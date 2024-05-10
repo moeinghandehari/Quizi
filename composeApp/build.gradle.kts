@@ -1,12 +1,32 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
+    alias(libs.plugins.kotlinxSerialization)
 }
 
 kotlin {
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs {
+        moduleName = "composeApp"
+        browser {
+            commonWebpackConfig {
+                outputFileName = "composeApp.js"
+                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
+                    static = (static ?: mutableListOf()).apply {
+                        // Serve sources to debug inside browser
+                        add(project.projectDir.path)
+                    }
+                }
+            }
+        }
+        binaries.executable()
+    }
+
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -14,7 +34,9 @@ kotlin {
             }
         }
     }
-    
+
+    jvm("desktop")
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -27,11 +49,24 @@ kotlin {
     }
     
     sourceSets {
+        val desktopMain by getting
         
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
+
+            implementation(libs.koin.core)
         }
+
+        iosMain.dependencies {
+        }
+
+        jvmMain.dependencies {
+            implementation(compose.desktop.currentOs)
+        }
+
+        jsMain.dependencies {}
+
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -39,8 +74,25 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+
+            // implementation(libs.bundles.ktor.multiplatform)
+
+            // implementation(libs.voyager.navigator)
+            // implementation(libs.voyager.koin)
+
+            implementation(projects.shared)
+
+            // Temp Workaround for a bug - Should be removed later
+            implementation("co.touchlab:stately-common:2.0.6")
+        }
+
+        // Temp Workaround for a bug - Should be removed later
+        configurations.all {
+            exclude(group = "co.touchlab", module = "stately-strict-jvm")
         }
     }
+
+    task("testClasses")
 }
 
 android {
@@ -77,3 +129,18 @@ android {
     }
 }
 
+compose.desktop {
+    application {
+        mainClass = "MainKt"
+
+        nativeDistributions {
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            packageName = "de.tuhh.quizi"
+            packageVersion = "1.0.0"
+        }
+    }
+}
+
+compose.experimental {
+    web.application {}
+}
