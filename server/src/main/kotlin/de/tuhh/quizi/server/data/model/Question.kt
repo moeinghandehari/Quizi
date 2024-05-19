@@ -7,16 +7,13 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-sealed class Question(
-    @SerialName("base_id")
-    override val id: Int,
-    @SerialName("base_question")
-    open val question: Description,
-    @SerialName("base_options")
-    open val options: List<Option>,
-    @SerialName("base_hint")
-    open val hint: Hint?,
-) : Identifiable
+sealed interface Question {
+    val id: Int
+    val question: Description
+    val options: List<Option>
+    val topicId: Int
+    val hint: Hint?
+}
 
 enum class QuestionType {
     SingleChoice,

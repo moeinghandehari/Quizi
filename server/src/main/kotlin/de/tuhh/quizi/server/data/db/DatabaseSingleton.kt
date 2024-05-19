@@ -10,15 +10,15 @@ import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransacti
 import org.jetbrains.exposed.sql.transactions.transaction
 
 object DatabaseSingleton {
-    private const val JDBC_URL = "jdbc:h2:file:./build/db"
-    private const val DRIVER_CLASS_NAME = "org.h2.Driver"
+    private const val JDBC_URL = "jdbc:postgresql://localhost:5432/"
+    private const val DRIVER_CLASS_NAME = "org.postgresql.Driver"
 
     fun init() {
         val database = Database.connect(
             url = JDBC_URL,
-            user = "root",
+            user = "postgres",
             driver = DRIVER_CLASS_NAME,
-            password = ""
+            password = "quizi"
         )
         transaction(database) {
             SchemaUtils.create(Courses, Topics, Questions)

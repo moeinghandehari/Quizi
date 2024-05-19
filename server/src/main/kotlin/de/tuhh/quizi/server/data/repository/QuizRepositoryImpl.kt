@@ -1,20 +1,24 @@
 package de.tuhh.quizi.server.data.repository
 
 import de.tuhh.quizi.server.data.db.dao.course.CourseDao
-import de.tuhh.quizi.server.data.db.dao.course.CourseDaoImpl
+import de.tuhh.quizi.server.data.db.dao.question.QuestionDao
 import de.tuhh.quizi.server.data.model.Course
 import de.tuhh.quizi.server.data.model.Question
+import de.tuhh.quizi.server.data.model.QuestionType
 import de.tuhh.quizi.server.data.model.Topic
-import de.tuhh.quizi.server.data.repository.QuizRepository
+import de.tuhh.quizi.server.data.model.types.Description
+import de.tuhh.quizi.server.data.model.types.Hint
+import de.tuhh.quizi.server.data.model.types.Option
 
 class QuizRepositoryImpl(
-    private val courseDao: CourseDao = CourseDaoImpl()
+    private val courseDao: CourseDao,
+    private val questionDao: QuestionDao,
 ) : QuizRepository {
     override suspend fun addCourse(courseName: String) = courseDao.addCourse(courseName)
 
-    override suspend fun getCourseById(courseId: Int): Course? {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getCourseById(courseId: Int): Course? =
+        courseDao.getCourseById(courseId)
+
 
     override suspend fun getAllCourses(): List<String> = courseDao.getAllCourses()
 
@@ -26,13 +30,12 @@ class QuizRepositoryImpl(
         TODO("Not yet implemented")
     }
 
-    override suspend fun addTopic(courseId: Int, topic: Topic): Int {
-        TODO("Not yet implemented")
-    }
+    override suspend fun addTopic(courseId: Int, topicName: String): Topic =
+        courseDao.addTopic(courseId, topicName)
 
-    override suspend fun getTopicById(topicId: Int): Topic? {
-        TODO("Not yet implemented")
-    }
+
+    override suspend fun getTopicById(topicId: Int): Topic? =
+        courseDao.getTopicById(topicId)
 
     override suspend fun getAllTopicsByCourseId(courseId: Int): List<Topic> {
         TODO("Not yet implemented")
@@ -46,9 +49,13 @@ class QuizRepositoryImpl(
         TODO("Not yet implemented")
     }
 
-    override suspend fun addQuestion(courseId: Int, topicId: Int, question: Question): Int {
-        TODO("Not yet implemented")
-    }
+    override suspend fun addQuestion(
+        topicId: Int,
+        questionType: QuestionType,
+        description: Description,
+        options: List<Option>,
+        hint: Hint?,
+    ): Question = questionDao.addQuestion(topicId, questionType, description, options, hint)
 
     override suspend fun getQuestionById(questionId: Int): Question? {
         TODO("Not yet implemented")

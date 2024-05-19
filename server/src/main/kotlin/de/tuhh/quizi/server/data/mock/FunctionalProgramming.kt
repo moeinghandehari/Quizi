@@ -17,7 +17,8 @@ val functionalProgrammingQuestions = listOf<Question>(
             Option("1 + 2 % 3" to false),
             Option("1 + 2" to false),
         ),
-        hint = null
+        hint = null,
+        topicId = 3
     ),
     SingleChoiceQuestion(
         id = 32,
@@ -28,7 +29,8 @@ val functionalProgrammingQuestions = listOf<Question>(
             Option("1 + 2 % 3" to true),
             Option("1 + 2" to false),
         ),
-        hint = null
+        hint = null,
+        topicId = 3
     ),
     TrueFalseQuestion(
         id = 33,
@@ -37,6 +39,7 @@ val functionalProgrammingQuestions = listOf<Question>(
             Option("True" to false),
             Option("False" to true),
         ),
-        hint = null
+        hint = null,
+        topicId = 3
     ),
 )

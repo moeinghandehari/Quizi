@@ -11,15 +11,16 @@ androidx-espresso-core = "3.5.1"
 androidx-material = "1.11.0"
 androidx-test-junit = "1.1.5"
 kotlinx-serialization = "1.6.3"
-kotlin = "2.0.0-RC1"
+kotlin = "2.0.0-RC3"
 compose = "2024.05.00"
 compose-plugin = "1.6.2"
 exposed = "0.50.0"
 h2 = "2.2.224"
 junit = "4.13.2"
-ksp = "1.9.23-1.0.20" # Depends on kotlin version
-koin = "3.6.0-wasm-alpha2"
-ktor = "2.3.10"
+ksp = "2.0.0-RC3-1.0.20" # Depends on kotlin version
+koin = "3.6.0-Beta2"
+koin-ksp = "1.3.1"
+ktor = "2.3.11"
 logback = "1.5.6"
 voyager = "1.0.0"
 
@@ -52,20 +53,21 @@ compose-material3 = { module = "androidx.compose.material3:material3" }
 ksp-gradle = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin", version.ref = "ksp" }
 
 # Ktor
-ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
-ktor-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
-ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json-jvm", version.ref = "ktor" }
-ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
-ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
-ktor-client-java = { module = "io.ktor:ktor-client-java", version.ref = "ktor" }
-ktor-client-js = { module = "io.ktor:ktor-client-js", version.ref = "ktor" }
-ktor-contentNegotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
-ktor-server-core = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktor" }
-ktor-server-netty = { module = "io.ktor:ktor-server-netty-jvm", version.ref = "ktor" }
-ktor-server-tests = { module = "io.ktor:ktor-server-tests-jvm", version.ref = "ktor" }
-ktor-server-host-common = { module = "io.ktor:ktor-server-host-common-jvm", version.ref = "ktor" }
-ktor-server-content-negotiation = { module = "io.ktor:ktor-server-content-negotiation-jvm", version.ref = "ktor" }
-ktor-server-call-logging = { module = "io.ktor:ktor-server-call-logging-jvm", version.ref = "ktor" }
+ktor-bom = { module = "io.ktor:ktor-bom", version.ref = "ktor" }
+ktor-core = { module = "io.ktor:ktor-client-core" }
+ktor-logging = { module = "io.ktor:ktor-client-logging" }
+ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json-jvm" }
+ktor-client-android = { module = "io.ktor:ktor-client-android" }
+ktor-client-darwin = { module = "io.ktor:ktor-client-darwin" }
+ktor-client-java = { module = "io.ktor:ktor-client-java" }
+ktor-client-js = { module = "io.ktor:ktor-client-js" }
+ktor-contentNegotiation = { module = "io.ktor:ktor-client-content-negotiation" }
+ktor-server-core = { module = "io.ktor:ktor-server-core-jvm" }
+ktor-server-netty = { module = "io.ktor:ktor-server-netty-jvm" }
+ktor-server-tests = { module = "io.ktor:ktor-server-tests-jvm" }
+ktor-server-host-common = { module = "io.ktor:ktor-server-host-common-jvm" }
+ktor-server-content-negotiation = { module = "io.ktor:ktor-server-content-negotiation-jvm" }
+ktor-server-call-logging = { module = "io.ktor:ktor-server-call-logging-jvm" }
 
 # Logback
 logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
@@ -78,12 +80,20 @@ exposed-jdbc = { module = "org.jetbrains.exposed:exposed-jdbc", version.ref = "e
 # H2
 h2 = { module = "com.h2database:h2", version.ref = "h2" }
 
+# Postgres
+postgres = { module = "org.postgresql:postgresql", version = "42.7.3" }
+
 # Koin
 koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin" }
-koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
-koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
-koin-compose-multiplatform = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
-koin-android-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
+koin-core = { module = "io.insert-koin:koin-core" }
+koin-android = { module = "io.insert-koin:koin-android" }
+koin-compose-multiplatform = { module = "io.insert-koin:koin-compose" }
+koin-android-compose = { module = "io.insert-koin:koin-androidx-compose" }
+koin-annotation = { module = "io.insert-koin:koin-annotations" }
+koin-ktor = { module = "io.insert-koin:koin-ktor" }
+koin-logger = { module = "io.insert-koin:koin-logger-slf4j" }
+
+koin-ksp = { module = "io.insert-koin:koin-ksp-compiler", version.ref = "koin-ksp" }
 
 # Voyager
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }

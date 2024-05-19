@@ -1,5 +1,7 @@
 package de.tuhh.quizi.server.data.db.dao.question
 
+import de.tuhh.quizi.server.data.db.dao.course.TopicEntity
+import de.tuhh.quizi.server.data.db.dao.course.Topics
 import de.tuhh.quizi.server.data.model.MultipleChoiceQuestion
 import de.tuhh.quizi.server.data.model.Question
 import de.tuhh.quizi.server.data.model.QuestionType
@@ -16,6 +18,7 @@ object Questions : IntIdTable() {
     val type = integer("type")
     val question = varchar("question", 255)
     val options = text("options")
+    val topicId = reference("topic_id", Topics)
     val hint = varchar("hint", 255).nullable()
 }
 
@@ -25,6 +28,7 @@ class QuestionEntity(id: EntityID<Int>) : IntEntity(id) {
     var type by Questions.type
     var question by Questions.question
     var options by Questions.options
+    var topicId by TopicEntity referencedOn Questions.topicId
     var hint by Questions.hint
 }
 
@@ -33,21 +37,24 @@ internal fun QuestionEntity.toModel(): Question = when (this.type) {
         id = id.value,
         question = Description(question),
         options = deserializeOptions(options),
-        hint = hint?.let { Hint(it) }
+        topicId = topicId.id.value,
+        hint = hint?.let { Hint(it) },
     )
 
     QuestionType.MultipleChoice.ordinal -> MultipleChoiceQuestion(
         id = id.value,
         question = Description(question),
         options = deserializeOptions(options),
-        hint = hint?.let { Hint(it) }
+        topicId = topicId.id.value,
+        hint = hint?.let { Hint(it) },
     )
 
     QuestionType.TrueFalse.ordinal -> TrueFalseQuestion(
         id = id.value,
         question = Description(question),
         options = deserializeOptions(options),
-        hint = hint?.let { Hint(it) }
+        topicId = topicId.id.value,
+        hint = hint?.let { Hint(it) },
     )
 
     else -> throw IllegalArgumentException("Unknown question type")

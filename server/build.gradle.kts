@@ -2,10 +2,11 @@ plugins {
     alias(libs.plugins.kotlinJvm)
     alias(libs.plugins.ktor)
     alias(libs.plugins.kotlinxSerialization)
+    alias(libs.plugins.ksp)
     application
 }
 
-group = "de.tuhh"
+group = "de.tuhh.quizi.server"
 version = "1.0.0"
 
 application {
@@ -14,7 +15,6 @@ application {
 }
 
 dependencies {
-    implementation(projects.shared)
     implementation(libs.logback)
 
     // Ktor
@@ -25,8 +25,13 @@ dependencies {
     implementation(libs.ktor.server.call.logging)
     implementation(libs.ktor.serialization)
 
+    // Koin
+    implementation(project.dependencies.platform(libs.koin.bom))
+    implementation(libs.koin.ktor)
+    implementation(libs.koin.logger)
+
     // Database
-    implementation(libs.h2)
+    implementation(libs.postgres)
 
     // Exposed
     implementation(libs.exposed.core)
