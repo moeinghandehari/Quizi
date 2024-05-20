@@ -7,6 +7,8 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.kotlinxSerialization)
+    alias(libs.plugins.googleServices)
+    alias(libs.plugins.firebase.crashlytics)
 }
 
 kotlin {
@@ -54,8 +56,8 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
-
-            implementation(libs.koin.core)
+            implementation(libs.firebase.analytics)
+            implementation(libs.firebase.craslytics)
         }
 
         iosMain.dependencies {
@@ -76,6 +78,7 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
 
             // implementation(libs.bundles.ktor.multiplatform)
+            implementation(project.dependencies.platform(libs.firebase.bom))
 
             // implementation(libs.voyager.navigator)
             // implementation(libs.voyager.koin)

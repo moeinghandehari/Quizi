@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "192359127143",
+    "project_id": "quizi-tuhh",
+    "storage_bucket": "quizi-tuhh.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:192359127143:android:d30f94ae70430717c0dcc2",
+        "android_client_info": {
+          "package_name": "de.tuhh.quizi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJ8pS_EHqJ4h6nysftiY4JE-wShroZUJ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
