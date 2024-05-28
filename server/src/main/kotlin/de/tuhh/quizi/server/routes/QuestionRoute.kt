@@ -21,14 +21,14 @@ fun Route.randomQuestions() {
     get(path = "/randomquestions") {
         call.respond(
             HttpStatusCode.OK,
-            capitalQuestions
+            capitalQuestions,
         )
     }
     get(path = "/randomquestions/{count}") {
         val count = call.parameters["count"]?.toIntOrNull() ?: 1
         call.respond(
             HttpStatusCode.OK,
-            capitalQuestions.shuffled().take(count)
+            capitalQuestions.shuffled().take(count),
         )
     }
 
@@ -39,7 +39,7 @@ fun Route.randomQuestions() {
         val description: String,
         val option: String,
         val answer: Boolean,
-        val hint: String
+        val hint: String,
     )
     post<AddQuestionRequest>(path = "/question/add/") { question ->
         val topicId = question.topicId
@@ -63,8 +63,8 @@ fun Route.randomQuestions() {
                     questionType,
                     description,
                     listOf(option),
-                    hint
-                )
+                    hint,
+                ),
             )
         }
     }

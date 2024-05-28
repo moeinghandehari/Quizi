@@ -12,15 +12,18 @@ import de.tuhh.quizi.server.data.model.types.Description
 import de.tuhh.quizi.server.data.model.types.Hint
 import de.tuhh.quizi.server.data.model.types.deserializeOptions
 import de.tuhh.quizi.server.exceptionHandler.DbExceptionHandler
-import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.ResultRow
+import org.jetbrains.exposed.sql.insert
+import org.jetbrains.exposed.sql.selectAll
 
+@Suppress("TooManyFunctions")
 class CourseDaoImpl : CourseDao {
 
     private fun resultRowToCourse(row: ResultRow): Course {
         return Course(
             id = row[Courses.id].value,
             name = row[Courses.name],
-            topics = listOf()
+            topics = listOf(),
         )
     }
 
@@ -30,7 +33,7 @@ class CourseDaoImpl : CourseDao {
             question = Description(row[Questions.question]),
             options = deserializeOptions(row[Questions.options]),
             hint = row[Questions.hint]?.let { Hint(it) },
-            topicId = row[Questions.topicId].value
+            topicId = row[Questions.topicId].value,
         )
 
         1 -> SingleChoiceQuestion(
@@ -38,7 +41,7 @@ class CourseDaoImpl : CourseDao {
             question = Description(row[Questions.question]),
             options = deserializeOptions(row[Questions.options]),
             hint = row[Questions.hint]?.let { Hint(it) },
-            topicId = row[Questions.topicId].value
+            topicId = row[Questions.topicId].value,
         )
 
         2 -> TrueFalseQuestion(
@@ -46,7 +49,7 @@ class CourseDaoImpl : CourseDao {
             question = Description(row[Questions.question]),
             options = deserializeOptions(row[Questions.options]),
             hint = row[Questions.hint]?.let { Hint(it) },
-            topicId = row[Questions.topicId].value
+            topicId = row[Questions.topicId].value,
         )
 
         else -> throw IllegalArgumentException("Unknown question type")
@@ -86,7 +89,7 @@ class CourseDaoImpl : CourseDao {
                         id = topicId,
                         name = topicRow[Topics.name],
                         courseId = topicRow[Topics.courseId].value,
-                        questions = questions
+                        questions = questions,
                     )
                 }
 
@@ -116,7 +119,7 @@ class CourseDaoImpl : CourseDao {
             id = row[Topics.id].value,
             name = row[Topics.name],
             courseId = row[Topics.courseId].value,
-            questions = listOf()
+            questions = listOf(),
         )
     }
 

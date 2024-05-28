@@ -10,6 +10,7 @@ import de.tuhh.quizi.server.data.model.types.Description
 import de.tuhh.quizi.server.data.model.types.Hint
 import de.tuhh.quizi.server.data.model.types.Option
 
+@Suppress("TooManyFunctions")
 class QuizRepositoryImpl(
     private val courseDao: CourseDao,
     private val questionDao: QuestionDao,
@@ -18,7 +19,6 @@ class QuizRepositoryImpl(
 
     override suspend fun getCourseById(courseId: Int): Course? =
         courseDao.getCourseById(courseId)
-
 
     override suspend fun getAllCourses(): List<String> = courseDao.getAllCourses()
 
@@ -32,7 +32,6 @@ class QuizRepositoryImpl(
 
     override suspend fun addTopic(courseId: Int, topicName: String): Topic =
         courseDao.addTopic(courseId, topicName)
-
 
     override suspend fun getTopicById(topicId: Int): Topic? =
         courseDao.getTopicById(topicId)

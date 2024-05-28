@@ -8,6 +8,7 @@ import de.tuhh.quizi.server.data.model.types.Description
 import de.tuhh.quizi.server.data.model.types.Hint
 import de.tuhh.quizi.server.data.model.types.Option
 
+@Suppress("TooManyFunctions")
 interface QuizRepository {
     suspend fun addCourse(courseName: String): Course
     suspend fun getCourseById(courseId: Int): Course?
@@ -26,7 +27,7 @@ interface QuizRepository {
         questionType: QuestionType,
         description: Description,
         options: List<Option>,
-        hint: Hint?
+        hint: Hint?,
     ): Question
 
     suspend fun getQuestionById(questionId: Int): Question?

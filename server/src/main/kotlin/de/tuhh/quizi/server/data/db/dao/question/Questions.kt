@@ -14,12 +14,15 @@ import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IntIdTable
 
+private const val HINT_LENGTH = 255
+private const val QUESTION_LENGTH = 255
+
 object Questions : IntIdTable() {
     val type = integer("type")
-    val question = varchar("question", 255)
+    val question = varchar("question", QUESTION_LENGTH)
     val options = text("options")
     val topicId = reference("topic_id", Topics)
-    val hint = varchar("hint", 255).nullable()
+    val hint = varchar("hint", HINT_LENGTH).nullable()
 }
 
 class QuestionEntity(id: EntityID<Int>) : IntEntity(id) {

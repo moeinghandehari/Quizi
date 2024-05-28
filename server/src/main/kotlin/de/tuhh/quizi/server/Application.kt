@@ -6,18 +6,18 @@ import de.tuhh.quizi.server.di.appModule
 import de.tuhh.quizi.server.plugins.configureMonitoring
 import de.tuhh.quizi.server.plugins.configureRouting
 import de.tuhh.quizi.server.plugins.configureSerialization
-import io.ktor.server.application.*
+import io.ktor.server.application.Application
+import io.ktor.server.application.install
 import io.ktor.server.engine.embeddedServer
-import io.ktor.server.netty.*
+import io.ktor.server.netty.Netty
 import org.koin.ktor.plugin.Koin
 import org.koin.logger.slf4jLogger
 
-fun main(args: Array<String>){
-    embeddedServer(Netty, port = 8080){
+fun main(args: Array<String>) {
+    embeddedServer(Netty, port = 8080) {
         main()
         module()
     }.start(wait = true)
-
 }
 
 fun Application.module() {

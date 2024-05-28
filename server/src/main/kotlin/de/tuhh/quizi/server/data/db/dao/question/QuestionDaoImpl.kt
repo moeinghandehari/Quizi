@@ -22,7 +22,7 @@ class QuestionDaoImpl : QuestionDao {
         questionType: QuestionType,
         description: Description,
         options: List<Option>,
-        hint: Hint?
+        hint: Hint?,
     ): Question = dbQuery {
         val insertStatement = Questions.insert {
             it[this.type] = questionType.ordinal
@@ -42,7 +42,7 @@ class QuestionDaoImpl : QuestionDao {
             question = Description(row[Questions.question]),
             options = deserializeOptions(row[Questions.options]),
             hint = row[Questions.hint]?.let { Hint(it) },
-            topicId = row[Questions.topicId].value
+            topicId = row[Questions.topicId].value,
         )
 
         1 -> SingleChoiceQuestion(
@@ -50,7 +50,7 @@ class QuestionDaoImpl : QuestionDao {
             question = Description(row[Questions.question]),
             options = deserializeOptions(row[Questions.options]),
             hint = row[Questions.hint]?.let { Hint(it) },
-            topicId = row[Questions.topicId].value
+            topicId = row[Questions.topicId].value,
         )
 
         2 -> TrueFalseQuestion(
@@ -58,7 +58,7 @@ class QuestionDaoImpl : QuestionDao {
             question = Description(row[Questions.question]),
             options = deserializeOptions(row[Questions.options]),
             hint = row[Questions.hint]?.let { Hint(it) },
-            topicId = row[Questions.topicId].value
+            topicId = row[Questions.topicId].value,
         )
 
         else -> throw IllegalArgumentException("Unknown question type")

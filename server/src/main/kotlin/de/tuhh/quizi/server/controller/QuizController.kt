@@ -19,7 +19,6 @@ interface QuizController {
         questionType: QuestionType,
         description: Description,
         options: List<Option>,
-        hint: Hint?
+        hint: Hint?,
     ): Question
-
 }

@@ -5,6 +5,8 @@ import de.tuhh.quizi.server.data.model.types.Hint
 import de.tuhh.quizi.server.data.model.types.Option
 import kotlinx.serialization.Serializable
 
+private const val OPTIONS_COUNT = 4
+
 @Serializable
 data class MultipleChoiceQuestion(
     override val id: Int,
@@ -14,6 +16,6 @@ data class MultipleChoiceQuestion(
     override val hint: Hint?,
 ) : Identifiable, Question {
     init {
-        require(options.size == 4) { "There must be exactly 4 options" }
+        require(options.size == OPTIONS_COUNT) { "There must be exactly 4 options" }
     }
 }

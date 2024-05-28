@@ -17,7 +17,7 @@ val capitalQuestions = listOf<Question>(
             Option("Frankfurt" to false),
         ),
         hint = null,
-        topicId = 1
+        topicId = 1,
     ),
     SingleChoiceQuestion(
         id = 11,
@@ -29,7 +29,7 @@ val capitalQuestions = listOf<Question>(
             Option("Nice" to false),
         ),
         hint = null,
-        topicId = 1
+        topicId = 1,
     ),
     SingleChoiceQuestion(
         id = 12,
@@ -41,7 +41,7 @@ val capitalQuestions = listOf<Question>(
             Option("Turin" to false),
         ),
         hint = null,
-        topicId = 1
+        topicId = 1,
     ),
     SingleChoiceQuestion(
         id = 13,
@@ -53,7 +53,7 @@ val capitalQuestions = listOf<Question>(
             Option("Seville" to false),
         ),
         hint = null,
-        topicId = 1
+        topicId = 1,
     ),
     SingleChoiceQuestion(
         id = 14,
@@ -65,7 +65,7 @@ val capitalQuestions = listOf<Question>(
             Option("Coimbra" to false),
         ),
         hint = null,
-        topicId = 1
+        topicId = 1,
     ),
     SingleChoiceQuestion(
         id = 15,
@@ -77,7 +77,7 @@ val capitalQuestions = listOf<Question>(
             Option("Utrecht" to false),
         ),
         hint = null,
-        topicId = 1
+        topicId = 1,
     ),
     SingleChoiceQuestion(
         id = 16,
@@ -89,7 +89,7 @@ val capitalQuestions = listOf<Question>(
             Option("Bruges" to false),
         ),
         hint = null,
-        topicId = 1
+        topicId = 1,
     ),
     SingleChoiceQuestion(
         id = 17,
@@ -101,7 +101,7 @@ val capitalQuestions = listOf<Question>(
             Option("Dudelange" to false),
         ),
         hint = null,
-        topicId = 1
+        topicId = 1,
     ),
     SingleChoiceQuestion(
         id = 18,
@@ -113,7 +113,7 @@ val capitalQuestions = listOf<Question>(
             Option("Basel" to false),
         ),
         hint = null,
-        topicId = 1
+        topicId = 1,
     ),
     SingleChoiceQuestion(
         id = 19,
@@ -125,7 +125,7 @@ val capitalQuestions = listOf<Question>(
             Option("Salzburg" to false),
         ),
         hint = null,
-        topicId = 1
+        topicId = 1,
     ),
     SingleChoiceQuestion(
         id = 20,
@@ -137,7 +137,7 @@ val capitalQuestions = listOf<Question>(
             Option("Wroclaw" to false),
         ),
         hint = null,
-        topicId = 1
+        topicId = 1,
     ),
     SingleChoiceQuestion(
         id = 21,
@@ -149,7 +149,7 @@ val capitalQuestions = listOf<Question>(
             Option("Plzen" to false),
         ),
         hint = null,
-        topicId = 1
+        topicId = 1,
     ),
     SingleChoiceQuestion(
         id = 22,
@@ -161,7 +161,7 @@ val capitalQuestions = listOf<Question>(
             Option("Zilina" to false),
         ),
         hint = null,
-        topicId = 1
+        topicId = 1,
     ),
     SingleChoiceQuestion(
         id = 23,
@@ -173,7 +173,7 @@ val capitalQuestions = listOf<Question>(
             Option("Miskolc" to false),
         ),
         hint = null,
-        topicId = 1
+        topicId = 1,
     ),
     SingleChoiceQuestion(
         id = 24,
@@ -185,7 +185,7 @@ val capitalQuestions = listOf<Question>(
             Option("Iasi" to false),
         ),
         hint = null,
-        topicId = 1
+        topicId = 1,
     ),
     SingleChoiceQuestion(
         id = 25,
@@ -197,7 +197,7 @@ val capitalQuestions = listOf<Question>(
             Option("Burgas" to false),
         ),
         hint = null,
-        topicId = 1
+        topicId = 1,
     ),
     SingleChoiceQuestion(
         id = 26,
@@ -209,7 +209,7 @@ val capitalQuestions = listOf<Question>(
             Option("Heraklion" to false),
         ),
         hint = null,
-        topicId = 1
+        topicId = 1,
     ),
     SingleChoiceQuestion(
         id = 27,
@@ -221,7 +221,7 @@ val capitalQuestions = listOf<Question>(
             Option("Bursa" to false),
         ),
         hint = null,
-        topicId = 1
+        topicId = 1,
     ),
     SingleChoiceQuestion(
         id = 28,
@@ -233,7 +233,7 @@ val capitalQuestions = listOf<Question>(
             Option("Yekaterinburg" to false),
         ),
         hint = null,
-        topicId = 1
+        topicId = 1,
     ),
     TrueFalseQuestion(
         id = 29,
@@ -242,7 +242,7 @@ val capitalQuestions = listOf<Question>(
             Option("The capital of the United Kingdom is London." to true),
         ),
         hint = null,
-        topicId = 1
+        topicId = 1,
     ),
     TrueFalseQuestion(
         id = 30,
@@ -251,6 +251,6 @@ val capitalQuestions = listOf<Question>(
             Option("The capital of the United States is New York City." to false),
         ),
         hint = null,
-        topicId = 1
+        topicId = 1,
     ),
 )

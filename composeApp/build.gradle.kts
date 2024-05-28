@@ -1,89 +1,49 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
-import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
-    alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidApplication)
+    id("app.library.kotlin.multiplatform")
     alias(libs.plugins.jetbrainsCompose)
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlinxSerialization)
-    alias(libs.plugins.googleServices)
-    alias(libs.plugins.firebase.crashlytics)
 }
 
 kotlin {
-    @OptIn(ExperimentalWasmDsl::class)
-    wasmJs {
-        moduleName = "composeApp"
-        browser {
-            commonWebpackConfig {
-                outputFileName = "composeApp.js"
-                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-                    static = (static ?: mutableListOf()).apply {
-                        // Serve sources to debug inside browser
-                        add(project.projectDir.path)
-                    }
-                }
-            }
-        }
-        binaries.executable()
-    }
-
-    androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "11"
-            }
-        }
-    }
-
-    jvm("desktop")
-
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach { iosTarget ->
-        iosTarget.binaries.framework {
-            baseName = "ComposeApp"
-            isStatic = true
-        }
-    }
-    
     sourceSets {
         val desktopMain by getting
-        
+
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.firebase.analytics)
-            implementation(libs.firebase.craslytics)
+            implementation(libs.firebase.crashlytics)
+            // implementation(libs.firebase.crashlytics.gradle)
         }
 
-        iosMain.dependencies {
-        }
+        iosMain.dependencies {}
 
-        jvmMain.dependencies {
+        desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
         }
 
-        jsMain.dependencies {}
+        wasmJsMain.dependencies {}
 
         commonMain.dependencies {
+            implementation(project.dependencies.platform(libs.compose.bom))
             implementation(compose.runtime)
             implementation(compose.foundation)
-            implementation(compose.material)
+            implementation(compose.material3)
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
 
-            // implementation(libs.bundles.ktor.multiplatform)
+            implementation(project.dependencies.platform(libs.koin.bom))
+            api(libs.koin.core)
+
             implementation(project.dependencies.platform(libs.firebase.bom))
 
-            // implementation(libs.voyager.navigator)
-            // implementation(libs.voyager.koin)
+            implementation(project(":feature:project-defaults"))
 
-            implementation(projects.shared)
+            // api(projects.shared.core.model)
 
             // Temp Workaround for a bug - Should be removed later
             implementation("co.touchlab:stately-common:2.0.6")
@@ -94,39 +54,96 @@ kotlin {
             exclude(group = "co.touchlab", module = "stately-strict-jvm")
         }
     }
-
-    task("testClasses")
 }
 
 android {
-    namespace = "de.tuhh.quizi"
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
+    namespace = "de.tuhh.quizi.composeApp"
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     sourceSets["main"].res.srcDirs("src/androidMain/res")
     sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 
-    defaultConfig {
-        applicationId = "de.tuhh.quizi"
-        minSdk = libs.versions.android.minSdk.get().toInt()
-        targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = 1
-        versionName = "1.0"
-    }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
+
+    AppBuildConfig.BrandFlavorDimension.productFlavors.forEach { brandFlavor ->
+        val brandName = brandFlavor.name
+        val taskName = brandName.replaceFirstChar { it.uppercaseChar() }
+
+        tasks.register("getStrings$taskName") {
+            group = "quizi"
+
+            finalizedBy("getStrings")
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+//
+//    productFlavors {
+//        AppBuildConfig.BrandFlavorDimension.productFlavors.forEach { flavor ->
+//            getByName(flavor.name) {
+//                applicationId = flavor.applicationId
+//            }
+//        }
+//    }
+    android.buildFeatures.buildConfig = true
+
+    signingConfigs {
+        /*getByName(Identifiers.SigningConfigs.DEBUG) {
+            storeFile = rootProject.file("config/signing/debug.keystore")
+        }*/
+        /*create(Identifiers.SigningConfigs.RELEASE) {
+            storeFile = file(
+                param(
+                    Identifiers.Params.SIGNING_KEYSTORE_PATH,
+                )?.takeUnless {
+                    it.isEmpty()
+                } ?: "notSet",
+            )
+            storePassword =
+                param(Identifiers.Params.SIGNING_KEYSTORE_PASSWORD)?.takeUnless { it.isEmpty() }
+                    ?: "notSet"
+            keyAlias =
+                param(Identifiers.Params.SIGNING_KEY_ALIAS)?.takeUnless { it.isEmpty() } ?: "notSet"
+            keyPassword =
+                param(Identifiers.Params.SIGNING_KEY_PASSWORD)?.takeUnless { it.isEmpty() }
+                    ?: "notSet"
+        }*/
     }
+
+    buildTypes {
+        /*getByName(Identifiers.BuildTypes.DEBUG) {
+            signingConfig = signingConfigs.getByName(Identifiers.SigningConfigs.DEBUG)
+            applicationIdSuffix = ".debug"
+            // For debuggable builds, minification is limited by AGP and will not obfuscate names
+            isMinifyEnabled = param(Identifiers.Params.IS_MINIFY_ENABLED)?.toBoolean() ?: false
+            isDebuggable = true
+
+            buildConfigField(
+                "String",
+                "QUIZI_API_BASE_URL",
+                "\"${AppBuildConfig.quiziApiBuildConfig.baseUrlDev}\"",
+            )
+        }*/
+        /*getByName(Identifiers.BuildTypes.RELEASE) {
+            signingConfig = signingConfigs.getByName(Identifiers.SigningConfigs.RELEASE)
+            isMinifyEnabled = param(Identifiers.Params.IS_MINIFY_ENABLED)?.toBoolean() ?: true
+            isDebuggable = false
+
+            buildConfigField(
+                "String",
+                "QUIZI_API_BASE_URL",
+                "\"${AppBuildConfig.quiziApiBuildConfig.baseUrlDev}\"",
+            )
+        }*/
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
     dependencies {
         debugImplementation(libs.compose.ui.tooling)
     }
@@ -142,8 +159,4 @@ compose.desktop {
             packageVersion = "1.0.0"
         }
     }
-}
-
-compose.experimental {
-    web.application {}
 }

@@ -5,6 +5,7 @@ import de.tuhh.quizi.server.data.model.SingleChoiceQuestion
 import de.tuhh.quizi.server.data.model.types.Description
 import de.tuhh.quizi.server.data.model.types.Option
 
+@Suppress("Indentation")
 val chemistryQuestions = listOf<Question>(
     SingleChoiceQuestion(
         id = 1,
@@ -14,7 +15,7 @@ val chemistryQuestions = listOf<Question>(
             Option("Fe" to true),
             Option("Al" to false),
             Option("Be" to false),
-            Option("Ca" to false)
+            Option("Ca" to false),
         ),
         topicId = 2,
     ),
@@ -92,7 +93,11 @@ val chemistryQuestions = listOf<Question>(
     ),
     SingleChoiceQuestion(
         id = 8,
-        question = Description("Das Löslichkeitsprodukt von Bleisulfat beträgt Lp (PbSO4) = 10-8 mol2/l2. Wie viel mg Blei (in Form von Pb2+) findet man in 1 Liter einer gesättigten Lösung?"),
+        question = Description(
+            "Das Löslichkeitsprodukt von Bleisulfat beträgt Lp (PbSO4) = 10-8 mol2/l2." +
+                    " Wie viel mg Blei (in Form von Pb2+) findet man in 1 Liter einer" +
+                    " gesättigten Lösung?",
+        ),
         options = listOf(
             Option("207" to true),
             Option("0207" to false),
@@ -104,7 +109,10 @@ val chemistryQuestions = listOf<Question>(
     ),
     SingleChoiceQuestion(
         id = 9,
-        question = Description("In 2 l Wasser können ca. 3 mg Silberchlorid gelöst werden. Wie groß ist das Löslichkeitsprodukt von Silberchlorid?"),
+        question = Description(
+            "In 2 l Wasser können ca. 3 mg Silberchlorid gelöst werden." +
+                    " Wie groß ist das Löslichkeitsprodukt von Silberchlorid?",
+        ),
         options =
         listOf(
             Option("ca. 10-4 mol2/l2" to true),
@@ -114,5 +122,5 @@ val chemistryQuestions = listOf<Question>(
         ),
         hint = null,
         topicId = 2,
-    )
+    ),
 )

@@ -1,10 +1,12 @@
 package de.tuhh.quizi.server.routes
 
 import de.tuhh.quizi.server.controller.QuizController
-import io.ktor.http.*
+import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.call
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
+import io.ktor.server.response.respond
+import io.ktor.server.routing.Route
+import io.ktor.server.routing.get
+import io.ktor.server.routing.post
 import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.sql.exposedLogger
 import org.koin.java.KoinJavaComponent.inject
@@ -12,7 +14,6 @@ import org.koin.java.KoinJavaComponent.inject
 private val quizController by inject<QuizController>(QuizController::class.java)
 
 fun Route.course() {
-
     @Serializable
     data class AddCourseRequest(val courseName: String)
     post<AddCourseRequest>(path = "/course/add/") { courseName ->
@@ -37,7 +38,7 @@ fun Route.course() {
             } else {
                 call.respond(
                     HttpStatusCode.OK,
-                    quizController.getCourseById(id.toInt()) ?: "Course not found"
+                    quizController.getCourseById(id.toInt()) ?: "Course not found",
                 )
             }
         }
@@ -46,7 +47,7 @@ fun Route.course() {
     get(path = "/course/all") {
         call.respond(
             HttpStatusCode.OK,
-            quizController.getAllCourses()
+            quizController.getAllCourses(),
         )
     }
 
@@ -66,7 +67,7 @@ fun Route.course() {
                     } else {
                         call.respond(
                             HttpStatusCode.OK,
-                            quizController.addTopic(id, name) ?: "Topic not added"
+                            quizController.addTopic(id, name) ?: "Topic not added",
                         )
                     }
                 }
@@ -84,7 +85,7 @@ fun Route.course() {
             } else {
                 call.respond(
                     HttpStatusCode.OK,
-                    quizController.getTopicById(id.toInt()) ?: "Topic not found"
+                    quizController.getTopicById(id.toInt()) ?: "Topic not found",
                 )
             }
         }

@@ -70,5 +70,4 @@ class QuizControllerImpl(private val quizRepository: QuizRepository) : QuizContr
 //    suspend fun deleteQuestion(questionId: Int): Boolean {
 //        return quizRepository.deleteQuestion(questionId)
 //    }
-
 }

@@ -1,8 +1,8 @@
 package de.tuhh.quizi.server.data.db
 
 import de.tuhh.quizi.server.data.db.dao.course.Courses
-import de.tuhh.quizi.server.data.db.dao.question.Questions
 import de.tuhh.quizi.server.data.db.dao.course.Topics
+import de.tuhh.quizi.server.data.db.dao.question.Questions
 import kotlinx.coroutines.Dispatchers
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
@@ -18,7 +18,7 @@ object DatabaseSingleton {
             url = JDBC_URL,
             user = "postgres",
             driver = DRIVER_CLASS_NAME,
-            password = "quizi"
+            password = "quizi",
         )
         transaction(database) {
             SchemaUtils.create(Courses, Topics, Questions)

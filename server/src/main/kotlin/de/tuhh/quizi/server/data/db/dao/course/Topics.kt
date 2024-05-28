@@ -6,8 +6,10 @@ import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IntIdTable
 
+private const val NAME_LENGTH = 255
+
 object Topics : IntIdTable() {
-    val name = varchar("name", 255)
+    val name = varchar("name", NAME_LENGTH)
     val courseId = reference("course_id", Courses)
 }
 
@@ -22,5 +24,5 @@ internal fun TopicEntity.toModel(): Topic = Topic(
     id = id.value,
     name = name,
     courseId = courseId.id.value,
-    questions = emptyList() // TODO
+    questions = emptyList(), // TODO
 )

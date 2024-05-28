@@ -17,7 +17,7 @@
 		98124CF92BFBFA9300389ED1 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 98124CF82BFBFA9300389ED1 /* FirebaseAnalyticsOnDeviceConversion */; };
 		98124CFB2BFBFA9300389ED1 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 98124CFA2BFBFA9300389ED1 /* FirebaseAnalyticsSwift */; };
 		98124CFD2BFBFA9300389ED1 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 98124CFC2BFBFA9300389ED1 /* FirebaseAnalyticsWithoutAdIdSupport */; };
-		98125CC22BFC9DAB001D309C /* Appdelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98125CC12BFC9DAB001D309C /* Appdelegate.swift */; };
+		9820329A2C048E57001A3CC0 /* Appdelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982032982C03AFAA001A3CC0 /* Appdelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,7 +28,7 @@
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		98124CF62BFBF36A00389ED1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		98125CC12BFC9DAB001D309C /* Appdelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Appdelegate.swift; path = ../../../../Desktop/iosApp/iosApp/Appdelegate.swift; sourceTree = "<group>"; };
+		982032982C03AFAA001A3CC0 /* Appdelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appdelegate.swift; sourceTree = "<group>"; };
 		AB3632DC29227652001CCB65 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,7 +84,7 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
-				98125CC12BFC9DAB001D309C /* Appdelegate.swift */,
+				982032982C03AFAA001A3CC0 /* Appdelegate.swift */,
 				98124CF62BFBF36A00389ED1 /* GoogleService-Info.plist */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				7555FF82242A565900829871 /* ContentView.swift */,
@@ -229,8 +229,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9820329A2C048E57001A3CC0 /* Appdelegate.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
-				98125CC22BFC9DAB001D309C /* Appdelegate.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

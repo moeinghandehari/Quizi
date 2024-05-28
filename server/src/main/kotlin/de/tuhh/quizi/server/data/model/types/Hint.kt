@@ -4,4 +4,4 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @JvmInline
-value class Hint (val value: String)
+value class Hint(val value: String)

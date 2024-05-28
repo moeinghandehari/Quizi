@@ -12,7 +12,7 @@ interface QuestionDao {
         questionType: QuestionType,
         description: Description,
         options: List<Option>,
-        hint: Hint?
+        hint: Hint?,
     ): Question
 
     fun resultRowToQuestion(row: org.jetbrains.exposed.sql.ResultRow): Question
