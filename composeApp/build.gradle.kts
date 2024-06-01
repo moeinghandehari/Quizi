@@ -41,7 +41,7 @@ kotlin {
 
             implementation(project.dependencies.platform(libs.firebase.bom))
 
-            implementation(project(":feature:project-defaults"))
+            implementation(project(":shared:functionality:project-defaults"))
 
             // api(projects.shared.core.model)
 

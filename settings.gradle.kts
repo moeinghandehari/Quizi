@@ -36,14 +36,13 @@ include(":server")
 include(":composeApp")
 
 include(":shared")
+
 include(":shared:core:model")
 include(":shared:core:utils-network")
 
-include(":feature")
+include(":shared:functionality:project-defaults")
 
-include(":feature:project-defaults")
-
-include(":feature:quiz-input:abstractions")
-include(":feature:quiz-input:data")
-include(":feature:quiz-input:entities")
-include(":feature:quiz-input:usecases")
+include(":shared:functionality:add-data:abstractions")
+include(":shared:functionality:add-data:data")
+include(":shared:functionality:add-data:entities")
+include(":shared:functionality:add-data:usecases")
