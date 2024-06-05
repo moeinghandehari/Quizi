@@ -1,7 +1,8 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
-    id("app.library.kotlin.multiplatform")
+    id("app.android.application")
+    id("app.firebase.application")
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlinxSerialization)
@@ -9,14 +10,11 @@ plugins {
 
 kotlin {
     sourceSets {
-        val desktopMain by getting
-
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.firebase.analytics)
             implementation(libs.firebase.crashlytics)
-            // implementation(libs.firebase.crashlytics.gradle)
         }
 
         iosMain.dependencies {}
@@ -57,7 +55,7 @@ kotlin {
 }
 
 android {
-    namespace = "de.tuhh.quizi.composeApp"
+    namespace = "de.tuhh.quizi"
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     sourceSets["main"].res.srcDirs("src/androidMain/res")

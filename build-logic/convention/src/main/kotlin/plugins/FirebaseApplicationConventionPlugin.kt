@@ -24,7 +24,7 @@ class FirebaseApplicationConventionPlugin : Plugin<Project> {
             dependencies {
                 implementation(project.dependencies.platform(catalog.findLibrary("firebase-bom").get()))
                 implementation(catalog.findLibrary("firebase.analytics").get())
-                implementation(catalog.findLibrary("firebase.performance").get())
+                implementation(catalog.findLibrary("firebase.perf").get())
                 implementation(catalog.findLibrary("firebase.crashlytics").get())
             }
 

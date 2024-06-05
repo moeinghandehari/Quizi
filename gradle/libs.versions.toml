@@ -133,7 +133,7 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 ktor = { id = "io.ktor.plugin", version.ref = "ktor" }
 googleServices = { id = "com.google.gms.google-services", version.ref = "google-services" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlyticsPlugin" }
-firebase-performance-gradle = { id = "com.google.firebase.firebase-perf", version.ref = "firebasePerfPlugin" }
+firebase-performance = { id = "com.google.firebase.firebase-perf", version.ref = "firebasePerfPlugin" }
 
 [bundles]
 ktor-multiplatform = ["ktor-core", "ktor-logging", "ktor-contentNegotiation"]
