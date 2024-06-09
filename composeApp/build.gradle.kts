@@ -12,6 +12,8 @@ kotlin {
     sourceSets {
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
+            implementation(libs.androidx.ui.tooling.preview.android)
+            implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.firebase.analytics)
             implementation(libs.firebase.crashlytics)
@@ -31,6 +33,7 @@ kotlin {
             implementation(compose.foundation)
             implementation(compose.material3)
             implementation(compose.ui)
+            implementation(compose.uiUtil)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
 

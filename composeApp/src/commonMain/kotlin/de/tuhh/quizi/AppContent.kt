@@ -15,6 +15,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import de.tuhh.quizi.screens.AddContentScreen
+import de.tuhh.quizi.screens.QuizScreen
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import quizi.composeapp.generated.resources.Res
@@ -36,6 +38,7 @@ internal fun AppContent() {
                     Text("Compose: $greeting")
                 }
             }
+            AddContentScreen()
         }
     }
 }

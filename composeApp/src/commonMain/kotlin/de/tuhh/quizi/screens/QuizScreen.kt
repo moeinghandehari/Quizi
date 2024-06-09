@@ -1,7 +1,8 @@
-package de.tuhh.quizi.quiz
+package de.tuhh.quizi.screens
 
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import de.tuhh.quizi.components.TrueFalseQuizView
 
 @Composable
 internal fun QuizScreen(
@@ -12,6 +13,10 @@ internal fun QuizScreen(
             // TopBar()
         },
     ) {
-        // CorrectButton(true, onClick = { /*TODO*/ })
+        TrueFalseQuizView(
+            "Berlin is capital of germany",
+            isTrue = true,
+            {},
+        )
     }
 }
