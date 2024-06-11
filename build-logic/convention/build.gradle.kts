@@ -41,10 +41,6 @@ tasks {
 gradlePlugin {
     plugins {
         // Android
-        register("androidApplication") {
-            id = "app.android.application"
-            implementationClass = "plugins.AndroidApplicationConventionPlugin"
-        }
         register("androidLibrary") {
             id = "app.android.library"
             implementationClass = "plugins.AndroidLibraryConventionPlugin"
@@ -61,6 +57,10 @@ gradlePlugin {
         }
 
         // Kotlin
+        register("kotlinMultiplatformApplication") {
+            id = "app.application.kotlin.multiplatform"
+            implementationClass = "plugins.KotlinMultiplatformApplicationConventionPlugin"
+        }
         register("kotlinMultiplatformLibrary") {
             id = "app.library.kotlin.multiplatform"
             implementationClass = "plugins.KotlinMultiplatformLibraryConventionPlugin"

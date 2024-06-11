@@ -14,14 +14,15 @@ import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompileCommon
 import plugins.extensions.sourceSets
 
-@OptIn(ExperimentalWasmDsl::class)
 internal fun Project.configureKotlinMultiplatform() {
     configure<KotlinMultiplatformExtension> {
         applyDefaultHierarchyTemplate()
+
         @OptIn(ExperimentalWasmDsl::class)
         wasmJs {
             browser {
                 commonWebpackConfig {
+                    outputFileName = "composeApp.js"
                     devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
                         static = (static ?: mutableListOf()).apply {
                             // Serve sources to debug inside browser
@@ -30,6 +31,7 @@ internal fun Project.configureKotlinMultiplatform() {
                     }
                 }
             }
+            binaries.executable()
         }
 
         androidTarget {

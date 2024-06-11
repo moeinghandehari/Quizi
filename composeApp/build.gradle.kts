@@ -1,7 +1,7 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
-    id("app.android.application")
+    id("app.application.kotlin.multiplatform")
     id("app.firebase.application")
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
@@ -59,95 +59,6 @@ kotlin {
 
 android {
     namespace = "de.tuhh.quizi"
-
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-    sourceSets["main"].res.srcDirs("src/androidMain/res")
-    sourceSets["main"].resources.srcDirs("src/commonMain/resources")
-
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
-
-    AppBuildConfig.BrandFlavorDimension.productFlavors.forEach { brandFlavor ->
-        val brandName = brandFlavor.name
-        val taskName = brandName.replaceFirstChar { it.uppercaseChar() }
-
-        tasks.register("getStrings$taskName") {
-            group = "quizi"
-
-            finalizedBy("getStrings")
-        }
-    }
-//
-//    productFlavors {
-//        AppBuildConfig.BrandFlavorDimension.productFlavors.forEach { flavor ->
-//            getByName(flavor.name) {
-//                applicationId = flavor.applicationId
-//            }
-//        }
-//    }
-    android.buildFeatures.buildConfig = true
-
-    signingConfigs {
-        /*getByName(Identifiers.SigningConfigs.DEBUG) {
-            storeFile = rootProject.file("config/signing/debug.keystore")
-        }*/
-        /*create(Identifiers.SigningConfigs.RELEASE) {
-            storeFile = file(
-                param(
-                    Identifiers.Params.SIGNING_KEYSTORE_PATH,
-                )?.takeUnless {
-                    it.isEmpty()
-                } ?: "notSet",
-            )
-            storePassword =
-                param(Identifiers.Params.SIGNING_KEYSTORE_PASSWORD)?.takeUnless { it.isEmpty() }
-                    ?: "notSet"
-            keyAlias =
-                param(Identifiers.Params.SIGNING_KEY_ALIAS)?.takeUnless { it.isEmpty() } ?: "notSet"
-            keyPassword =
-                param(Identifiers.Params.SIGNING_KEY_PASSWORD)?.takeUnless { it.isEmpty() }
-                    ?: "notSet"
-        }*/
-    }
-
-    buildTypes {
-        /*getByName(Identifiers.BuildTypes.DEBUG) {
-            signingConfig = signingConfigs.getByName(Identifiers.SigningConfigs.DEBUG)
-            applicationIdSuffix = ".debug"
-            // For debuggable builds, minification is limited by AGP and will not obfuscate names
-            isMinifyEnabled = param(Identifiers.Params.IS_MINIFY_ENABLED)?.toBoolean() ?: false
-            isDebuggable = true
-
-            buildConfigField(
-                "String",
-                "QUIZI_API_BASE_URL",
-                "\"${AppBuildConfig.quiziApiBuildConfig.baseUrlDev}\"",
-            )
-        }*/
-        /*getByName(Identifiers.BuildTypes.RELEASE) {
-            signingConfig = signingConfigs.getByName(Identifiers.SigningConfigs.RELEASE)
-            isMinifyEnabled = param(Identifiers.Params.IS_MINIFY_ENABLED)?.toBoolean() ?: true
-            isDebuggable = false
-
-            buildConfigField(
-                "String",
-                "QUIZI_API_BASE_URL",
-                "\"${AppBuildConfig.quiziApiBuildConfig.baseUrlDev}\"",
-            )
-        }*/
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    dependencies {
-        debugImplementation(libs.compose.ui.tooling)
-    }
 }
 
 compose.desktop {

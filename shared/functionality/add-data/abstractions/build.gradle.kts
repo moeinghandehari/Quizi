@@ -1,11 +1,9 @@
 plugins {
-    id("app.library.kotlin.multiplatform")
+    id("app.android.library")
 }
 
 kotlin {
-    sourceSets {
-        commonMain.dependencies {}
-    }
+    dependencies {}
 }
 
 android {

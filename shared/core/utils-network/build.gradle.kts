@@ -7,9 +7,10 @@ kotlin {
         commonMain.dependencies {
             // put your Multiplatform dependencies here
             implementation(libs.kotlinx.serialization)
-            implementation(project.dependencies.platform(libs.ktor.bom))
+            // implementation(project.dependencies.platform(libs.ktor.bom))
             implementation(project.dependencies.platform(libs.koin.bom))
             api(libs.koin.core)
+            // implementation(libs.ktor.core)
         }
 
         androidMain.dependencies {
@@ -24,8 +25,8 @@ kotlin {
             implementation(libs.ktor.client.java)
         }
 
-        jsMain.dependencies {
-            implementation(libs.ktor.client.js)
+        wasmJsMain.dependencies {
+            // implementation(libs.ktor.client.js)
         }
     }
 }

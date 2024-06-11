@@ -5,7 +5,7 @@ import org.gradle.api.Project
 import plugins.config.configureAndroidApplication
 import plugins.config.configureKotlinMultiplatform
 
-class AndroidApplicationConventionPlugin : Plugin<Project> {
+class KotlinMultiplatformApplicationConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
