@@ -7,9 +7,9 @@ kotlin {
         commonMain.dependencies {
             // put your Multiplatform dependencies here
             implementation(libs.kotlinx.serialization)
-            // implementation(project.dependencies.platform(libs.ktor.bom))
             implementation(project.dependencies.platform(libs.koin.bom))
             api(libs.koin.core)
+            implementation(project.dependencies.platform(libs.ktor.bom))
             // implementation(libs.ktor.core)
         }
 
