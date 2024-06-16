@@ -11,9 +11,11 @@ plugins {
 kotlin {
     sourceSets {
         androidMain.dependencies {
+            implementation(libs.compose.ui.tooling)
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.ui.tooling.preview.android)
             implementation(compose.preview)
+            implementation(libs.jetbrains.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.firebase.analytics)
             implementation(libs.firebase.crashlytics)
@@ -23,6 +25,8 @@ kotlin {
 
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
+            implementation(libs.jetbrains.compose.ui.tooling.preview)
+            implementation(libs.androidx.ui.tooling.preview.desktop)
         }
 
         wasmJsMain.dependencies {}
