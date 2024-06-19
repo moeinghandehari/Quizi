@@ -1,24 +1,24 @@
 [versions]
-agp = "8.3.2"
+agp = "8.4.2"
 androidx-activityCompose = "1.9.0"
 androidx-appcompat = "1.7.0"
 androidx-constraintlayout = "2.1.4"
 androidx-core-ktx = "1.13.1"
 androidx-espresso-core = "3.5.1"
-androidx-material = "1.12.0"
+androidx-lifecycle = "2.8.0"
+androidx-navigation = "2.8.0-alpha02"
 androidx-test-junit = "1.1.5"
 coverageAggregation = "2.2.0"
 kotlinx-serialization = "1.6.3"
 kotlin = "2.0.0"
-compose = "2024.05.00"
-compose-plugin = "1.6.11"
+compose = "2024.06.00"
+compose-plugin = "1.6.20-dev1667"
 detekt = "1.23.6"
 detektComposeRules = "0.3.13"
 exposed = "0.50.0"
 firebase = "33.0.0"
 firebaseCrashlyticsPlugin = "3.0.1"
 firebasePerfPlugin = "1.4.2"
-h2 = "2.2.224"
 jacoco = "0.8.7"
 junit = "4.13.2"
 ksp = "2.0.0-1.0.21" # Depends on kotlin version
@@ -28,6 +28,7 @@ ktor = "2.3.11"
 logback = "1.5.6"
 voyager = "1.0.0"
 google-services = "4.4.1"
+material = "1.12.0"
 
 [libraries]
 android-gradle = { module = "com.android.tools.build:gradle", version.ref = "agp" }
@@ -39,9 +40,11 @@ androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = 
 androidx-test-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-junit" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidx-espresso-core" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidx-appcompat" }
-androidx-material = { group = "com.google.android.material", name = "material", version.ref = "androidx-material" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "androidx-constraintlayout" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
+androidx-lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
+androidx-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
 
 coverageAggregation-gradle = { module = "io.github.gmazzo.test.aggregation:plugin", version.ref = "coverageAggregation" }
 
@@ -50,12 +53,16 @@ kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-
 # Compose
 # BOM version mapping: https://developer.android.com/jetpack/compose/bom/bom-mapping
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose" }
+compose-foundation = { module = "androidx.compose.foundation:foundation" }
 compose-runtime = { module = "androidx.compose.runtime:runtime" }
+compose-material3 = { module = "androidx.compose.material3:material3" }
 compose-ui = { module = "androidx.compose.ui:ui" }
-compose-util = { module = "androidx.compose.ui:ui-util" }
+compose-uiUtil = { module = "androidx.compose.ui:ui-util" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
-compose-material3 = { module = "androidx.compose.material3:material3" }
+jetbrains-compose-ui-tooling-preview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "compose-plugin" }
+androidx-ui-tooling-preview-android = { module = "androidx.compose.ui:ui-tooling-preview-android" }
+androidx-ui-tooling-preview-desktop = { module = "androidx.compose.ui:ui-tooling-preview-desktop" }
 
 # Detekt
 detekt-gradle = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
@@ -90,9 +97,6 @@ exposed-core = { module = "org.jetbrains.exposed:exposed-core", version.ref = "e
 exposed-dao = { module = "org.jetbrains.exposed:exposed-dao", version.ref = "exposed" }
 exposed-jdbc = { module = "org.jetbrains.exposed:exposed-jdbc", version.ref = "exposed" }
 
-# H2
-h2 = { module = "com.h2database:h2", version.ref = "h2" }
-
 # Postgres
 postgres = { module = "org.postgresql:postgresql", version = "42.7.3" }
 
@@ -118,6 +122,7 @@ firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 firebase-crashlytics-gradle = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "firebaseCrashlyticsPlugin" }
 firebase-perf = { module = "com.google.firebase:firebase-perf", version.ref = "firebasePerfPlugin" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -134,6 +139,7 @@ ktor = { id = "io.ktor.plugin", version.ref = "ktor" }
 googleServices = { id = "com.google.gms.google-services", version.ref = "google-services" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlyticsPlugin" }
 firebase-performance = { id = "com.google.firebase.firebase-perf", version.ref = "firebasePerfPlugin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 
 [bundles]
 ktor-multiplatform = ["ktor-core", "ktor-logging", "ktor-contentNegotiation"]

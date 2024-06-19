@@ -1,1 +1,0 @@
-package de.tuhh.quizi.theme.model

@@ -19,11 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-plugins {
-    // JVM toolchain auto-provisioning (see https://docs.gradle.org/current/userguide/toolchains.html#sec:provisioning)
-    id("org.gradle.toolchains.foojay-resolver-convention") version ("0.7.0")
-}
-
 buildCache {
     local {
         directory = File(rootDir, ".gradle-build-cache")
@@ -35,7 +30,9 @@ include(":server")
 
 include(":composeApp")
 
-include(":shared")
+include(":ui:core")
+include(":ui:add-content")
+include(":ui:quiz")
 
 include(":shared:core:model")
 include(":shared:core:utils-network")

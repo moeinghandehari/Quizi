@@ -1,46 +1,32 @@
 package plugins.config
 
-import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.Project
-import org.gradle.configurationcache.extensions.capitalized
 import org.gradle.kotlin.dsl.dependencies
-import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.getValue
 import org.gradle.kotlin.dsl.provideDelegate
 import plugins.extensions.catalog
 
-internal fun Project.configureJetpackCompose(
-    commonExtension: CommonExtension<*, *, *, *, *, *>,
-) {
+internal fun Project.configureJetpackCompose() {
+    val implementation by configurations
+    val debugImplementation by configurations
+
     pluginManager.apply {
         apply("com.google.devtools.ksp")
     }
 
-    commonExtension.apply {
-        buildFeatures.compose = true
-        composeOptions.kotlinCompilerExtensionVersion =
-            catalog.findVersion("composeKotlinCompiler").get().toString()
-
-        val kspExtension = extensions.getByType<com.google.devtools.ksp.gradle.KspExtension>()
-        kspExtension.apply {
-            // Configure Compose Destinations to generate NavGraphs containing the Destinations
-            arg("compose-destinations.mode", "navgraphs")
-
-            // Configure Compose Destinations to use the module path up to `ui` to generate names
-            arg("compose-destinations.moduleName", moduleName { it.name == "ui" })
-        }
-    }
-
-    val implementation by configurations
-    val debugImplementation by configurations
-    val ksp by configurations
-
     dependencies {
-        ksp(catalog.findLibrary("compose.destinations.ksp").get())
         implementation(platform(catalog.findLibrary("compose.bom").get()))
+        implementation(catalog.findLibrary("compose.foundation").get())
         implementation(catalog.findLibrary("compose.runtime").get())
-        implementation(catalog.findLibrary("compose.preview").get())
-        debugImplementation(catalog.findLibrary("compose.tooling").get())
+        implementation(catalog.findLibrary("compose.material3").get())
+        implementation(catalog.findLibrary("compose.ui").get())
+        implementation(catalog.findLibrary("compose.ui.tooling.preview").get())
+        implementation(catalog.findLibrary("compose.uiUtil").get())
+        // implementation(catalog.findLibrary("compose.components.resources").get())
+        // implementation(catalog.findLibrary("compose.components.uiToolingPreview").get())
+        debugImplementation(catalog.findLibrary("compose.ui.tooling").get())
+
+        implementation(catalog.findLibrary("androidx.navigation.compose").get())
     }
 }
 
@@ -51,7 +37,7 @@ internal fun Project.configureJetpackCompose(
  *
  * @param takeUntil Optional parameter to specify at which parent module to stop
  */
-private fun Project.moduleName(takeUntil: (Project) -> Boolean = { false }) = buildList {
+/*private fun Project.moduleName(takeUntil: (Project) -> Boolean = { false }) = buildList {
     var currentProject: Project? = project
     while (currentProject != null) {
         add(currentProject.name)
@@ -64,4 +50,4 @@ private fun Project.moduleName(takeUntil: (Project) -> Boolean = { false }) = bu
     .reversed()
     .map { it.split("[^A-Za-z]".toRegex()) }
     .flatten()
-    .joinToString(separator = "") { it.capitalized() }
+    .joinToString(separator = "") { it.capitalized() }*/
