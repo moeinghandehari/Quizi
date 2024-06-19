@@ -1,9 +1,7 @@
 package plugins
 
-import com.android.build.api.dsl.ApplicationExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.getByType
 import plugins.config.configureJetpackCompose
 
 class JetpackComposeApplicationConventionPlugin : Plugin<Project> {
@@ -12,10 +10,10 @@ class JetpackComposeApplicationConventionPlugin : Plugin<Project> {
             pluginManager.apply {
                 apply("com.android.application")
                 apply("com.google.devtools.ksp")
+                apply("org.jetbrains.compose")
+                apply("org.jetbrains.kotlin.plugin.compose")
             }
-
-            val applicationExtension = extensions.getByType<ApplicationExtension>()
-            configureJetpackCompose(applicationExtension)
+            configureJetpackCompose()
         }
     }
 }

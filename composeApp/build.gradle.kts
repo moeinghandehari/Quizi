@@ -2,18 +2,14 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
     id("app.application.kotlin.multiplatform")
+    id("app.compose.application")
     id("app.firebase.application")
-    alias(libs.plugins.jetbrainsCompose)
-    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlinxSerialization)
 }
 
 kotlin {
     sourceSets {
         androidMain.dependencies {
-            implementation(libs.compose.ui.tooling)
-            implementation(libs.compose.ui.tooling.preview)
-            implementation(libs.androidx.ui.tooling.preview.android)
             implementation(compose.preview)
             implementation(libs.jetbrains.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
@@ -25,38 +21,22 @@ kotlin {
 
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
-            implementation(libs.jetbrains.compose.ui.tooling.preview)
-            implementation(libs.androidx.ui.tooling.preview.desktop)
         }
 
         wasmJsMain.dependencies {}
 
         commonMain.dependencies {
-            implementation(project.dependencies.platform(libs.compose.bom))
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.ui)
-            implementation(compose.uiUtil)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
-
             implementation(project.dependencies.platform(libs.koin.bom))
             api(libs.koin.core)
 
             implementation(project.dependencies.platform(libs.firebase.bom))
 
-            implementation(project(":shared:functionality:project-defaults"))
+            implementation(compose.components.resources)
 
-            // api(projects.shared.core.model)
-
-            // Temp Workaround for a bug - Should be removed later
-            implementation("co.touchlab:stately-common:2.0.6")
-        }
-
-        // Temp Workaround for a bug - Should be removed later
-        configurations.all {
-            exclude(group = "co.touchlab", module = "stately-strict-jvm")
+            implementation(projects.ui.core)
+            implementation(projects.ui.addContent)
+            implementation(projects.ui.quiz)
+            implementation(projects.shared.functionality.projectDefaults)
         }
     }
 }

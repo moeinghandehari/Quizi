@@ -13,10 +13,12 @@ class JetpackComposeLibraryConventionPlugin : Plugin<Project> {
             pluginManager.apply {
                 apply("com.android.library")
                 apply("com.google.devtools.ksp")
+                apply("org.jetbrains.compose")
+                apply("org.jetbrains.kotlin.plugin.compose")
             }
 
             val extension = extensions.getByType<LibraryExtension>()
-            configureJetpackCompose(extension)
+            configureJetpackCompose()
 
             // Can be removed if flavors are not needed for e.g. brand specific resources in the UI
             configureFlavors(extension)
