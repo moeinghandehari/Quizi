@@ -31,6 +31,7 @@ turbine = "1.1.0"
 voyager = "1.0.0"
 google-services = "4.4.1"
 material = "1.12.0"
+navigationCommonKtx = "2.7.7"
 
 [libraries]
 android-gradle = { module = "com.android.tools.build:gradle", version.ref = "agp" }
@@ -134,6 +135,7 @@ firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 firebase-crashlytics-gradle = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "firebaseCrashlyticsPlugin" }
 firebase-perf = { module = "com.google.firebase:firebase-perf", version.ref = "firebasePerfPlugin" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-navigation-common-ktx = { group = "androidx.navigation", name = "navigation-common-ktx", version.ref = "navigationCommonKtx" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

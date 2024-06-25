@@ -1,19 +1,18 @@
-package de.tuhh.quizi.ui.home
-
+package de.tuhh.quizi.ui.quiz
 
 import de.tuhh.quizi.ui.core.navigation.spec.DestinationSpec
 import de.tuhh.quizi.ui.core.navigation.spec.NavGraphSpec
 import de.tuhh.quizi.ui.core.navigation.spec.Route
-import de.tuhh.quizi.ui.home.destinations.HomeScreenDestination
+import de.tuhh.quizi.ui.quiz.destinations.QuizScreenDestination
 
-public object HomeNavGraph : NavGraphSpec {
-
-    override val route: String = "Home"
-
-    override val startRoute: Route = HomeScreenDestination
-
+public object QuizNavGraph : NavGraphSpec {
+    
+    override val route: String = "Quiz"
+    
+    override val startRoute: Route = QuizScreenDestination
+    
     override val destinationsByRoute: Map<String, DestinationSpec<*>> = listOf(
-        HomeScreenDestination
+        QuizScreenDestination
     ).associateBy { it.route }
 
 }

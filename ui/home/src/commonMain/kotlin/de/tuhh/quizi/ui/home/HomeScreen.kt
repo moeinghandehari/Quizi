@@ -24,9 +24,7 @@ import androidx.navigation.compose.rememberNavController
 import de.tuhh.quizi.ui.core.components.button.OptionButton
 
 @Composable
-fun HomeScreen(
-    navController: NavHostController = rememberNavController(),
-) {
+fun HomeScreen() {
     Column(
         verticalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier

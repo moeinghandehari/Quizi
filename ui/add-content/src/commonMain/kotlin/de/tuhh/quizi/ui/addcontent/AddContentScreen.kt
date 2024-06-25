@@ -22,9 +22,7 @@ import quizi.ui.add_content.generated.resources.Res
 import quizi.ui.add_content.generated.resources.choose_content_description
 
 @Composable
-fun AddContentScreen(
-    navController: NavHostController = rememberNavController(),
-) {
+fun AddContentScreen() {
     Column(
         verticalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier

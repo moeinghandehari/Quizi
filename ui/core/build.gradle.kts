@@ -24,3 +24,6 @@ kotlin {
         }
     }
 }
+dependencies {
+    implementation(libs.androidx.navigation.common.ktx)
+}
