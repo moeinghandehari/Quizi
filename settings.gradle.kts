@@ -30,11 +30,14 @@ include(":server")
 
 include(":composeApp")
 
-include(":ui:core")
 include(":ui:add-content")
+include(":ui:core")
+include(":ui:home")
 include(":ui:quiz")
 
+include(":shared:core:build-info")
 include(":shared:core:model")
+include(":shared:core:utils-loading")
 include(":shared:core:utils-network")
 
 include(":shared:functionality:project-defaults")

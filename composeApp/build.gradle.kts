@@ -3,6 +3,7 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 plugins {
     id("app.application.kotlin.multiplatform")
     id("app.compose.application")
+    id("app.koin.compose.multiplatform")
     id("app.firebase.application")
     alias(libs.plugins.kotlinxSerialization)
 }
@@ -26,8 +27,9 @@ kotlin {
         wasmJsMain.dependencies {}
 
         commonMain.dependencies {
-            implementation(project.dependencies.platform(libs.koin.bom))
-            api(libs.koin.core)
+            implementation(projects.shared.core.buildInfo) {
+                because("The app provides the actual implementation of the build info")
+            }
 
             implementation(project.dependencies.platform(libs.firebase.bom))
 
@@ -35,6 +37,7 @@ kotlin {
 
             implementation(projects.ui.core)
             implementation(projects.ui.addContent)
+            implementation(projects.ui.home)
             implementation(projects.ui.quiz)
             implementation(projects.shared.functionality.projectDefaults)
         }

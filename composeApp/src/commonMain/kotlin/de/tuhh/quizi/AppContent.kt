@@ -16,51 +16,79 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.rememberNavController
+import de.tuhh.quizi.di.appModule
+import de.tuhh.quizi.navigation.NavEventProvider
+import de.tuhh.quizi.navigation.extensions.execute
 import de.tuhh.quizi.ui.addcontent.AddContentScreen
 import de.tuhh.quizi.ui.core.theme.AppTheme
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.KoinApplication
+import org.koin.compose.koinInject
 import quizi.composeapp.generated.resources.Res
 import quizi.composeapp.generated.resources.compose_multiplatform
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun AppContent() {
-    MaterialTheme {
-        Scaffold(
-            modifier = Modifier,
-            topBar = {
-                TopAppBar(
-                    title = { Text("Add Content") },
-                    navigationIcon = { Icon(Icons.AutoMirrored.Filled.ArrowBack, "Navigate Back") },
+    KoinApplication(application = {
+        modules(appModule)
+    }) {
+        val navEventProvider: NavEventProvider = koinInject()
+        val navController = rememberNavController()
+
+        LaunchedEffect(navEventProvider, navController) {
+            navEventProvider.navigationEvent.collect { navEvent ->
+                navController.execute(
+                    navEvent = navEvent,
                 )
-            },
-        ) { innerPadding ->
-            var showContent by remember { mutableStateOf(false) }
-            Column(
-                Modifier.fillMaxWidth().padding(innerPadding),
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                Button(onClick = { showContent = !showContent }) {
-                    Text("Click me!")
-                }
-                AnimatedVisibility(showContent) {
-                    val greeting = remember { Greeting().greet() }
-                    Column(
-                        Modifier.fillMaxWidth(),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                    ) {
-                        Image(painterResource(Res.drawable.compose_multiplatform), null)
-                        Text("Compose: $greeting")
+            }
+        }
+
+        MaterialTheme {
+            // RootNavGraph()
+            Scaffold(
+                modifier = Modifier,
+                topBar = {
+                    TopAppBar(
+                        title = { Text("Add Content") },
+                        navigationIcon = {
+                            Icon(
+                                Icons.AutoMirrored.Filled.ArrowBack,
+                                "Navigate Back",
+                            )
+                        },
+                    )
+                },
+            ) { innerPadding ->
+                var showContent by remember { mutableStateOf(false) }
+                Column(
+                    Modifier.fillMaxWidth().padding(innerPadding),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    Button(onClick = { showContent = !showContent }) {
+                        Text("Click me!")
                     }
+                    AnimatedVisibility(showContent) {
+                        val greeting = remember { Greeting().greet() }
+                        Column(
+                            Modifier.fillMaxWidth(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                        ) {
+                            Image(painterResource(Res.drawable.compose_multiplatform), null)
+                            Text("Compose: $greeting")
+                        }
+                    }
+                    AddContentScreen()
                 }
-                AddContentScreen()
             }
         }
     }

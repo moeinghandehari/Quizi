@@ -32,5 +32,5 @@ kotlin {
 }
 
 android {
-    namespace = "de.tuhh.quizi.feature.quizinput.abstractions"
+    namespace = "de.tuhh.quizi.core.utils.network"
 }
