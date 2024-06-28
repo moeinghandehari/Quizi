@@ -18,9 +18,9 @@ import de.tuhh.quizi.ui.core.components.list.OptionsList
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun AddContentScreen(
-    page: AddContentPage
-) {
+fun AddContentScreen() {
+
+    val page: AddContentPage = AddContentPage.SelectContentPage
     Column(
         verticalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier

@@ -15,12 +15,12 @@ import de.tuhh.quizi.ui.core.components.card.BigTextCard
 import de.tuhh.quizi.ui.core.components.list.OptionsList
 import de.tuhh.quizi.ui.core.state.ButtonOption
 import quizi.ui.home.generated.resources.Res
-import quizi.ui.home.generated.resources.add_content_button
-import quizi.ui.home.generated.resources.home_function_choice_title
-import quizi.ui.home.generated.resources.quiz_button
+import quizi.ui.home.generated.resources.button_quiz
 import de.tuhh.quizi.ui.home.state.HomeScreenEvent
 import de.tuhh.quizi.ui.home.state.HomeViewModel
 import org.koin.compose.koinInject
+import quizi.ui.home.generated.resources.button_add_content
+import quizi.ui.home.generated.resources.title_home_function_choice
 
 @Composable
 internal fun HomeScreen(
@@ -33,14 +33,14 @@ internal fun HomeScreen(
             .fillMaxHeight()
             .padding(16.dp),
     ) {
-        BigTextCard(text = Res.string.home_function_choice_title)
+        BigTextCard(text = Res.string.title_home_function_choice)
         Spacer(Modifier.weight(1f))
         OptionsList(
             options = listOf(
-                ButtonOption(Res.string.add_content_button to {
-                    viewModel.onEvent(HomeScreenEvent.ToAddContentClicked)
+                ButtonOption(Res.string.button_add_content to {
+                    viewModel.onEvent(HomeScreenEvent.OnAddContentClicked)
                 }),
-                ButtonOption(Res.string.quiz_button to {}),
+                ButtonOption(Res.string.button_quiz to {}),
             ),
             modifier = Modifier
                 .fillMaxWidth()

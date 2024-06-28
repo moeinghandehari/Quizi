@@ -10,8 +10,8 @@ internal class HomeViewModel(
 
     fun onEvent(event: HomeScreenEvent) {
         when (event) {
-            HomeScreenEvent.ToAddContentClicked -> navigator.navigateTo(NavTarget.AddContent)
-            HomeScreenEvent.ToQuizClicked -> navigator.navigateTo(NavTarget.Quiz)
+            HomeScreenEvent.OnAddContentClicked -> navigator.navigateTo(NavTarget.AddContent)
+            HomeScreenEvent.OnQuizClicked -> navigator.navigateTo(NavTarget.Quiz)
         }
     }
 }
