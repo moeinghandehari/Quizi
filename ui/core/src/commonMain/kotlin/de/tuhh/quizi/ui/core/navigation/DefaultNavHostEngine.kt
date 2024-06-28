@@ -22,6 +22,7 @@ import de.tuhh.quizi.ui.core.navigation.spec.DestinationSpec
 import de.tuhh.quizi.ui.core.navigation.spec.NavGraphSpec
 import de.tuhh.quizi.ui.core.navigation.spec.NavHostEngine
 import de.tuhh.quizi.ui.core.navigation.spec.Route
+import de.tuhh.quizi.ui.core.navigation.spec.addActivityDestination
 
 /**
  * Returns the default [NavHostEngine] to be used with [DestinationsNavHost]

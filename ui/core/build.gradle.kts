@@ -21,6 +21,7 @@ kotlin {
             api(libs.androidx.lifecycle.runtime.compose)
             api(libs.androidx.lifecycle.viewmodel.compose)
             api(libs.androidx.navigation.compose)
+            api(libs.kotlinx.serialization.json)
         }
     }
 }

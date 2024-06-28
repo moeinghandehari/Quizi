@@ -7,6 +7,7 @@ import de.tuhh.quizi.ui.core.navigation.extensions.allDestinations
 import de.tuhh.quizi.ui.core.navigation.scope.AnimatedDestinationScope
 import de.tuhh.quizi.ui.core.navigation.scope.DestinationScope
 import de.tuhh.quizi.ui.core.navigation.spec.DestinationSpec
+import de.tuhh.quizi.ui.core.navigation.spec.DestinationStyle
 import de.tuhh.quizi.ui.core.navigation.spec.NavGraphSpec
 import de.tuhh.quizi.ui.core.navigation.spec.NavHostEngine
 
@@ -18,6 +19,7 @@ import de.tuhh.quizi.ui.core.navigation.spec.NavHostEngine
  * with the correct [AnimatedDestinationScope] containing the navigation
  * arguments, the back stack entry and navigators.
  */
+@OptIn(InternalDestinationsApi::class)
 fun <T> ManualComposableCallsBuilder.composable(
     destination: DestinationSpec<T>,
     content: @Composable AnimatedDestinationScope<T>.() -> Unit
@@ -44,6 +46,7 @@ fun <T> ManualComposableCallsBuilder.composable(
  * with the correct [DestinationScope] containing the navigation
  * arguments, the back stack entry and navigators.
  */
+@OptIn(InternalDestinationsApi::class)
 fun <T> ManualComposableCallsBuilder.dialogComposable(
     destination: DestinationSpec<T>,
     content: @Composable DestinationScope<T>.() -> Unit
