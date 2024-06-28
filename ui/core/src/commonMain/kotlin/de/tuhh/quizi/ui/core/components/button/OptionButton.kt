@@ -14,10 +14,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
+import org.jetbrains.compose.resources.StringResource
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun OptionButton(
-    label: String,
+    label: StringResource,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     isEnabled: Boolean = true,
@@ -30,7 +32,7 @@ fun OptionButton(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     DefaultButton(
-        label = label,
+        label = stringResource(label),
         onClick = onClick,
         isEnabled = isEnabled,
         shape = shape,

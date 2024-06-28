@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="title">Quizi</string>
+    <string name="appbar_title">Quizi</string>
+    <string name="title_home_function_choice">What are you up to today?</string>
+    <string name="button_add_content">Add New Content</string>
+    <string name="button_quiz">Start a Quiz</string>
 </resources>

@@ -20,7 +20,7 @@ import org.jetbrains.compose.resources.stringResource
 fun BigTextCard(
     text: StringResource,
     textColor: Color = Color.Black,
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
 ) = Box(
     contentAlignment = Alignment.Center,
     modifier = modifier
