@@ -1,11 +1,14 @@
 package de.tuhh.quizi.navigation.extensions
 
 import androidx.navigation.NavController
-import androidx.navigation.navOptions
 import de.tuhh.quizi.navigation.NavEvent
+import de.tuhh.quizi.ui.addcontent.AddContentNavGraph
 import de.tuhh.quizi.ui.core.navigation.NavTarget
+import de.tuhh.quizi.ui.core.navigation.navigation.navigate
+import de.tuhh.quizi.ui.core.navigation.navigation.popUpTo
 import de.tuhh.quizi.ui.home.HomeNavGraph
-import de.tuhh.quizi.ui.home.HomeScreenRoutes
+import de.tuhh.quizi.ui.navgraph.AppNavGraph
+import de.tuhh.quizi.ui.quiz.QuizNavGraph
 
 suspend fun NavController.execute(
     navEvent: NavEvent,
@@ -20,18 +23,14 @@ suspend fun NavController.execute(
         }
 
         is NavEvent.NavigateTo.Target -> when (navEvent.target) {
-            NavTarget.AddContent -> navigate(HomeScreenRoutes.AddContentNav.route) {
-                popUpTo(HomeScreenRoutes.StartScreen.route) {
+            NavTarget.AppStartup -> navigate(AppNavGraph) {
+                popUpTo(AppNavGraph) {
                     inclusive = true
                 }
             }
-
-            NavTarget.HomePage -> navigate(
-                HomeScreenRoutes.StartScreen.route,
-                navEvent.navOptionsBuilder
-            )
-
-            NavTarget.Quiz -> {}
+            NavTarget.AddContent ->  navigate(AddContentNavGraph, navEvent.navOptionsBuilder)
+            NavTarget.HomePage -> navigate(HomeNavGraph, navEvent.navOptionsBuilder)
+            NavTarget.Quiz ->  navigate(QuizNavGraph, navEvent.navOptionsBuilder)
         }
     }
 }

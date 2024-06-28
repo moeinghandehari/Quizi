@@ -18,6 +18,7 @@ import de.tuhh.quizi.ui.core.navigation.animations.defaults.DestinationExitTrans
 import de.tuhh.quizi.ui.core.navigation.animations.defaults.NestedNavGraphDefaultAnimations
 import de.tuhh.quizi.ui.core.navigation.animations.defaults.RootNavGraphDefaultAnimations
 import de.tuhh.quizi.ui.core.navigation.manualcomposablecalls.ManualComposableCalls
+import de.tuhh.quizi.ui.core.navigation.navigation.DependenciesContainerBuilder
 import de.tuhh.quizi.ui.core.navigation.spec.DestinationSpec
 import de.tuhh.quizi.ui.core.navigation.spec.NavGraphSpec
 import de.tuhh.quizi.ui.core.navigation.spec.NavHostEngine
@@ -27,7 +28,7 @@ import de.tuhh.quizi.ui.core.navigation.spec.addActivityDestination
 /**
  * Returns the default [NavHostEngine] to be used with [DestinationsNavHost]
  *
- * The [NavHostEngine] is used by default in [com.ramcosta.composedestinations.DestinationsNavHost]
+ * The [NavHostEngine] is used by default in [DestinationsNavHost]
  * call.
  *
  * @param navHostContentAlignment content alignment for the NavHost.

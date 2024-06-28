@@ -1,12 +1,10 @@
 package de.tuhh.quizi.ui.core.navigation.navargs.primitives.arraylist
 
-import androidx.core.bundle.Bundle
 import androidx.lifecycle.SavedStateHandle
+import de.tuhh.quizi.ui.core.navigation.navargs.Bundle
 import de.tuhh.quizi.ui.core.navigation.navargs.DestinationsNavType
 import de.tuhh.quizi.ui.core.navigation.navargs.primitives.DECODED_NULL
 import de.tuhh.quizi.ui.core.navigation.navargs.primitives.ENCODED_NULL
-import de.tuhh.quizi.ui.core.navigation.navargs.primitives.encodedComma
-import de.tuhh.quizi.ui.core.navigation.navargs.primitives.valueOfIgnoreCase
 import kotlin.reflect.KClass
 
 @Suppress("UNCHECKED_CAST")
@@ -15,12 +13,14 @@ class DestinationsEnumArrayListNavType<E : Enum<*>>(
 ) : DestinationsNavType<ArrayList<E>?>() {
 
     override fun put(bundle: Bundle, key: String, value: ArrayList<E>?) {
-        bundle.putSerializable(key, value)
+//        bundle.putSerializable(key, value)
+        return TODO("Provide the return value")
     }
 
     override fun get(bundle: Bundle, key: String): ArrayList<E>? {
-        @Suppress("DEPRECATION")
-        return bundle.getSerializable(key) as ArrayList<E>?
+//        @Suppress("DEPRECATION")
+//        return bundle.getSerializable(key) as ArrayList<E>?
+        return TODO("Provide the return value")
     }
 
     override fun parseValue(value: String): ArrayList<E>? {
@@ -29,11 +29,12 @@ class DestinationsEnumArrayListNavType<E : Enum<*>>(
         if (value == "[]") return arrayListOf()
 
         val contentValue = value.subSequence(1, value.length - 1)
-        return if (contentValue.contains(encodedComma)) {
-            contentValue.split(encodedComma)
-        } else {
-            contentValue.split(",")
-        }.mapTo(ArrayList()) { enumType.valueOfIgnoreCase(it) }
+//        return if (contentValue.contains(encodedComma)) {
+//            contentValue.split(encodedComma)
+//        } else {
+//            contentValue.split(",")
+//        }.mapTo(ArrayList()) { enumType.valueOfIgnoreCase(it) }
+        return TODO("Provide the return value")
     }
 
     override fun serializeValue(value: ArrayList<E>?): String {

@@ -1,4 +1,4 @@
-package de.tuhh.quizi.ui.core.navigation.extensions
+package de.tuhh.quizi.ui.core.navigation.utils
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -6,10 +6,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
+import de.tuhh.quizi.ui.core.navigation.DestinationsNavHost
 import de.tuhh.quizi.ui.core.navigation.spec.DestinationSpec
 import de.tuhh.quizi.ui.core.navigation.spec.NavGraphSpec
 import de.tuhh.quizi.ui.core.navigation.spec.Route
-import de.tuhh.quizi.ui.core.navigation.utils.NavGraphRegistry
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.transform
@@ -94,8 +94,8 @@ fun NavController.currentDestinationAsState(): State<DestinationSpec<*>?> {
 }
 
 /**
- * Checks if a given [Route] (which is either [com.ramcosta.composedestinations.spec.NavGraphSpec]
- * or [com.ramcosta.composedestinations.spec.DestinationSpec]) is currently somewhere in the back stack.
+ * Checks if a given [Route] (which is either [NavGraphSpec]
+ * or [DestinationSpec]) is currently somewhere in the back stack.
  */
 fun NavController.isRouteOnBackStack(route: Route): Boolean {
     return runCatching { getBackStackEntry(route.route) }.isSuccess

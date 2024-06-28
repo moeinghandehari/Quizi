@@ -1,13 +1,13 @@
 package de.tuhh.quizi.ui.core.navigation.navargs.primitives.array
 
-import androidx.core.bundle.Bundle
 import androidx.lifecycle.SavedStateHandle
-import de.tuhh.quizi.ui.core.navigation.navargs.utils.encodeForRoute
+import de.tuhh.quizi.ui.core.navigation.navargs.Bundle
 import de.tuhh.quizi.ui.core.navigation.navargs.DestinationsNavType
 import de.tuhh.quizi.ui.core.navigation.navargs.primitives.DECODED_NULL
 import de.tuhh.quizi.ui.core.navigation.navargs.primitives.DestinationsStringNavType
 import de.tuhh.quizi.ui.core.navigation.navargs.primitives.ENCODED_NULL
 import de.tuhh.quizi.ui.core.navigation.navargs.primitives.encodedComma
+import de.tuhh.quizi.ui.core.navigation.navargs.utils.encodeForRoute
 
 object DestinationsStringArrayNavType : DestinationsNavType<Array<String>?>() {
 

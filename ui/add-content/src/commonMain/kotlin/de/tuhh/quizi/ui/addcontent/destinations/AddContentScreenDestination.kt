@@ -2,6 +2,7 @@ package de.tuhh.quizi.ui.addcontent.destinations
 
 import androidx.annotation.RestrictTo
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavBackStackEntry
 import de.tuhh.quizi.ui.addcontent.AddContentScreen
 import de.tuhh.quizi.ui.core.navigation.scope.DestinationScope
 import de.tuhh.quizi.ui.core.navigation.spec.Direction
@@ -13,6 +14,10 @@ public object AddContentScreenDestination : DirectionDestinationSpec {
     
     @get:RestrictTo(RestrictTo.Scope.SUBCLASSES)
     override val baseRoute: String = "add_content_screen"
+
+    override fun argsFrom(navBackStackEntry: NavBackStackEntry) {
+        TODO("Not yet implemented")
+    }
 
     override val route: String = baseRoute
     

@@ -18,9 +18,14 @@ import quizi.ui.home.generated.resources.Res
 import quizi.ui.home.generated.resources.add_content_button
 import quizi.ui.home.generated.resources.home_function_choice_title
 import quizi.ui.home.generated.resources.quiz_button
+import de.tuhh.quizi.ui.home.state.HomeScreenEvent
+import de.tuhh.quizi.ui.home.state.HomeViewModel
+import org.koin.compose.koinInject
 
 @Composable
-fun HomeScreen() {
+internal fun HomeScreen(
+    viewModel: HomeViewModel = koinInject()
+) {
     Column(
         verticalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
@@ -32,7 +37,9 @@ fun HomeScreen() {
         Spacer(Modifier.weight(1f))
         OptionsList(
             options = listOf(
-                ButtonOption(Res.string.add_content_button to {}),
+                ButtonOption(Res.string.add_content_button to {
+                    viewModel.onEvent(HomeScreenEvent.ToAddContentClicked)
+                }),
                 ButtonOption(Res.string.quiz_button to {}),
             ),
             modifier = Modifier

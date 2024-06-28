@@ -3,13 +3,13 @@ package de.tuhh.quizi.ui.core.navigation.manualcomposablecalls
 import androidx.compose.runtime.Composable
 import de.tuhh.quizi.ui.core.navigation.annotations.InternalDestinationsApi
 import de.tuhh.quizi.ui.core.navigation.dynamic.DynamicDestinationSpec
-import de.tuhh.quizi.ui.core.navigation.extensions.allDestinations
 import de.tuhh.quizi.ui.core.navigation.scope.AnimatedDestinationScope
 import de.tuhh.quizi.ui.core.navigation.scope.DestinationScope
 import de.tuhh.quizi.ui.core.navigation.spec.DestinationSpec
 import de.tuhh.quizi.ui.core.navigation.spec.DestinationStyle
 import de.tuhh.quizi.ui.core.navigation.spec.NavGraphSpec
 import de.tuhh.quizi.ui.core.navigation.spec.NavHostEngine
+import de.tuhh.quizi.ui.core.navigation.utils.allDestinations
 
 /**
  * Registers [content] lambda as the responsible for calling

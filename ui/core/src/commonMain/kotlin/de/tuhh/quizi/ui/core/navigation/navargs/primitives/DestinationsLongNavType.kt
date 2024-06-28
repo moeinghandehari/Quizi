@@ -1,7 +1,7 @@
 package de.tuhh.quizi.ui.core.navigation.navargs.primitives
 
-import androidx.core.bundle.Bundle
 import androidx.lifecycle.SavedStateHandle
+import de.tuhh.quizi.ui.core.navigation.navargs.Bundle
 import de.tuhh.quizi.ui.core.navigation.navargs.DestinationsNavType
 
 object DestinationsLongNavType : DestinationsNavType<Long?>() {

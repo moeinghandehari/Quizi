@@ -19,6 +19,8 @@ import de.tuhh.quizi.ui.core.theme.model.AppDimensions
 import de.tuhh.quizi.ui.core.theme.model.AppShapes
 import de.tuhh.quizi.ui.core.theme.model.AppTypography
 import de.tuhh.quizi.ui.core.theme.tokens.AlphaTokens
+import de.tuhh.quizi.ui.core.theme.tokens.ColorAccessibilityDarkTokens
+import de.tuhh.quizi.ui.core.theme.tokens.ColorAccessibilityLightTokens
 import de.tuhh.quizi.ui.core.theme.tokens.ColorDarkTokens
 import de.tuhh.quizi.ui.core.theme.tokens.ColorLightTokens
 import de.tuhh.quizi.ui.core.theme.tokens.DimensionTokens
@@ -103,30 +105,48 @@ internal val LocalAppAlpha = staticCompositionLocalOf<AppAlpha> {
     error("No AppAlpha definition provided")
 }
 
-// @OptIn(ExperimentalMaterialApi::class)
-// @Composable
-// fun AppRippleTheme(
-//    isEnabled: Boolean,
-//    color: Color = defaultRippleColor(
-//        contentColor = LocalContentColor.current,
-//        lightTheme = AppTheme.colors.isLight,
-//    ),
-//    alpha: RippleAlpha = defaultRippleAlpha(
-//        contentColor = LocalContentColor.current,
-//        lightTheme = AppTheme.colors.isLight,
-//    ),
-//    content: @Composable () -> Unit,
-// ) {
-//    CompositionLocalProvider(
-//        LocalRippleConfiguration provides RippleConfiguration(
-//            isEnabled = isEnabled,
-//            color = color,
-//            rippleAlpha = alpha,
-//        ),
-//    ) {
-//        content()
-//    }
-// }
+@Composable
+fun AppTheme(
+    isDarkTheme: Boolean = isSystemInDarkTheme(),
+    isHighContrast: Boolean = false,
+    content: @Composable () -> Unit,
+) {
+    // Use the material theme to provide ripples, shapes, ...
+    MaterialTheme(
+        colorScheme = debugMaterialColorScheme(),
+        shapes = debugMaterialShapes(),
+    ) {
+        CompositionLocalProvider(
+            LocalAppColors provides when (isDarkTheme) {
+                true -> when (isHighContrast) {
+                    true -> ColorAccessibilityDarkTokens
+                    false -> ColorDarkTokens
+                }
+
+                false -> when (isHighContrast) {
+                    true -> ColorAccessibilityLightTokens
+                    false -> ColorLightTokens
+                }
+            },
+            LocalAppTypography provides TypographyTokens,
+            LocalAppShapes provides ShapeTokens,
+            LocalAppDimens provides DimensionTokens,
+            LocalAppAlpha provides AlphaTokens,
+        ) {
+            CompositionLocalProvider(
+                LocalTextSelectionColors provides TextSelectionColors(
+                    handleColor = AppTheme.colors.template.primary,
+                    backgroundColor = AppTheme.colors.template.primary
+                        .copy(
+                            alpha = AppTheme.alpha.textSelection,
+                        ),
+                ),
+            ) {
+                content()
+            }
+        }
+    }
+}
 
 /**
  * Material color pallet with every color set to be highlighted, to make it visible that these

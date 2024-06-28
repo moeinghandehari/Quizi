@@ -13,15 +13,19 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.dialog
-import de.tuhh.quizi.ui.core.navigation.DependenciesContainerBuilder
+import de.tuhh.quizi.ui.core.navigation.annotations.Destination
 import de.tuhh.quizi.ui.core.navigation.annotations.InternalDestinationsApi
 import de.tuhh.quizi.ui.core.navigation.manualcomposablecalls.DestinationLambda
 import de.tuhh.quizi.ui.core.navigation.manualcomposablecalls.ManualComposableCalls
+import de.tuhh.quizi.ui.core.navigation.navigation.DependenciesContainerBuilder
+import de.tuhh.quizi.ui.core.navigation.scope.AnimatedDestinationScopeImpl
+import de.tuhh.quizi.ui.core.navigation.scope.DestinationScopeImpl
+import de.tuhh.quizi.ui.core.navigation.DestinationsNavHost
 
 /**
  * Controls how the destination is shown when navigated to and navigated away from.
  * You can pass the KClass of an implementation to the
- * [com.ramcosta.composedestinations.annotation.Destination.style].
+ * [Destination.style].
  */
 interface DestinationStyle {
 
@@ -31,7 +35,7 @@ interface DestinationStyle {
      *
      * Its animations will be inherited from the ones set at the navigation graph level,
      * using `@NavGraph(defaultTransitions = SomeClass::class)` (if the destination belongs to
-     * some nested graph) or the [com.ramcosta.composedestinations.DestinationsNavHost]'s
+     * some nested graph) or the [DestinationsNavHost]'s
      * `defaultTransitions` parameter for the top level "NavHost Graph".
      */
     object Default : DestinationStyle
@@ -55,7 +59,7 @@ interface DestinationStyle {
      * when coming from or going to certain destinations.
      *
      * You will need to create an object which implements this interface
-     * and use its KClass in [com.ramcosta.composedestinations.annotation.Destination.style]
+     * and use its KClass in [Destination.style]
      */
     interface Animated : DestinationStyle {
 
@@ -97,12 +101,11 @@ interface DestinationStyle {
      * This is useful if you want to define the style for a Destination in a
      * different module than the one which has the annotated Composable.
      */
-    object Runtime: DestinationStyle
+    object Runtime : DestinationStyle
 
     @InternalDestinationsApi
-    object Activity: DestinationStyle
+    object Activity : DestinationStyle
 }
-
 
 
 @Composable
@@ -133,7 +136,7 @@ internal typealias AddComposable<T> = (NavGraphBuilder, DestinationSpec<T>, NavH
 
 @InternalDestinationsApi
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-var additionalAddComposable : AddComposable<*>? = null
+var additionalAddComposable: AddComposable<*>? = null
 
 @OptIn(InternalDestinationsApi::class)
 internal fun <T> DestinationStyle.addActivityDestination(
@@ -183,7 +186,7 @@ internal fun <T> DestinationStyle.addActivityDestination(
             }
         }
         is DestinationStyle.Animated -> {
-             navGraphBuilder.composable(
+            navGraphBuilder.composable(
                 route = destination.route,
                 arguments = destination.arguments,
                 deepLinks = destination.deepLinks,
@@ -207,7 +210,13 @@ internal fun <T> DestinationStyle.addActivityDestination(
 
         else -> {
             additionalAddComposable
-                ?.invoke(navGraphBuilder, destination, navController, dependenciesContainerBuilder, manualComposableCalls)
+                ?.invoke(
+                    navGraphBuilder,
+                    destination,
+                    navController,
+                    dependenciesContainerBuilder,
+                    manualComposableCalls
+                )
                 ?: error("Unknown DestinationStyle $this. If you're trying to use a destination with BottomSheet style, use rememberAnimatedNavHostEngine and pass that engine to DestinationsNavHost!")
         }
     }

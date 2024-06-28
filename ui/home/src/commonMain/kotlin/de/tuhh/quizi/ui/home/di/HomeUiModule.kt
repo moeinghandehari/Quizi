@@ -4,5 +4,7 @@ import de.tuhh.quizi.ui.home.state.HomeViewModel
 import org.koin.dsl.module
 
 val HomeUiModule = module {
-    factory { ::HomeViewModel }
+    factory<HomeViewModel> {
+        HomeViewModel(get())
+    }
 }

@@ -13,6 +13,7 @@ import de.tuhh.quizi.ui.core.navigation.scope.DestinationScope
 import de.tuhh.quizi.ui.core.navigation.spec.NavHostEngine
 import de.tuhh.quizi.ui.core.navigation.utils.NavGraphRegistry
 import de.tuhh.quizi.ui.core.navigation.manualcomposablecalls.ManualComposableCallsBuilder
+import de.tuhh.quizi.ui.core.navigation.navigation.DependenciesContainerBuilder
 
 /**
  * Like [androidx.navigation.compose.NavHost] but includes the destinations of [navGraph].

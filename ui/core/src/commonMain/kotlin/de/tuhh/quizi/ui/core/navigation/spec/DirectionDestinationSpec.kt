@@ -1,7 +1,8 @@
 package de.tuhh.quizi.ui.core.navigation.spec
 
-import androidx.core.bundle.Bundle
+
 import androidx.lifecycle.SavedStateHandle
+import de.tuhh.quizi.ui.core.navigation.navargs.Bundle
 
 /**
  * [DestinationSpec] that does not contain any navigation arguments.

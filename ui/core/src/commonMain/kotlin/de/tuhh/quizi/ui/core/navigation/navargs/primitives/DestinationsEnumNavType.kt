@@ -1,7 +1,7 @@
 package de.tuhh.quizi.ui.core.navigation.navargs.primitives
 
-import androidx.core.bundle.Bundle
 import androidx.lifecycle.SavedStateHandle
+import de.tuhh.quizi.ui.core.navigation.navargs.Bundle
 import de.tuhh.quizi.ui.core.navigation.navargs.DestinationsNavType
 import kotlin.reflect.KClass
 
@@ -11,18 +11,20 @@ class DestinationsEnumNavType<E : Enum<*>>(
 ) : DestinationsNavType<E?>() {
 
     override fun put(bundle: Bundle, key: String, value: E?) {
-        bundle.putSerializable(key, value)
+//        bundle.putSerializable(key, value)
+        return TODO("Provide the return value")
     }
 
     override fun get(bundle: Bundle, key: String): E? {
-        @Suppress("DEPRECATION")
-        return bundle.getSerializable(key) as E?
+//        return bundle.getSerializable(key) as E?
+        return TODO("Provide the return value")
     }
 
     override fun parseValue(value: String): E? {
         if (value == DECODED_NULL) return null
 
-        return enumType.valueOfIgnoreCase(value)
+//        return enumType.valueOfIgnoreCase(value)
+        return TODO("Provide the return value")
     }
 
     override fun serializeValue(value: E?): String {

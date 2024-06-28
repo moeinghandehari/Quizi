@@ -1,11 +1,12 @@
 package de.tuhh.quizi.ui.core.navigation.navigation
 
 import de.tuhh.quizi.ui.core.navigation.dynamic.originalDestination
-import de.tuhh.quizi.ui.core.navigation.extensions.findDestination
 import de.tuhh.quizi.ui.core.navigation.scope.DestinationScopeWithNoDependencies
 import de.tuhh.quizi.ui.core.navigation.spec.DestinationSpec
 import de.tuhh.quizi.ui.core.navigation.spec.NavGraphSpec
 import kotlin.reflect.KClass
+import de.tuhh.quizi.ui.core.navigation.scope.DestinationScope
+import de.tuhh.quizi.ui.core.navigation.utils.findDestination
 
 /**
  * Interface through which you can add dependencies to a [DestinationDependenciesContainer].
@@ -66,10 +67,10 @@ inline fun <reified D : Any, T> DependenciesContainerBuilder<T>.dependency(
  * Helpful:
  * - Internally by generated code to get dependencies your annotated Composables
  * require.
- * - When using [com.ramcosta.composedestinations.manualcomposablecalls.ManualComposableCallsBuilder]
- * you can get a hold of it by calling [com.ramcosta.composedestinations.scope.DestinationScope.buildDependencies].
- * - When using [com.ramcosta.composedestinations.wrapper.DestinationWrapper] feature you'll also be given
- * a [com.ramcosta.composedestinations.scope.DestinationScope] where you can get this by its `dependencies`
+ * - When using [ManualComposableCallsBuilder]
+ * you can get a hold of it by calling [DestinationScope.buildDependencies].
+ * - When using [DestinationWrapper] feature you'll also be given
+ * a [DestinationScope] where you can get this by its `dependencies`
  * method.
  */
 sealed interface DestinationDependenciesContainer

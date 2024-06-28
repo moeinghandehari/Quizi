@@ -2,7 +2,7 @@ package de.tuhh.quizi.ui.core.navigation.spec
 
 import androidx.annotation.RestrictTo
 import androidx.compose.runtime.Composable
-import androidx.core.bundle.Bundle
+import de.tuhh.quizi.ui.core.navigation.navargs.Bundle
 import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
@@ -30,7 +30,8 @@ interface DestinationSpec<T> : Route {
      * Method that returns the navigation arguments class of this Composable
      * for the [navBackStackEntry] when the destination gets navigated to.
      */
-    fun argsFrom(navBackStackEntry: NavBackStackEntry) : T = argsFrom(navBackStackEntry.arguments)
+    fun argsFrom(navBackStackEntry: NavBackStackEntry) : T
+//  TODO:  = argsFrom(navBackStackEntry.arguments)
 
     /**
      * Method that returns the navigation arguments class of this Composable

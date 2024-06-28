@@ -16,7 +16,7 @@ interface NavGraphDefaultAnimationParams {
  * You can create your own and pass it to the
  * [rememberAnimatedNavHostEngine] call.
  *
- * @see [com.google.accompanist.navigation.animation.AnimatedNavHost] for a parameters explanation
+ * @see [AnimatedNavHost] for a parameters explanation
  */
 class RootNavGraphDefaultAnimations(
     override val enterTransition: DestinationEnterTransition = DestinationEnterTransition { EnterTransition.None },
@@ -39,7 +39,7 @@ class RootNavGraphDefaultAnimations(
  * specific style set and that belong to a specific nested navigation graph.
  * It is used in [rememberAnimatedNavHostEngine] call.
  *
- * @see [com.google.accompanist.navigation.animation.navigation] for a parameters explanation
+ * @see [navigation] for a parameters explanation
  */
 class NestedNavGraphDefaultAnimations(
     override val enterTransition: DestinationEnterTransition? = null,

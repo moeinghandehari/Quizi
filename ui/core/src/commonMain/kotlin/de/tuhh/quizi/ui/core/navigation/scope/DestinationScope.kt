@@ -6,8 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
-import de.tuhh.quizi.ui.core.navigation.DestinationDependenciesContainer
 import de.tuhh.quizi.ui.core.navigation.DestinationsNavigator
+import de.tuhh.quizi.ui.core.navigation.navigation.DestinationDependenciesContainer
 import de.tuhh.quizi.ui.core.navigation.result.ResultBackNavigator
 import de.tuhh.quizi.ui.core.navigation.result.ResultRecipient
 import de.tuhh.quizi.ui.core.navigation.result.resultBackNavigator
