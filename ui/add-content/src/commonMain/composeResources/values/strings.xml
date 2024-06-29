@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="appbar_title">Add Content</string>
+
+    <string name="title_select_content">Which type of content are you adding?</string>
+    <string name="button_add_course">Course</string>
+    <string name="button_add_topic">Add Topic to existing Course</string>
+    <string name="button_add_question">Add Question to existing Topic</string>
+
+    <string name="title_add_course">Enter the new course title</string>
+
+    <string name="title_select_course">Which course are you adding this topic to?</string>
+
+    <string name="title_add_topic">Enter the new topic title</string>
+
+    <string name="title_select_question_type">Which type of question are you adding?</string>
+    <string name="button_true_false">True/False</string>
+    <string name="button_single_choice">Single Choice</string>
+    <string name="button_multiple_choice">Multiple Choice</string>
+</resources>

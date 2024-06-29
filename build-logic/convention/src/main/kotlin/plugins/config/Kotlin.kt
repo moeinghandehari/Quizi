@@ -12,6 +12,7 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompileCommon
+import plugins.extensions.catalog
 import plugins.extensions.sourceSets
 
 internal fun Project.configureKotlinMultiplatform() {
@@ -57,13 +58,13 @@ internal fun Project.configureKotlinMultiplatform() {
 
         sourceSets {
             commonMain.dependencies {
-                // implementation(catalog.findLibrary("kotlin.coroutines.core").get())
+                implementation(catalog.findLibrary("kotlin.coroutines.core").get())
             }
 
             commonTest.dependencies {
-                // implementation(catalog.findLibrary("kotlin.test").get())
-                // implementation(catalog.findLibrary("kotlin.coroutines.test").get())
-                // implementation(catalog.findLibrary("turbine").get())
+                implementation(catalog.findLibrary("kotlin.test").get())
+                implementation(catalog.findLibrary("kotlin.coroutines.test").get())
+                implementation(catalog.findLibrary("turbine").get())
             }
 
             // Opt-in for native coroutines
@@ -92,24 +93,6 @@ internal fun Project.configureKotlinMultiplatform() {
     // Building KMP sometimes fails with `Task 'testClasses' not found in project`
     // https://stackoverflow.com/questions/33132996/android-skip-gradle-testclasses-task-for-a-dependency-project
     tasks.maybeCreate("testClasses")
-
-    configureCommonKotlin()
-}
-
-internal fun Project.configureKotlinAndroid() {
-//    val implementation by configurations
-//    val testImplementation by configurations
-//    dependencies {
-//        implementation(catalog.findLibrary("kotlin.coroutines.core").get())
-//
-//        testImplementation(catalog.findLibrary("kotlin.test").get())
-//        testImplementation(catalog.findLibrary("kotlin.coroutines.test").get()) {
-//            because("Testing of Kotlin Coroutines")
-//        }
-//        testImplementation(catalog.findLibrary("turbine").get()) {
-//            because("Testing of Kotlin Flows")
-//        }
-//    }
 
     configureCommonKotlin()
 }

@@ -67,13 +67,9 @@ gradlePlugin {
         }
 
         // Koin
-        register("koinCore") {
-            id = "app.koin.core"
-            implementationClass = "plugins.KoinCoreConventionPlugin"
-        }
-        register("koinAndroidCompose") {
-            id = "app.koin.android.compose"
-            implementationClass = "plugins.KoinAndroidComposeConventionPlugin"
+        register("koinCompose") {
+            id = "app.koin.compose.multiplatform"
+            implementationClass = "plugins.KoinComposeConventionPlugin"
         }
 
         // Firebase

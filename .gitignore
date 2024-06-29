@@ -1,6 +1,7 @@
 *.iml
 .gradle
 **/build/
+**/kotlin-js-store/
 xcuserdata
 !src/**/build/
 local.properties

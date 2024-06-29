@@ -7,7 +7,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import plugins.extensions.catalog
 import plugins.extensions.sourceSets
 
-class KoinCoreConventionPlugin : Plugin<Project> {
+class KoinComposeConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             pluginManager.apply {
@@ -18,6 +18,7 @@ class KoinCoreConventionPlugin : Plugin<Project> {
                     commonMain.dependencies {
                         implementation(project.dependencies.platform(catalog.findLibrary("koin.bom").get()))
                         implementation(catalog.findLibrary("koin.core").get())
+                        implementation(catalog.findLibrary("koin.compose.multiplatform").get())
                     }
                 }
             }

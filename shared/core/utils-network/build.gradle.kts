@@ -6,7 +6,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             // put your Multiplatform dependencies here
-            implementation(libs.kotlinx.serialization)
+            implementation(libs.kotlinx.serialization.json)
             implementation(project.dependencies.platform(libs.koin.bom))
             api(libs.koin.core)
             implementation(project.dependencies.platform(libs.ktor.bom))
@@ -32,5 +32,5 @@ kotlin {
 }
 
 android {
-    namespace = "de.tuhh.quizi.feature.quizinput.abstractions"
+    namespace = "de.tuhh.quizi.core.utils.network"
 }

@@ -3,7 +3,6 @@ package plugins
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import plugins.config.configureAndroidLibrary
-import plugins.config.configureKotlinAndroid
 
 class AndroidLibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -13,7 +12,6 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                 apply("org.jetbrains.kotlin.android")
             }
 
-            configureKotlinAndroid()
             configureAndroidLibrary()
         }
     }
