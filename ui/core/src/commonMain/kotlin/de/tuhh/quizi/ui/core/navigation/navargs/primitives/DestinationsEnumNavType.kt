@@ -5,7 +5,6 @@ import de.tuhh.quizi.ui.core.navigation.navargs.Bundle
 import de.tuhh.quizi.ui.core.navigation.navargs.DestinationsNavType
 import kotlin.reflect.KClass
 
-@Suppress("UNCHECKED_CAST")
 class DestinationsEnumNavType<E : Enum<*>>(
     private val enumType: KClass<E>
 ) : DestinationsNavType<E?>() {
@@ -34,6 +33,5 @@ class DestinationsEnumNavType<E : Enum<*>>(
     override fun get(savedStateHandle: SavedStateHandle, key: String): E? {
         return savedStateHandle.get<E?>(key)
     }
-
 }
 

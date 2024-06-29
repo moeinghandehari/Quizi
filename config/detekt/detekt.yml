@@ -21,10 +21,10 @@ formatting:
     active: false
   # https://detekt.dev/docs/rules/formatting/#trailingcommaoncallsite
   TrailingCommaOnCallSite:
-    active: true
+    active: false
   # https://detekt.dev/docs/rules/formatting/#trailingcommaondeclarationsite
   TrailingCommaOnDeclarationSite:
-    active: true
+    active: false
 naming:
   # https://detekt.dev/docs/rules/naming/#invalidpackagedeclaration
   InvalidPackageDeclaration:

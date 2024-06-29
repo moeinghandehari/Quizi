@@ -37,7 +37,7 @@ fun NavBackStackEntry.destination(): DestinationSpec<*> {
     return when (val route = route()) {
         is DestinationSpec<*> -> route
         is NavGraphSpec -> error(
-            "Cannot call `destination()` for a NavBackStackEntry which corresponds to a nav graph, use `route()` instead!"
+            "Cannot call `destination()` for a NavBackStackEntry which corresponds to a nav graph, use `route()` instead!",
         )
     }
 }
@@ -191,7 +191,7 @@ fun NavGraphSpec.findDestination(route: String): DestinationSpec<*>? {
  */
 @Deprecated(
     message = "Api will be removed! Use `destination` instead.",
-    replaceWith = ReplaceWith("destination()")
+    replaceWith = ReplaceWith("destination()"),
 )
 fun NavBackStackEntry.destination(navGraph: NavGraphSpec): DestinationSpec<*>? {
     return destination.route?.let { navGraph.findDestination(it) }
@@ -203,7 +203,7 @@ fun NavBackStackEntry.destination(navGraph: NavGraphSpec): DestinationSpec<*>? {
  */
 @Deprecated(
     message = "Api will be removed! Use `destination(NavGraphSpec)` instead.",
-    replaceWith = ReplaceWith("destination()")
+    replaceWith = ReplaceWith("destination()"),
 )
 fun NavBackStackEntry.destinationSpec(navGraph: NavGraphSpec): DestinationSpec<*>? {
     return destination.route?.let { navGraph.findDestination(it) }
@@ -217,7 +217,7 @@ fun NavBackStackEntry.destinationSpec(navGraph: NavGraphSpec): DestinationSpec<*
  */
 @Deprecated(
     message = "Api will be removed! Use `startDestination` instead.",
-    replaceWith = ReplaceWith("startDestination")
+    replaceWith = ReplaceWith("startDestination"),
 )
 val Route.startDestinationSpec get(): DestinationSpec<*> {
     return when (this) {

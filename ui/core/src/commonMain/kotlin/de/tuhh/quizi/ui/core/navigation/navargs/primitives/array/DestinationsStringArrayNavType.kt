@@ -22,8 +22,10 @@ object DestinationsStringArrayNavType : DestinationsNavType<Array<String>?>() {
     override fun parseValue(value: String): Array<String>? {
         return when (value) {
             DECODED_NULL -> null
-            "[]" -> arrayOf()
-            else -> value
+            "[]" ->
+                arrayOf()
+            else ->
+                value
                 .subSequence(1, value.length - 1)
                 .split(encodedComma).let { splits ->
                     Array(splits.size) {
@@ -42,7 +44,7 @@ object DestinationsStringArrayNavType : DestinationsNavType<Array<String>?>() {
             else -> encodeForRoute(
                 "[" + value.joinToString(encodedComma) {
                     it.ifEmpty { DestinationsStringNavType.ENCODED_EMPTY_STRING }
-                } + "]"
+                } + "]",
             )
         }
     }

@@ -46,7 +46,7 @@ package de.tuhh.quizi.ui.core.navigation.annotations
 @Target(AnnotationTarget.ANNOTATION_CLASS)
 annotation class NavGraph(
     val route: String = ANNOTATION_NAME,
-    val default: Boolean = false
+    val default: Boolean = false,
 ) {
     companion object {
         private const val ANNOTATION_NAME = "@quizi.destinations.annotation-navgraph-route@"
@@ -61,5 +61,5 @@ annotation class NavGraph(
  */
 @NavGraph(default = true)
 annotation class RootNavGraph(
-    val start: Boolean = false
+    val start: Boolean = false,
 )

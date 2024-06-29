@@ -12,7 +12,7 @@ import de.tuhh.quizi.ui.core.navigation.spec.Route
  */
 fun NavController.navigate(
     direction: Direction,
-    navOptionsBuilder: NavOptionsBuilder.() -> Unit = {}
+    navOptionsBuilder: NavOptionsBuilder.() -> Unit = {},
 ) {
     navigate(direction.route, navOptionsBuilder)
 }
@@ -33,7 +33,7 @@ fun NavOptionsBuilder.popUpTo(route: Route, popUpToBuilder: PopUpToBuilder.() ->
 fun NavController.popBackStack(
     route: Route,
     inclusive: Boolean,
-    saveState: Boolean = false
+    saveState: Boolean = false,
 ): Boolean = popBackStack(route.route, inclusive, saveState)
 
 /**
@@ -50,11 +50,11 @@ fun NavController.clearBackStack(route: Route): Boolean = clearBackStack(route.r
  */
 @Deprecated(
     message = "Api will be removed! Use `navigate` extension method instead.",
-    replaceWith = ReplaceWith("navigate(direction, navOptionsBuilder)")
+    replaceWith = ReplaceWith("navigate(direction, navOptionsBuilder)"),
 )
 fun NavController.navigateTo(
     direction: Direction,
-    navOptionsBuilder: NavOptionsBuilder.() -> Unit = {}
+    navOptionsBuilder: NavOptionsBuilder.() -> Unit = {},
 ) {
     navigate(direction.route, navOptionsBuilder)
 }

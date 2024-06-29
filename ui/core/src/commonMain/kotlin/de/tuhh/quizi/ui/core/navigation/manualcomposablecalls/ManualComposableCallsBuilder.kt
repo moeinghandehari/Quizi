@@ -22,7 +22,7 @@ import de.tuhh.quizi.ui.core.navigation.utils.allDestinations
 @OptIn(InternalDestinationsApi::class)
 fun <T> ManualComposableCallsBuilder.composable(
     destination: DestinationSpec<T>,
-    content: @Composable AnimatedDestinationScope<T>.() -> Unit
+    content: @Composable AnimatedDestinationScope<T>.() -> Unit,
 ) {
     if (engineType != NavHostEngine.Type.DEFAULT) {
         error("'composable' can only be called with a 'NavHostEngine'")
@@ -49,7 +49,7 @@ fun <T> ManualComposableCallsBuilder.composable(
 @OptIn(InternalDestinationsApi::class)
 fun <T> ManualComposableCallsBuilder.dialogComposable(
     destination: DestinationSpec<T>,
-    content: @Composable DestinationScope<T>.() -> Unit
+    content: @Composable DestinationScope<T>.() -> Unit,
 ) {
     if (engineType != NavHostEngine.Type.DEFAULT) {
         error("'composable' can only be called with a 'NavHostEngine'")
@@ -68,7 +68,7 @@ fun <T> ManualComposableCallsBuilder.dialogComposable(
 class ManualComposableCallsBuilder internal constructor(
     @InternalDestinationsApi
     val engineType: NavHostEngine.Type,
-    navGraph: NavGraphSpec
+    navGraph: NavGraphSpec,
 ) {
 
     private val map: MutableMap<String, DestinationLambda<*>> = mutableMapOf()

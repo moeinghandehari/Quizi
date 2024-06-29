@@ -43,10 +43,9 @@ interface NavGraphBuilderDestinationScope<T> {
  */
 @Composable
 inline fun <reified R : Any> NavGraphBuilderDestinationScope<*>.resultBackNavigator(
-    navController: NavController
+    navController: NavController,
 ): ResultBackNavigator<R> =
     resultBackNavigator(destination, R::class, navController, navBackStackEntry)
-
 
 /**
  * Returns a well typed [ResultRecipient] for this [NavGraphBuilderDestinationScope]

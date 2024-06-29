@@ -42,6 +42,4 @@ object DestinationsBooleanArrayNavType : DestinationsNavType<BooleanArray?>() {
     override fun get(savedStateHandle: SavedStateHandle, key: String): BooleanArray? {
         return savedStateHandle.get(key)
     }
-
 }
-

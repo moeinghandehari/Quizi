@@ -5,7 +5,7 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 
 abstract class NavType<T>(
-    open val isNullableAllowed: Boolean
+    open val isNullableAllowed: Boolean,
 ) {
     abstract fun put(bundle: Bundle, key: String, value: T)
     abstract operator fun get(bundle: Bundle, key: String): T?
@@ -66,7 +66,7 @@ abstract class NavType<T>(
                 else -> {
                     if (!type.isNullOrEmpty()) {
                         throw IllegalArgumentException(
-                            "Object of type $type is not supported for navigation arguments."
+                            "Object of type $type is not supported for navigation arguments.",
                         )
                     }
                     StringType
@@ -123,7 +123,7 @@ abstract class NavType<T>(
                 is String, null -> StringType as NavType<Any>
                 is Array<*> -> StringArrayType as NavType<Any>
                 else -> throw IllegalArgumentException(
-                    "$value is not supported for navigation arguments."
+                    "$value is not supported for navigation arguments.",
                 )
             }
         }
@@ -307,7 +307,7 @@ abstract class NavType<T>(
                     "false" -> false
                     else -> {
                         throw IllegalArgumentException(
-                            "A boolean NavType only accepts \"true\" or \"false\" values."
+                            "A boolean NavType only accepts \"true\" or \"false\" values.",
                         )
                     }
                 }
@@ -368,7 +368,7 @@ abstract class NavType<T>(
 
         @JvmField
         val StringArrayType: NavType<Array<String>?> = object : NavType<Array<String>?>(
-            true
+            true,
         ) {
             override val name: String
                 get() = "string[]"

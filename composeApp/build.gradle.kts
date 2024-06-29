@@ -22,6 +22,7 @@ kotlin {
 
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
+            implementation(libs.kotlin.coroutines.swing)
         }
 
         wasmJsMain.dependencies {}

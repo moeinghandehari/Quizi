@@ -1,12 +1,12 @@
 package de.tuhh.quizi.ui.core.navigation.navigation
 
 import de.tuhh.quizi.ui.core.navigation.dynamic.originalDestination
+import de.tuhh.quizi.ui.core.navigation.scope.DestinationScope
 import de.tuhh.quizi.ui.core.navigation.scope.DestinationScopeWithNoDependencies
 import de.tuhh.quizi.ui.core.navigation.spec.DestinationSpec
 import de.tuhh.quizi.ui.core.navigation.spec.NavGraphSpec
-import kotlin.reflect.KClass
-import de.tuhh.quizi.ui.core.navigation.scope.DestinationScope
 import de.tuhh.quizi.ui.core.navigation.utils.findDestination
+import kotlin.reflect.KClass
 
 /**
  * Interface through which you can add dependencies to a [DestinationDependenciesContainer].
@@ -38,8 +38,10 @@ inline fun <reified D : Any, T> DependenciesContainerBuilder<T>.dependency(
     val route = requireNotNull(navBackStackEntry.destination.route)
 
     if (navGraph.findDestination(route) != null) {
-        (this as DestinationDependenciesContainerImpl<*>).dependency(dependencyProvider(),
-            asType = D::class)
+        (this as DestinationDependenciesContainerImpl<*>).dependency(
+            dependencyProvider(),
+            asType = D::class
+        )
     }
 }
 
@@ -53,8 +55,10 @@ inline fun <reified D : Any, T> DependenciesContainerBuilder<T>.dependency(
     dependencyProvider: () -> D,
 ) {
     if (this.destination.originalDestination.route == destination.originalDestination.route) {
-        (this as DestinationDependenciesContainerImpl<*>).dependency(dependencyProvider(),
-            asType = D::class)
+        (this as DestinationDependenciesContainerImpl<*>).dependency(
+            dependencyProvider(),
+            asType = D::class,
+        )
     }
 }
 

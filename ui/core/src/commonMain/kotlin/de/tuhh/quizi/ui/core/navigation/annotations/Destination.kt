@@ -37,8 +37,10 @@ annotation class Destination(
     val deepLinks: Array<DeepLink> = [],
     val style: KClass<out DestinationStyle> = DestinationStyle.Default::class,
     val wrappers: Array<KClass<out DestinationWrapper>> = [],
-    @Deprecated("Will be removed! Create annotation classes annotated with @NavGraph instead.") val start: Boolean = false,
-    @Deprecated("Will be removed! Create annotation classes annotated with @NavGraph instead.") val navGraph: String = ROOT_NAV_GRAPH_ROUTE,
+    @Deprecated("Will be removed! Create annotation classes annotated with @NavGraph instead.")
+    val start: Boolean = false,
+    @Deprecated("Will be removed! Create annotation classes annotated with @NavGraph instead.")
+    val navGraph: String = ROOT_NAV_GRAPH_ROUTE,
 ) {
     companion object {
         const val COMPOSABLE_NAME = "@quizi.destinations.composable-name-route@"

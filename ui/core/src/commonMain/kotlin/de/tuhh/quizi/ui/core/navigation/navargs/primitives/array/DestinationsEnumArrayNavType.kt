@@ -9,7 +9,7 @@ import de.tuhh.quizi.ui.core.navigation.navargs.primitives.encodedComma
 
 @Suppress("UNCHECKED_CAST")
 class DestinationsEnumArrayNavType<E : Enum<*>>(
-    private val converter: (List<String>) -> Array<E>
+    private val converter: (List<String>) -> Array<E>,
 ) : DestinationsNavType<Array<E>?>() {
 
     override fun put(bundle: Bundle, key: String, value: Array<E>?) {
@@ -46,5 +46,4 @@ class DestinationsEnumArrayNavType<E : Enum<*>>(
     override fun get(savedStateHandle: SavedStateHandle, key: String): Array<E>? {
         return savedStateHandle.get<Array<E>?>(key)
     }
-
 }

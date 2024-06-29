@@ -7,7 +7,11 @@ import de.tuhh.quizi.ui.addcontent.AddContentScreen
 import de.tuhh.quizi.ui.core.navigation.scope.DestinationScope
 import de.tuhh.quizi.ui.core.navigation.spec.Direction
 import de.tuhh.quizi.ui.core.navigation.spec.DirectionDestinationSpec
+import kotlin.experimental.ExperimentalObjCRefinement
+import kotlin.native.HiddenFromObjC
 
+@OptIn(ExperimentalObjCRefinement::class)
+@HiddenFromObjC
 public object AddContentScreenDestination : DirectionDestinationSpec {
          
     public operator fun invoke(): Direction = this

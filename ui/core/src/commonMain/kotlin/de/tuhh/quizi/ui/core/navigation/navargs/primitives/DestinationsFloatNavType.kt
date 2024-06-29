@@ -36,10 +36,6 @@ object DestinationsFloatNavType : DestinationsNavType<Float?>() {
     }
 
     private fun floatValue(valueForKey: Any?): Float? {
-        return if (valueForKey is Float) {
-            valueForKey
-        } else {
-            null
-        }
+        return valueForKey as? Float
     }
 }

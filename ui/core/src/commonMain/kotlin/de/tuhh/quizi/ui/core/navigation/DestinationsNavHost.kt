@@ -6,14 +6,14 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import de.tuhh.quizi.ui.core.navigation.manualcomposablecalls.ManualComposableCalls
-import de.tuhh.quizi.ui.core.navigation.spec.NavGraphSpec
-import de.tuhh.quizi.ui.core.navigation.spec.Route
-import de.tuhh.quizi.ui.core.navigation.spec.DestinationSpec
-import de.tuhh.quizi.ui.core.navigation.scope.DestinationScope
-import de.tuhh.quizi.ui.core.navigation.spec.NavHostEngine
-import de.tuhh.quizi.ui.core.navigation.utils.NavGraphRegistry
 import de.tuhh.quizi.ui.core.navigation.manualcomposablecalls.ManualComposableCallsBuilder
 import de.tuhh.quizi.ui.core.navigation.navigation.DependenciesContainerBuilder
+import de.tuhh.quizi.ui.core.navigation.scope.DestinationScope
+import de.tuhh.quizi.ui.core.navigation.spec.DestinationSpec
+import de.tuhh.quizi.ui.core.navigation.spec.NavGraphSpec
+import de.tuhh.quizi.ui.core.navigation.spec.NavHostEngine
+import de.tuhh.quizi.ui.core.navigation.spec.Route
+import de.tuhh.quizi.ui.core.navigation.utils.NavGraphRegistry
 
 /**
  * Like [androidx.navigation.compose.NavHost] but includes the destinations of [navGraph].
@@ -28,12 +28,13 @@ import de.tuhh.quizi.ui.core.navigation.navigation.DependenciesContainerBuilder
  * can provide. If you do this, it is advisable that you create your `NavGraphs` file with your
  * navigation graphs in the form of [NavGraphSpec] implementations.
  *
- * @param navGraph [NavGraphSpec] to use the [DestinationSpec]s from and register the navigation graph.
+ * @param navGraph [NavGraphSpec] to use the [DestinationSpec]s from and register the navigation
+ * graph.
  *
  * @param modifier [Modifier] to apply to this Composable
  *
- * @param startRoute the start destination of the NavHost. By default, we'll use the `startDestination`
- * of the [navGraph]. This makes it possible to override that default on runtime.
+ * @param startRoute the start destination of the NavHost. By default, we'll use the
+ * `startDestination` of the [navGraph]. This makes it possible to override that default on runtime.
  *
  * @param engine [NavHostEngine] to use. If you are not using animation features
  * (which need "io.github.raamcosta.compose-destinations:animations-core" dependency), you don't
@@ -41,10 +42,13 @@ import de.tuhh.quizi.ui.core.navigation.navigation.DependenciesContainerBuilder
  * If using animation features, then you should pass the [NavHostEngine] returned by
  * `rememberAnimatedNavHostEngine` function.
  *
- * @param navController [NavHostController] that can be used to navigate between this NavHost's destinations.
- * If you need this outside the scope of this function, you should get it from [androidx.navigation.compose.rememberNavController]
+ * @param navController [NavHostController] that can be used to navigate between this NavHost's
+ * destinations.
+ * If you need this outside the scope of this function, you should get it from
+ * [androidx.navigation.compose.rememberNavController]
  * or, if you're using animation feature, from [rememberAnimatedNavController].
- * Alternatively, you can also use [NavHostEngine.rememberNavController] that will internally call the correct remember function.
+ * Alternatively, you can also use [NavHostEngine.rememberNavController] that will internally call
+ * the correct remember function.
  *
  * @param dependenciesContainerBuilder offers a [DependenciesContainerBuilder] where you can add
  * dependencies by their class via [dependency].
@@ -52,10 +56,11 @@ import de.tuhh.quizi.ui.core.navigation.navigation.DependenciesContainerBuilder
  * [DependenciesContainerBuilder] also implements [DestinationScope]
  * so you can access all information about what [DestinationSpec] is being navigated to.
  *
- * @param manualComposableCallsBuilder this will offer a [ManualComposableCallsBuilder] scope where you can
- * make manual calls to specific [DestinationSpec] Composables which belong to this [navGraph].
- * This can be useful if you have some specific case where you want to pass something to a specific screen
- * that would not work (Compose runtime related classes f.e) or would be awkward with [dependenciesContainerBuilder].
+ * @param manualComposableCallsBuilder this will offer a [ManualComposableCallsBuilder] scope where
+ * you can make manual calls to specific [DestinationSpec] Composables which belong to this
+ * [navGraph]. This can be useful if you have some specific case where you want to pass something
+ * to a specific screen that would not work (Compose runtime related classes f.e) or would be
+ * awkward with [dependenciesContainerBuilder].
  */
 @Composable
 fun DestinationsNavHost(

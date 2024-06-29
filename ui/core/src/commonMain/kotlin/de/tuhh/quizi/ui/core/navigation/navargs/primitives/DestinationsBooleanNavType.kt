@@ -36,10 +36,6 @@ object DestinationsBooleanNavType : DestinationsNavType<Boolean?>() {
     }
 
     private fun booleanValue(valueForKey: Any?): Boolean? {
-        return if (valueForKey is Boolean) {
-            valueForKey
-        } else {
-            null
-        }
+        return valueForKey as? Boolean
     }
 }

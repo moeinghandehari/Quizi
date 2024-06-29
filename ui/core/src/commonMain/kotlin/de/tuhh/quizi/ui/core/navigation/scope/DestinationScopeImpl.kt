@@ -14,7 +14,6 @@ import de.tuhh.quizi.ui.core.navigation.navigation.DestinationDependenciesContai
 import de.tuhh.quizi.ui.core.navigation.navigation.DestinationsNavController
 import de.tuhh.quizi.ui.core.navigation.spec.DestinationSpec
 
-
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 abstract class DestinationScopeImpl<T> : DestinationScope<T> {
     abstract val dependenciesContainerBuilder: @Composable DependenciesContainerBuilder<*>.() -> Unit

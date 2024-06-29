@@ -37,7 +37,7 @@ internal class DestinationsNavController(
         route: String,
         onlyIfResumed: Boolean,
         navOptions: NavOptions?,
-        navigatorExtras: Navigator.Extras?
+        navigatorExtras: Navigator.Extras?,
     ) {
         if (onlyIfResumed && !isResumed) {
             return

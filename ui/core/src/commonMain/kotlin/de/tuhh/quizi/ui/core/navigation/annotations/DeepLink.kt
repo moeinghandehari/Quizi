@@ -8,7 +8,7 @@ package de.tuhh.quizi.ui.core.navigation.annotations
 annotation class DeepLink(
     val action: String = "",
     val mimeType: String = "",
-    val uriPattern: String = ""
+    val uriPattern: String = "",
 )
 
 /**

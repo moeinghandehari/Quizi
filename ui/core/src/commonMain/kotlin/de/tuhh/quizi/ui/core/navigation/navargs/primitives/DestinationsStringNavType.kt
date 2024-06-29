@@ -2,8 +2,8 @@ package de.tuhh.quizi.ui.core.navigation.navargs.primitives
 
 import androidx.lifecycle.SavedStateHandle
 import de.tuhh.quizi.ui.core.navigation.navargs.Bundle
-import de.tuhh.quizi.ui.core.navigation.navargs.utils.encodeForRoute
 import de.tuhh.quizi.ui.core.navigation.navargs.DestinationsNavType
+import de.tuhh.quizi.ui.core.navigation.navargs.utils.encodeForRoute
 
 object DestinationsStringNavType : DestinationsNavType<String?>() {
 

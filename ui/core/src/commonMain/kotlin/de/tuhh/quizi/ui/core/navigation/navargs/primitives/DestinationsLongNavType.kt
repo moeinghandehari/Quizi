@@ -36,10 +36,6 @@ object DestinationsLongNavType : DestinationsNavType<Long?>() {
     }
 
     private fun longValue(valueForKey: Any?): Long? {
-        return if (valueForKey is Long) {
-            valueForKey
-        } else {
-            null
-        }
+        return valueForKey as? Long
     }
 }
