@@ -12,19 +12,27 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.shared.core.utilsLoading)
             implementation(project.dependencies.platform(libs.compose.bom))
+            implementation(project.dependencies.platform(libs.koin.bom))
             api(compose.foundation)
             api(compose.material)
             api(compose.material3)
             api(compose.uiUtil)
             api(compose.components.resources)
+            api(compose.runtime)
             api(compose.components.uiToolingPreview)
+            api(compose.ui)
+            // api(libs.koin.compose.viewmodel)
             api(libs.androidx.lifecycle.runtime.compose)
             api(libs.androidx.lifecycle.viewmodel.compose)
+            api(libs.androidx.lifecycle.viewmodel.savedstate)
             api(libs.androidx.navigation.compose)
             api(libs.kotlinx.serialization.json)
+            api(libs.compottie)
+            api(libs.compottie.dot)
+            // api(libs.compottie.network)
+            api(libs.compottie.resources)
+            api(libs.androidx.navigation.compose)
+            // api(libs.androidx.navigation.common.ktx)
         }
     }
-}
-dependencies {
-    implementation(libs.androidx.navigation.common.ktx)
 }

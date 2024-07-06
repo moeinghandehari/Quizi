@@ -1,10 +1,10 @@
 package de.tuhh.quizi.ui.core.navigation.dynamic
 
 import androidx.navigation.NavDeepLink
-//import androidx.navigation.NavDeepLinkDslBuilder
 import de.tuhh.quizi.ui.core.navigation.spec.DestinationSpec
 import de.tuhh.quizi.ui.core.navigation.spec.Direction
 import de.tuhh.quizi.ui.core.navigation.spec.NavGraphSpec
+// import androidx.navigation.NavDeepLinkDslBuilder
 
 /**
  * [DestinationSpec] created by [routedIn] / [withDeepLink] methods.
@@ -106,15 +106,15 @@ infix fun Direction.within(navGraph: NavGraphSpec): Direction {
  * only one has a deep link (the one in "yourNavGraph"). So when that deep link is used, the app
  * will navigate to "YourScreenDestination" that belongs to "yourNavGraph".
  */
-//fun <T> DestinationSpec<T>.withDeepLink(
+// fun <T> DestinationSpec<T>.withDeepLink(
 //    deepLinkBuilder: NavDeepLinkDslBuilder.() -> Unit
-//): DestinationSpec<T> {
+// ): DestinationSpec<T> {
 //    return object : DynamicDestinationSpec<T>, DestinationSpec<T> by this {
 //        override val originalDestination = this@withDeepLink.originalDestination
 //
 //        override val deepLinks = listOf(navDeepLink(deepLinkBuilder))
 //    }
-//}
+// }
 
 /**
  * Same as [withDeepLink] but can take a list of [NavDeepLink]s instead of a single [NavDeepLinkDslBuilder].

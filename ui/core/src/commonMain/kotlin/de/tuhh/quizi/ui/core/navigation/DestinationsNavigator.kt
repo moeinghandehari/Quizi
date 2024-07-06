@@ -6,10 +6,10 @@ import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.Navigator
-import de.tuhh.quizi.ui.core.navigation.spec.Direction
-import de.tuhh.quizi.ui.core.navigation.spec.Route
 import de.tuhh.quizi.ui.core.navigation.spec.DestinationSpec
+import de.tuhh.quizi.ui.core.navigation.spec.Direction
 import de.tuhh.quizi.ui.core.navigation.spec.NavGraphSpec
+import de.tuhh.quizi.ui.core.navigation.spec.Route
 
 /**
  * Contract for a navigator of [DestinationSpec].

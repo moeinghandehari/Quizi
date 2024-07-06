@@ -4,8 +4,8 @@ import androidx.lifecycle.SavedStateHandle
 import de.tuhh.quizi.ui.core.navigation.navargs.Bundle
 import de.tuhh.quizi.ui.core.navigation.navargs.DestinationsNavType
 import de.tuhh.quizi.ui.core.navigation.navargs.primitives.DECODED_NULL
+import de.tuhh.quizi.ui.core.navigation.navargs.primitives.ENCODED_COMMA
 import de.tuhh.quizi.ui.core.navigation.navargs.primitives.ENCODED_NULL
-import de.tuhh.quizi.ui.core.navigation.navargs.primitives.encodedComma
 
 object DestinationsLongArrayListNavType : DestinationsNavType<ArrayList<Long>?>() {
 
@@ -24,8 +24,8 @@ object DestinationsLongArrayListNavType : DestinationsNavType<ArrayList<Long>?>(
             else -> {
                 val contentValue = value.subSequence(1, value.length - 1)
 
-                if (contentValue.contains(encodedComma)) {
-                    contentValue.split(encodedComma)
+                if (contentValue.contains(ENCODED_COMMA)) {
+                    contentValue.split(ENCODED_COMMA)
                 } else {
                     contentValue.split(",")
                 }.mapTo(ArrayList()) { LongType.parseValue(it) }

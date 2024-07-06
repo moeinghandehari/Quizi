@@ -7,15 +7,17 @@ import de.tuhh.quizi.ui.core.navigation.scope.DestinationScope
 import de.tuhh.quizi.ui.core.navigation.spec.Direction
 import de.tuhh.quizi.ui.core.navigation.spec.DirectionDestinationSpec
 import de.tuhh.quizi.ui.quiz.QuizScreen
+import kotlinx.serialization.Serializable
 import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.native.HiddenFromObjC
 
 @OptIn(ExperimentalObjCRefinement::class)
 @HiddenFromObjC
+@Serializable
 public object QuizScreenDestination : DirectionDestinationSpec {
-         
+
     public operator fun invoke(): Direction = this
-    
+
     @get:RestrictTo(RestrictTo.Scope.SUBCLASSES)
     override val baseRoute: String = "quiz_screen"
 
@@ -24,10 +26,9 @@ public object QuizScreenDestination : DirectionDestinationSpec {
     }
 
     override val route: String = baseRoute
-    
+
     @Composable
     override fun DestinationScope<Unit>.Content() {
         QuizScreen()
     }
-    
 }

@@ -13,6 +13,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.dialog
+import de.tuhh.quizi.ui.core.navigation.DestinationsNavHost
 import de.tuhh.quizi.ui.core.navigation.annotations.Destination
 import de.tuhh.quizi.ui.core.navigation.annotations.InternalDestinationsApi
 import de.tuhh.quizi.ui.core.navigation.manualcomposablecalls.DestinationLambda
@@ -20,7 +21,6 @@ import de.tuhh.quizi.ui.core.navigation.manualcomposablecalls.ManualComposableCa
 import de.tuhh.quizi.ui.core.navigation.navigation.DependenciesContainerBuilder
 import de.tuhh.quizi.ui.core.navigation.scope.AnimatedDestinationScopeImpl
 import de.tuhh.quizi.ui.core.navigation.scope.DestinationScopeImpl
-import de.tuhh.quizi.ui.core.navigation.DestinationsNavHost
 
 /**
  * Controls how the destination is shown when navigated to and navigated away from.
@@ -107,7 +107,6 @@ interface DestinationStyle {
     object Activity : DestinationStyle
 }
 
-
 @Composable
 private fun <T> CallDialogComposable(
     destination: DestinationSpec<T>,
@@ -132,7 +131,13 @@ private fun <T> CallDialogComposable(
     }
 }
 
-internal typealias AddComposable<T> = (NavGraphBuilder, DestinationSpec<T>, NavHostController, @Composable DependenciesContainerBuilder<*>.() -> Unit, ManualComposableCalls) -> Unit
+internal typealias AddComposable<T> = (
+    NavGraphBuilder,
+    DestinationSpec<T>,
+    NavHostController,
+    @Composable DependenciesContainerBuilder<*>.() -> Unit,
+    ManualComposableCalls,
+) -> Unit
 
 @InternalDestinationsApi
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
@@ -150,7 +155,8 @@ internal fun <T> DestinationStyle.addActivityDestination(
         DestinationStyle.Runtime,
         DestinationStyle.Default -> {
             @Suppress("UNCHECKED_CAST")
-            val contentWrapper = manualComposableCalls[destination.baseRoute] as? DestinationLambda<T>?
+            val contentWrapper =
+                manualComposableCalls[destination.baseRoute] as? DestinationLambda<T>?
 
             navGraphBuilder.composable(
                 route = destination.route,
@@ -166,9 +172,11 @@ internal fun <T> DestinationStyle.addActivityDestination(
                 )
             }
         }
+
         is DestinationStyle.Dialog -> {
             @Suppress("UNCHECKED_CAST")
-            val contentLambda = manualComposableCalls[destination.baseRoute] as? DestinationLambda<T>?
+            val contentLambda =
+                manualComposableCalls[destination.baseRoute] as? DestinationLambda<T>?
 
             navGraphBuilder.dialog(
                 destination.route,
@@ -185,6 +193,7 @@ internal fun <T> DestinationStyle.addActivityDestination(
                 )
             }
         }
+
         is DestinationStyle.Animated -> {
             navGraphBuilder.composable(
                 route = destination.route,
@@ -196,7 +205,8 @@ internal fun <T> DestinationStyle.addActivityDestination(
                 popExitTransition = { popExitTransition() }
             ) { navBackStackEntry ->
                 @Suppress("UNCHECKED_CAST")
-                val contentWrapper = manualComposableCalls[destination.baseRoute] as? DestinationLambda<T>?
+                val contentWrapper =
+                    manualComposableCalls[destination.baseRoute] as? DestinationLambda<T>?
 
                 CallComposable(
                     destination,
@@ -217,7 +227,11 @@ internal fun <T> DestinationStyle.addActivityDestination(
                     dependenciesContainerBuilder,
                     manualComposableCalls
                 )
-                ?: error("Unknown DestinationStyle $this. If you're trying to use a destination with BottomSheet style, use rememberAnimatedNavHostEngine and pass that engine to DestinationsNavHost!")
+                ?: error(
+                    "Unknown DestinationStyle $this. If you're trying to use a destination with " +
+                            "BottomSheet style, use rememberAnimatedNavHostEngine and pass that " +
+                            "engine to DestinationsNavHost!"
+                )
         }
     }
 }
@@ -230,7 +244,6 @@ private fun <T> AnimatedVisibilityScope.CallComposable(
     dependenciesContainerBuilder: @Composable DependenciesContainerBuilder<*>.() -> Unit,
     contentWrapper: DestinationLambda<T>?,
 ) {
-
     val scope = remember(navBackStackEntry) {
         AnimatedDestinationScopeImpl(
             destination,

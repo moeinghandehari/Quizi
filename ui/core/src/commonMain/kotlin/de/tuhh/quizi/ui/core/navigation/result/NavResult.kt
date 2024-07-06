@@ -10,8 +10,8 @@ package de.tuhh.quizi.ui.core.navigation.result
  * otherwise the value set will be wrapped in [Value].
  */
 sealed interface NavResult<out R> {
-    object Canceled: NavResult<Nothing>
-    data class Value<R>(val value: R): NavResult<R>
+    data object Canceled : NavResult<Nothing>
+    data class Value<R>(val value: R) : NavResult<R>
 }
 
 /**

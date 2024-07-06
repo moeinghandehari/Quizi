@@ -51,7 +51,8 @@ inline fun <reified R : Any> NavGraphBuilderDestinationScope<*>.resultBackNaviga
  * Returns a well typed [ResultRecipient] for this [NavGraphBuilderDestinationScope]
  */
 @Composable
-inline fun <reified D : DestinationSpec<*>, reified R : Any> NavGraphBuilderDestinationScope<*>.resultRecipient(): ResultRecipient<D, R> =
+inline fun <reified D : DestinationSpec<*>, reified R : Any>
+        NavGraphBuilderDestinationScope<*>.resultRecipient(): ResultRecipient<D, R> =
     resultRecipient(navBackStackEntry, D::class, R::class)
 
 /**
@@ -60,7 +61,8 @@ inline fun <reified D : DestinationSpec<*>, reified R : Any> NavGraphBuilderDest
  * of your Bottom Sheet styled Composable
  */
 @Immutable
-interface AnimatedNavGraphBuilderDestinationScope<T> : NavGraphBuilderDestinationScope<T>,
+interface AnimatedNavGraphBuilderDestinationScope<T> :
+    NavGraphBuilderDestinationScope<T>,
     AnimatedVisibilityScope
 
 /**
@@ -69,5 +71,6 @@ interface AnimatedNavGraphBuilderDestinationScope<T> : NavGraphBuilderDestinatio
  * of your Bottom Sheet styled Composable
  */
 @Immutable
-interface BottomSheetNavGraphBuilderDestinationScope<T> : NavGraphBuilderDestinationScope<T>,
+interface BottomSheetNavGraphBuilderDestinationScope<T> :
+    NavGraphBuilderDestinationScope<T>,
     ColumnScope

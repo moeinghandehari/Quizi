@@ -41,14 +41,12 @@ internal fun Project.configureAndroidLibrary() {
 
         val androidComponentsExtension = extensions.getByType<LibraryAndroidComponentsExtension>()
         androidComponentsExtension.configureCommonAndroid(commonExtension = this)
-
-        // configureJacocoAndroid(this)
     }
 }
 
 internal fun Project.configureAndroidApplication() {
     extensions.configure<ApplicationExtension> {
-        configureFlavors(this)
+        // configureFlavors(this)
 
         defaultConfig {
             targetSdk = AppBuildConfig.targetAndCompileSdk

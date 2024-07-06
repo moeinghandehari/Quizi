@@ -1,6 +1,5 @@
 package plugins.config
 
-import com.android.build.api.dsl.CommonExtension
 import io.github.gmazzo.android.test.aggregation.TestAggregationExtension
 import org.gradle.api.Action
 import org.gradle.api.Project
@@ -17,19 +16,8 @@ private val coverageExclusions = listOf(
 )
 
 private val coverageInclusions = listOf(
-    "**/feature/**",
+    "**/functionality/**",
 )
-
-internal fun Project.configureJacocoAndroid(
-    commonExtension: CommonExtension<*, *, *, *, *, *>,
-) {
-    // AGP adds a dependency to jacoco ant with an explicit version number (as specified via testCoverage.jacocoVersion)
-    //  when `BuildType.enableUnitTestCoverage` is set tu true, which is the default for the debug BuildType.
-    //  The jacoco.toolVersion specification used in modules that apply the jacoco gradle plugin is therefore not
-    //  necessary for Android modules.
-    val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
-    commonExtension.testCoverage.jacocoVersion = libs.findVersion("jacoco").get().toString()
-}
 
 internal fun Project.configureJacocoKotlin() {
     with(pluginManager) {

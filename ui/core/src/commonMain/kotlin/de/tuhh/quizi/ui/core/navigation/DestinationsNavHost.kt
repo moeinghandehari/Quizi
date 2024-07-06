@@ -66,7 +66,7 @@ import de.tuhh.quizi.ui.core.navigation.utils.NavGraphRegistry
 fun DestinationsNavHost(
     navGraph: NavGraphSpec,
     modifier: Modifier = Modifier,
-    startRoute: Route = navGraph.startRoute,
+    startRoute: Route = navGraph,
     engine: NavHostEngine = rememberNavHostEngine(),
     navController: NavHostController = engine.rememberNavController(),
     dependenciesContainerBuilder: @Composable DependenciesContainerBuilder<*>.() -> Unit = {},
@@ -76,7 +76,7 @@ fun DestinationsNavHost(
 
     engine.NavHost(
         modifier = modifier,
-        route = navGraph.route,
+        route = navGraph,
         startRoute = startRoute,
         navController = navController,
     ) {
@@ -102,7 +102,6 @@ private fun HandleNavGraphRegistry(
     NavGraphRegistry.addGraph(navController, navGraph)
 
     DisposableEffect(key1 = navController) {
-
         onDispose {
             NavGraphRegistry.removeGraph(navController)
         }
@@ -116,7 +115,6 @@ private fun NavGraphBuilder.addNavGraphDestinations(
     dependenciesContainerBuilder: @Composable DependenciesContainerBuilder<*>.() -> Unit,
     manualComposableCalls: ManualComposableCalls,
 ): Unit = with(engine) {
-
     navGraph.destinationsByRoute.values.forEach { destination ->
         composable(
             destination,
@@ -142,7 +140,6 @@ private fun NavGraphBuilder.addNestedNavGraphs(
     dependenciesContainerBuilder: @Composable DependenciesContainerBuilder<*>.() -> Unit,
     manualComposableCalls: ManualComposableCalls,
 ): Unit = with(engine) {
-
     nestedNavGraphs.forEach { nestedGraph ->
         navigation(nestedGraph) {
             addNavGraphDestinations(

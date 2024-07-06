@@ -1,6 +1,5 @@
 package de.tuhh.quizi.ui.home
 
-
 import de.tuhh.quizi.ui.core.navigation.spec.DestinationSpec
 import de.tuhh.quizi.ui.core.navigation.spec.NavGraphSpec
 import de.tuhh.quizi.ui.core.navigation.spec.Route
@@ -15,5 +14,4 @@ public object HomeNavGraph : NavGraphSpec {
     override val destinationsByRoute: Map<String, DestinationSpec<*>> = listOf(
         HomeScreenDestination
     ).associateBy { it.route }
-
 }

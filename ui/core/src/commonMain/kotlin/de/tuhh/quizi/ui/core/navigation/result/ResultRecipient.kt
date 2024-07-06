@@ -17,8 +17,10 @@ import de.tuhh.quizi.ui.core.navigation.spec.DestinationSpec
  * Type safety related limitations (compile time enforced):
  * - [R] must be one of String, Boolean, Float, Int, Long, Serializable, or Parcelable.
  * They can be nullable.
- * - [R] type cannot have type arguments itself (f.e you can't use Array<String> even though it is Serializable)
- * - Each annotated Composable can have at most one parameter of type [ResultRecipient] for a given [DestinationSpec] ([D])
+ * - [R] type cannot have type arguments itself (f.e you can't use Array<String> even though it
+ * is Serializable)
+ * - Each annotated Composable can have at most one parameter of type [ResultRecipient] for a
+ * given [DestinationSpec] ([D])
  * - [D] destination Composable must have a corresponding [ResultBackNavigator] of the same type [R]
  *
  * @see [ResultBackNavigator]
@@ -37,6 +39,7 @@ interface ResultRecipient<D : DestinationSpec<*>, R> : OpenResultRecipient<R> {
      * as a normal button click listener, you can navigate or call a method on a view model,
      * for example.
      */
+    @Suppress("ComposableNaming")
     @Composable
     override fun onNavResult(listener: @DisallowComposableCalls (NavResult<R>) -> Unit)
 
@@ -51,7 +54,11 @@ interface ResultRecipient<D : DestinationSpec<*>, R> : OpenResultRecipient<R> {
      * as a normal button click listener, you can navigate or call a method on a view model,
      * for example.
      */
-    @Deprecated("You should migrate to `onNavResult` as this API will be removed in the near future.")
+    @Deprecated(
+        "You should migrate to `onNavResult` as this API will be removed in the " +
+                "near future."
+    )
+    @Suppress("ComposableNaming")
     @Composable
     fun onResult(listener: @DisallowComposableCalls (R) -> Unit)
 }

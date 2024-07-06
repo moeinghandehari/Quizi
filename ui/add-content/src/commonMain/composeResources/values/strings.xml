@@ -4,10 +4,11 @@
 
     <string name="title_select_content">Which type of content are you adding?</string>
     <string name="button_add_course">Course</string>
-    <string name="button_add_topic">Add Topic to existing Course</string>
-    <string name="button_add_question">Add Question to existing Topic</string>
+    <string name="button_add_topic">Topic to existing Course</string>
+    <string name="button_add_question">Question to existing Topic</string>
 
     <string name="title_add_course">Enter the new course title</string>
+    <string name="placeholder_course_name">Course name</string>
 
     <string name="title_select_course">Which course are you adding this topic to?</string>
 

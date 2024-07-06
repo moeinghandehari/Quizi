@@ -110,7 +110,7 @@ internal class DestinationDependenciesContainerImpl<T>(
         return require(D::class, isMarkedNavHostParam)
     }
 
-    @Suppress("UNCHECKED_CAST")
+    @Suppress("UNCHECKED_CAST", "TooGenericExceptionThrown")
     fun <D : Any> require(type: KClass<in D>, isMarkedNavHostParam: Boolean): D {
         var depForType: D? = map[type] as? D
 

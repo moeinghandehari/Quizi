@@ -9,6 +9,7 @@ import androidx.navigation.Navigator
 import de.tuhh.quizi.ui.core.navigation.DestinationsNavHost
 import de.tuhh.quizi.ui.core.navigation.manualcomposablecalls.ManualComposableCalls
 import de.tuhh.quizi.ui.core.navigation.navigation.DependenciesContainerBuilder
+import kotlin.reflect.KClass
 
 /**
  * Abstraction over all needed functionality to call a "NavHost-like" composable
@@ -57,6 +58,18 @@ interface NavHostEngine {
         modifier: Modifier,
         route: String,
         startRoute: Route,
+        navController: NavHostController,
+        builder: NavGraphBuilder.() -> Unit
+    )
+
+    /**
+     * "NavHost-like" Composable for this engine.
+     */
+    @Composable
+    fun NavHost(
+        modifier: Modifier,
+        route: KClass<*>?,
+        startRoute: KClass<*>,
         navController: NavHostController,
         builder: NavGraphBuilder.() -> Unit
     )

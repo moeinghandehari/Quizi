@@ -5,8 +5,8 @@ import de.tuhh.quizi.ui.core.navigation.navargs.Bundle
 import de.tuhh.quizi.ui.core.navigation.navargs.DestinationsNavType
 import de.tuhh.quizi.ui.core.navigation.navargs.primitives.DECODED_NULL
 import de.tuhh.quizi.ui.core.navigation.navargs.primitives.DestinationsStringNavType
+import de.tuhh.quizi.ui.core.navigation.navargs.primitives.ENCODED_COMMA
 import de.tuhh.quizi.ui.core.navigation.navargs.primitives.ENCODED_NULL
-import de.tuhh.quizi.ui.core.navigation.navargs.primitives.encodedComma
 import de.tuhh.quizi.ui.core.navigation.navargs.utils.encodeForRoute
 
 object DestinationsStringArrayListNavType : DestinationsNavType<ArrayList<String>?>() {
@@ -21,14 +21,20 @@ object DestinationsStringArrayListNavType : DestinationsNavType<ArrayList<String
 
     override fun parseValue(value: String): ArrayList<String>? {
         return when (value) {
-            DECODED_NULL -> null
-            "[]" -> arrayListOf()
-            else -> value
-                .subSequence(1, value.length - 1)
-                .split(encodedComma).mapTo(ArrayList()) {
+            DECODED_NULL ->
+                null
+
+            "[]" ->
+                arrayListOf()
+
+            else ->
+                value.subSequence(1, value.length - 1).split(ENCODED_COMMA).mapTo(ArrayList()) {
                     when (it) {
-                        DestinationsStringNavType.DECODED_EMPTY_STRING -> ""
-                        else -> it
+                        DestinationsStringNavType.DECODED_EMPTY_STRING ->
+                            ""
+
+                        else ->
+                            it
                     }
                 }
         }
@@ -36,12 +42,15 @@ object DestinationsStringArrayListNavType : DestinationsNavType<ArrayList<String
 
     override fun serializeValue(value: ArrayList<String>?): String {
         return when (value) {
-            null -> ENCODED_NULL
-            else -> encodeForRoute(
-                "[" + value.joinToString(encodedComma) {
-                    it.ifEmpty { DestinationsStringNavType.ENCODED_EMPTY_STRING }
-                } + "]"
-            )
+            null ->
+                ENCODED_NULL
+
+            else ->
+                encodeForRoute(
+                    "[" + value.joinToString(ENCODED_COMMA) {
+                        it.ifEmpty { DestinationsStringNavType.ENCODED_EMPTY_STRING }
+                    } + "]"
+                )
         }
     }
 

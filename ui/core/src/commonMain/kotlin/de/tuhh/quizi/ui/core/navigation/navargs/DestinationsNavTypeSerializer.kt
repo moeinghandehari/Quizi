@@ -17,7 +17,7 @@ package de.tuhh.quizi.ui.core.navigation.navargs
  * For all other types that you turn as navigation argument types with this, they will be saved in the
  * [Bundle] as Strings.
  */
-interface DestinationsNavTypeSerializer<T: Any> {
+interface DestinationsNavTypeSerializer<T : Any> {
     fun toRouteString(value: T): String
 
     fun fromRouteString(routeStr: String): T

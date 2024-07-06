@@ -15,8 +15,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import de.tuhh.quizi.ui.core.components.button.DestructiveButton
-import de.tuhh.quizi.ui.core.components.button.PositiveButton
+import de.tuhh.quizi.ui.core.components.button.primary.DestructiveButton
+import de.tuhh.quizi.ui.core.components.button.primary.PositiveButton
 
 @Composable
 fun TrueFalseQuizView(

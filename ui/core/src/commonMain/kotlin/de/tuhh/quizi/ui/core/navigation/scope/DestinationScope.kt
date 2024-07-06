@@ -1,3 +1,5 @@
+@file:Suppress("MaxLineLength")
+
 package de.tuhh.quizi.ui.core.navigation.scope
 
 import androidx.compose.animation.AnimatedVisibilityScope

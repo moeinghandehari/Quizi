@@ -3,10 +3,10 @@ package de.tuhh.quizi.ui.core.navigation.navargs.primitives
 import androidx.lifecycle.SavedStateHandle
 import de.tuhh.quizi.ui.core.navigation.navargs.Bundle
 import de.tuhh.quizi.ui.core.navigation.navargs.DestinationsNavType
-import kotlin.reflect.KClass
 
+@Suppress("EmptyDefaultConstructor")
 class DestinationsEnumNavType<E : Enum<*>>(
-    private val enumType: KClass<E>
+    // private val enumType: KClass<E>
 ) : DestinationsNavType<E?>() {
 
     override fun put(bundle: Bundle, key: String, value: E?) {
@@ -34,4 +34,3 @@ class DestinationsEnumNavType<E : Enum<*>>(
         return savedStateHandle.get<E?>(key)
     }
 }
-
