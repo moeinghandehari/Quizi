@@ -23,8 +23,8 @@ fun OptionsList(
     ) {
         options.forEach { item ->
             OptionButton(
-                label = item.option.first,
-                onClick = item.option.second,
+                label = item.text,
+                onClick = item.action,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 32.dp, vertical = 8.dp),

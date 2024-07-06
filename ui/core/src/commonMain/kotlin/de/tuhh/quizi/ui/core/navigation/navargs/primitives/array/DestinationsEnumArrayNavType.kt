@@ -4,10 +4,10 @@ import androidx.lifecycle.SavedStateHandle
 import de.tuhh.quizi.ui.core.navigation.navargs.Bundle
 import de.tuhh.quizi.ui.core.navigation.navargs.DestinationsNavType
 import de.tuhh.quizi.ui.core.navigation.navargs.primitives.DECODED_NULL
+import de.tuhh.quizi.ui.core.navigation.navargs.primitives.ENCODED_COMMA
 import de.tuhh.quizi.ui.core.navigation.navargs.primitives.ENCODED_NULL
-import de.tuhh.quizi.ui.core.navigation.navargs.primitives.encodedComma
 
-@Suppress("UNCHECKED_CAST")
+@Suppress("UNCHECKED_CAST", "ReturnCount")
 class DestinationsEnumArrayNavType<E : Enum<*>>(
     private val converter: (List<String>) -> Array<E>,
 ) : DestinationsNavType<Array<E>?>() {
@@ -29,8 +29,8 @@ class DestinationsEnumArrayNavType<E : Enum<*>>(
         if (value == "[]") return converter(listOf())
 
         val contentValue = value.subSequence(1, value.length - 1)
-        val splits = if (contentValue.contains(encodedComma)) {
-            contentValue.split(encodedComma)
+        val splits = if (contentValue.contains(ENCODED_COMMA)) {
+            contentValue.split(ENCODED_COMMA)
         } else {
             contentValue.split(",")
         }

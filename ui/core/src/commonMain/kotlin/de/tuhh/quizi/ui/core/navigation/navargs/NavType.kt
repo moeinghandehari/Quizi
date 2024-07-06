@@ -1,3 +1,5 @@
+@file:Suppress("MagicNumber")
+
 package de.tuhh.quizi.ui.core.navigation.navargs
 
 import androidx.annotation.RestrictTo
@@ -22,8 +24,8 @@ abstract class NavType<T>(
 
     @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     fun parseAndPut(bundle: Bundle, key: String, value: String?, previousValue: T): T {
-        if (!bundle.containsKey(key)) {
-            throw IllegalArgumentException("There is no previous value in this bundle.")
+        require(bundle.containsKey(key)) {
+            println("There is no previous value in this bundle.")
         }
         if (value != null) {
             val parsedCombinedValue = parseValue(value, previousValue)
@@ -45,8 +47,8 @@ abstract class NavType<T>(
         return name
     }
 
-    internal fun isPrimitive() = this == IntType || this == BoolType ||
-            this == FloatType || this == LongType || this == StringType
+    internal fun isPrimitive() =
+        this == IntType || this == BoolType || this == FloatType || this == LongType || this == StringType
 
     companion object {
         @Suppress("NON_FINAL_MEMBER_IN_OBJECT")
@@ -64,17 +66,19 @@ abstract class NavType<T>(
                 FloatType.name -> FloatType
                 FloatArrayType.name -> FloatArrayType
                 else -> {
-                    if (!type.isNullOrEmpty()) {
-                        throw IllegalArgumentException(
-                            "Object of type $type is not supported for navigation arguments.",
-                        )
+                    require(type.isNullOrEmpty()) {
+                        println("Object of type $type is not supported for navigation arguments.")
                     }
                     StringType
                 }
             }
         }
 
-        @Suppress("UNCHECKED_CAST") // needed for cast to NavType<Any>
+        @Suppress(
+            "UNCHECKED_CAST",
+            "SwallowedException",
+            "ReturnCount"
+        ) // needed for cast to NavType<Any>
         @JvmStatic
         @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
         fun inferFromValue(value: String): NavType<Any> {

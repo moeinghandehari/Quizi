@@ -5,11 +5,10 @@ import de.tuhh.quizi.ui.core.navigation.navargs.Bundle
 import de.tuhh.quizi.ui.core.navigation.navargs.DestinationsNavType
 import de.tuhh.quizi.ui.core.navigation.navargs.primitives.DECODED_NULL
 import de.tuhh.quizi.ui.core.navigation.navargs.primitives.ENCODED_NULL
-import kotlin.reflect.KClass
 
-@Suppress("UNCHECKED_CAST")
+@Suppress("UNCHECKED_CAST", "ReturnCount", "EmptyDefaultConstructor")
 class DestinationsEnumArrayListNavType<E : Enum<*>>(
-    private val enumType: KClass<E>
+    // private val enumType: KClass<E>
 ) : DestinationsNavType<ArrayList<E>?>() {
 
     override fun put(bundle: Bundle, key: String, value: ArrayList<E>?) {
@@ -28,7 +27,7 @@ class DestinationsEnumArrayListNavType<E : Enum<*>>(
 
         if (value == "[]") return arrayListOf()
 
-        val contentValue = value.subSequence(1, value.length - 1)
+        // val contentValue = value.subSequence(1, value.length - 1)
 //        return if (contentValue.contains(encodedComma)) {
 //            contentValue.split(encodedComma)
 //        } else {
@@ -45,5 +44,4 @@ class DestinationsEnumArrayListNavType<E : Enum<*>>(
     override fun get(savedStateHandle: SavedStateHandle, key: String): ArrayList<E>? {
         return savedStateHandle.get<ArrayList<E>?>(key)
     }
-
 }

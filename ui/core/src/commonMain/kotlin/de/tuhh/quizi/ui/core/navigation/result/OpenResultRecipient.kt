@@ -36,6 +36,7 @@ interface OpenResultRecipient<R> {
      * as a normal button click listener, you can navigate or call a method on a view model,
      * for example.
      */
+    @Suppress("ComposableNaming")
     @Composable
     fun onNavResult(listener: @DisallowComposableCalls (NavResult<R>) -> Unit)
 }

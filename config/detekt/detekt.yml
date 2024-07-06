@@ -11,6 +11,9 @@ formatting:
   # https://detekt.dev/docs/rules/formatting/#argumentlistwrapping
   ArgumentListWrapping:
     active: true
+  # https://detekt.dev/docs/rules/formatting/#indentation
+  Indentation:
+    active: false
   # https://detekt.dev/docs/rules/formatting/#maximumlinelength
   # Disabled because it is also contained in style rules
   MaximumLineLength:

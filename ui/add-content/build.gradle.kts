@@ -11,6 +11,8 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(projects.ui.core)
+            implementation(projects.shared.core.utilsValidation)
+            implementation(projects.shared.functionality.addContent.usecases)
             implementation(compose.components.resources)
         }
     }

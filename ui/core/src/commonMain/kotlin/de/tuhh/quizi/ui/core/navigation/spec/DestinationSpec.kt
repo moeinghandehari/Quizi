@@ -2,12 +2,12 @@ package de.tuhh.quizi.ui.core.navigation.spec
 
 import androidx.annotation.RestrictTo
 import androidx.compose.runtime.Composable
-import de.tuhh.quizi.ui.core.navigation.navargs.Bundle
 import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
-import androidx.navigation.NavDeepLink
 import androidx.navigation.NavController
+import androidx.navigation.NavDeepLink
+import de.tuhh.quizi.ui.core.navigation.navargs.Bundle
 import de.tuhh.quizi.ui.core.navigation.scope.DestinationScope
 
 /**
@@ -30,14 +30,14 @@ interface DestinationSpec<T> : Route {
      * Method that returns the navigation arguments class of this Composable
      * for the [navBackStackEntry] when the destination gets navigated to.
      */
-    fun argsFrom(navBackStackEntry: NavBackStackEntry) : T
+    fun argsFrom(navBackStackEntry: NavBackStackEntry): T
 //  TODO:  = argsFrom(navBackStackEntry.arguments)
 
     /**
      * Method that returns the navigation arguments class of this Composable
      * for the [bundle] when the destination gets navigated to.
      */
-    fun argsFrom(bundle: Bundle?) : T
+    fun argsFrom(bundle: Bundle?): T
 
     /**
      * Method that returns the navigation arguments class of this Composable
@@ -49,7 +49,7 @@ interface DestinationSpec<T> : Route {
      * and pass the [NavBackStackEntry.arguments] as the second constructor parameter.
      * If you're using something like Hilt, then that is done for you out of the box.
      */
-    fun argsFrom(savedStateHandle: SavedStateHandle) : T
+    fun argsFrom(savedStateHandle: SavedStateHandle): T
 
     /**
      * Full route that will be added to the navigation graph

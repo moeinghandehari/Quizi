@@ -30,6 +30,7 @@ internal object NavGraphRegistry {
         return holderByTopLevelRoute[navController]
     }
 
+    @Suppress("ReturnCount")
     operator fun get(navBackStackEntry: NavBackStackEntry): NavGraphSpecHolder? {
         val topLevelRoute = navBackStackEntry.destination.hierarchy.last().route
         val navControllersWithTopLevelRoute = holderByTopLevelRoute.keys.filter {

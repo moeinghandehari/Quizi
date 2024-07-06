@@ -10,13 +10,12 @@ import kotlin.reflect.KClass
 
 @Composable
 @PublishedApi
-internal fun <R: Any> resultBackNavigator(
+internal fun <R : Any> resultBackNavigator(
     destination: DestinationSpec<*>,
     resultType: KClass<R>,
     navController: NavController,
     navBackStackEntry: NavBackStackEntry
 ): ResultBackNavigator<R> {
-
     val backNavigator = remember {
         ResultBackNavigatorImpl(
             navController = navController,
@@ -33,7 +32,7 @@ internal fun <R: Any> resultBackNavigator(
 
 @Composable
 @PublishedApi
-internal fun <D : DestinationSpec<*>, R: Any> resultRecipient(
+internal fun <D : DestinationSpec<*>, R : Any> resultRecipient(
     navBackStackEntry: NavBackStackEntry,
     originType: KClass<D>,
     resultType: KClass<R>
@@ -45,12 +44,12 @@ internal fun <D : DestinationSpec<*>, R: Any> resultRecipient(
     )
 }
 
-internal fun <D : DestinationSpec<*>, R: Any> resultKey(
+internal fun <D : DestinationSpec<*>, R : Any> resultKey(
     resultOriginType: KClass<D>,
     resultType: KClass<R>
 ) = "compose-destinations@${resultOriginType.simpleName}@${resultType.simpleName}@result"
 
-internal fun <D : DestinationSpec<*>, R: Any> canceledKey(
+internal fun <D : DestinationSpec<*>, R : Any> canceledKey(
     resultOriginType: KClass<D>,
     resultType: KClass<R>
 ) = "compose-destinations@${resultOriginType.simpleName}@${resultType.simpleName}@canceled"

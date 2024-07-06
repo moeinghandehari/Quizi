@@ -1,3 +1,5 @@
+@file:Suppress("MagicNumber")
+
 package de.tuhh.quizi.ui.core.components.card
 
 import androidx.compose.foundation.background
@@ -12,15 +14,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import de.tuhh.quizi.ui.core.theme.AppTheme
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun BigTextCard(
     text: StringResource,
-    textColor: Color = Color.Black,
     modifier: Modifier = Modifier,
+    textColor: Color = Color.Black,
 ) = Box(
     contentAlignment = Alignment.Center,
     modifier = modifier
@@ -40,6 +45,10 @@ fun BigTextCard(
 ) {
     Text(
         text = stringResource(text),
+        style = AppTheme.typography.title1.regular,
+        textAlign = TextAlign.Center,
         color = textColor,
+        overflow = TextOverflow.Ellipsis,
+        modifier = Modifier.fillMaxWidth()
     )
 }

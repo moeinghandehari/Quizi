@@ -35,11 +35,5 @@ object DestinationsIntNavType : DestinationsNavType<Int?>() {
         return intValue(savedStateHandle.get<Any?>(key))
     }
 
-    private fun intValue(valueForKey: Any?): Int? {
-        return if (valueForKey is Int) {
-            valueForKey
-        } else {
-            null
-        }
-    }
+    private fun intValue(valueForKey: Any?): Int? = valueForKey as? Int
 }

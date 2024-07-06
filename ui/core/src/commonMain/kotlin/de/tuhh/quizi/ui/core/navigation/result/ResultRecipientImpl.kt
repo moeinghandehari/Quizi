@@ -11,7 +11,7 @@ import androidx.navigation.NavBackStackEntry
 import de.tuhh.quizi.ui.core.navigation.spec.DestinationSpec
 import kotlin.reflect.KClass
 
-internal class ResultRecipientImpl<D : DestinationSpec<*>, R: Any>(
+internal class ResultRecipientImpl<D : DestinationSpec<*>, R : Any>(
     private val navBackStackEntry: NavBackStackEntry,
     resultOriginType: KClass<D>,
     resultType: KClass<R>,
@@ -20,6 +20,7 @@ internal class ResultRecipientImpl<D : DestinationSpec<*>, R: Any>(
     private val resultKey = resultKey(resultOriginType, resultType)
     private val canceledKey = canceledKey(resultOriginType, resultType)
 
+    @Suppress("ComposableNaming")
     @Composable
     override fun onNavResult(listener: (NavResult<R>) -> Unit) {
         val currentListener by rememberUpdatedState(listener)
@@ -28,8 +29,7 @@ internal class ResultRecipientImpl<D : DestinationSpec<*>, R: Any>(
             val observer = object : LifecycleEventObserver {
                 override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
                     when (event) {
-                        Lifecycle.Event.ON_START,
-                        Lifecycle.Event.ON_RESUME -> {
+                        Lifecycle.Event.ON_START, Lifecycle.Event.ON_RESUME -> {
                             handleResultIfPresent(currentListener)
                         }
 
@@ -69,11 +69,12 @@ internal class ResultRecipientImpl<D : DestinationSpec<*>, R: Any>(
     }
 
     private fun hasAnyResult(): Boolean {
-        return navBackStackEntry.savedStateHandle.contains(canceledKey) ||
-                navBackStackEntry.savedStateHandle.contains(resultKey)
+        return navBackStackEntry.savedStateHandle.contains(canceledKey) || navBackStackEntry.savedStateHandle.contains(
+            resultKey
+        )
     }
 
-    @Suppress("OVERRIDE_DEPRECATION", "OverridingDeprecatedMember")
+    @Suppress("OVERRIDE_DEPRECATION", "OverridingDeprecatedMember", "ComposableNaming")
     @Composable
     override fun onResult(listener: (R) -> Unit) {
         val currentListener by rememberUpdatedState(listener)
@@ -84,7 +85,11 @@ internal class ResultRecipientImpl<D : DestinationSpec<*>, R: Any>(
                     when (event) {
                         Lifecycle.Event.ON_RESUME -> {
                             if (navBackStackEntry.savedStateHandle.contains(resultKey)) {
-                                currentListener(navBackStackEntry.savedStateHandle.remove<R>(resultKey) as R)
+                                currentListener(
+                                    navBackStackEntry.savedStateHandle.remove<R>(
+                                        resultKey
+                                    ) as R
+                                )
                             }
                         }
 

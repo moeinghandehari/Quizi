@@ -24,6 +24,7 @@ import de.tuhh.quizi.ui.core.navigation.spec.NavGraphSpec
 import de.tuhh.quizi.ui.core.navigation.spec.NavHostEngine
 import de.tuhh.quizi.ui.core.navigation.spec.Route
 import de.tuhh.quizi.ui.core.navigation.spec.addActivityDestination
+import kotlin.reflect.KClass
 
 /**
  * Returns the default [NavHostEngine] to be used with [DestinationsNavHost]
@@ -75,10 +76,32 @@ internal class DefaultNavHostEngine(
         startRoute: Route,
         navController: NavHostController,
         builder: NavGraphBuilder.() -> Unit,
-    ) = with(defaultAnimationParams)  {
+    ) = with(defaultAnimationParams) {
         androidx.navigation.compose.NavHost(
             navController = navController,
             startDestination = startRoute.route,
+            modifier = modifier,
+            route = route,
+            contentAlignment = navHostContentAlignment,
+            enterTransition = enterTransition.toAccompanist(),
+            exitTransition = exitTransition.toAccompanist(),
+            popEnterTransition = popEnterTransition.toAccompanist(),
+            popExitTransition = popExitTransition.toAccompanist(),
+            builder = builder
+        )
+    }
+
+    @Composable
+    override fun NavHost(
+        modifier: Modifier,
+        route: KClass<*>?,
+        startRoute: KClass<*>,
+        navController: NavHostController,
+        builder: NavGraphBuilder.() -> Unit,
+    ) = with(defaultAnimationParams) {
+        androidx.navigation.compose.NavHost(
+            navController = navController,
+            startDestination = startRoute,
             modifier = modifier,
             route = route,
             contentAlignment = navHostContentAlignment,
@@ -94,7 +117,8 @@ internal class DefaultNavHostEngine(
         navGraph: NavGraphSpec,
         builder: NavGraphBuilder.() -> Unit
     ) {
-        val transitions: NestedNavGraphDefaultAnimations? = defaultAnimationsPerNestedNavGraph[navGraph]
+        val transitions: NestedNavGraphDefaultAnimations? =
+            defaultAnimationsPerNestedNavGraph[navGraph]
         if (transitions != null) {
             navigation(
                 startDestination = navGraph.startRoute.route,
@@ -120,14 +144,22 @@ internal class DefaultNavHostEngine(
         dependenciesContainerBuilder: @Composable DependenciesContainerBuilder<*>.() -> Unit,
         manualComposableCalls: ManualComposableCalls,
     ) = with(destination.style) {
-        addActivityDestination(this@composable, destination, navController, dependenciesContainerBuilder, manualComposableCalls)
+        addActivityDestination(
+            this@composable,
+            destination,
+            navController,
+            dependenciesContainerBuilder,
+            manualComposableCalls
+        )
     }
 
-    private fun DestinationEnterTransition.toAccompanist(): (AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition) {
+    private fun DestinationEnterTransition.toAccompanist():
+            (AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition) {
         return { enter() }
     }
 
-    private fun DestinationExitTransition.toAccompanist(): (AnimatedContentTransitionScope<NavBackStackEntry>.() -> ExitTransition) {
+    private fun DestinationExitTransition.toAccompanist():
+            (AnimatedContentTransitionScope<NavBackStackEntry>.() -> ExitTransition) {
         return { exit() }
     }
 }

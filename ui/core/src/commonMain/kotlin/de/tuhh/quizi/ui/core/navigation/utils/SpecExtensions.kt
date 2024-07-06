@@ -1,3 +1,5 @@
+@file:Suppress("TooManyFunctions")
+
 package de.tuhh.quizi.ui.core.navigation.utils
 
 import androidx.compose.runtime.Composable
@@ -37,7 +39,8 @@ fun NavBackStackEntry.destination(): DestinationSpec<*> {
     return when (val route = route()) {
         is DestinationSpec<*> -> route
         is NavGraphSpec -> error(
-            "Cannot call `destination()` for a NavBackStackEntry which corresponds to a nav graph, use `route()` instead!",
+            "Cannot call `destination()` for a NavBackStackEntry which corresponds to a nav " +
+                    "graph, use `route()` instead!",
         )
     }
 }
@@ -118,19 +121,20 @@ fun NavController.isRouteOnBackStackAsState(route: Route): State<Boolean> {
  * If this [Route] is a [NavGraphSpec], returns its
  * start [DestinationSpec].
  */
-val Route.startDestination get(): DestinationSpec<*> {
-    return when (this) {
-        is DestinationSpec<*> -> this
-        is NavGraphSpec -> startRoute.startDestination
+val Route.startDestination
+    get(): DestinationSpec<*> {
+        return when (this) {
+            is DestinationSpec<*> -> this
+            is NavGraphSpec -> startRoute.startDestination
+        }
     }
-}
 
 /**
  * Filters all destinations of this [NavGraphSpec] and its nested nav graphs with given [predicate]
  */
-inline fun NavGraphSpec.filterDestinations(predicate: (DestinationSpec<*>) -> Boolean): List<DestinationSpec<*>> {
-    return allDestinations.filter { predicate(it) }
-}
+inline fun NavGraphSpec.filterDestinations(
+    predicate: (DestinationSpec<*>) -> Boolean
+): List<DestinationSpec<*>> = allDestinations.filter { predicate(it) }
 
 /**
  * Checks if any destination of this [NavGraphSpec] matches with given [predicate]
@@ -149,22 +153,24 @@ fun NavGraphSpec.contains(destination: DestinationSpec<*>): Boolean {
 /**
  * Returns all [DestinationSpec]s including those of nested graphs
  */
-val NavGraphSpec.allDestinations get(): List<DestinationSpec<*>> {
-    val destinations = destinationsByRoute
-        .values
-        .toMutableList()
+val NavGraphSpec.allDestinations
+    get(): List<DestinationSpec<*>> {
+        val destinations = destinationsByRoute
+            .values
+            .toMutableList()
 
-    nestedNavGraphs.forEach {
-        destinations.addAll(it.allDestinations)
+        nestedNavGraphs.forEach {
+            destinations.addAll(it.allDestinations)
+        }
+        return destinations
     }
-    return destinations
-}
 
 /**
  * Finds a destination for a `route` in this navigation graph
  * or its nested graphs.
  * Returns `null` if there is no such destination.
  */
+@Suppress("ReturnCount")
 fun NavGraphSpec.findDestination(route: String): DestinationSpec<*>? {
     val destination = destinationsByRoute[route]
 
@@ -219,11 +225,12 @@ fun NavBackStackEntry.destinationSpec(navGraph: NavGraphSpec): DestinationSpec<*
     message = "Api will be removed! Use `startDestination` instead.",
     replaceWith = ReplaceWith("startDestination"),
 )
-val Route.startDestinationSpec get(): DestinationSpec<*> {
-    return when (this) {
-        is DestinationSpec<*> -> this
-        is NavGraphSpec -> startRoute.startDestination
+val Route.startDestinationSpec
+    get(): DestinationSpec<*> {
+        return when (this) {
+            is DestinationSpec<*> -> this
+            is NavGraphSpec -> startRoute.startDestination
+        }
     }
-}
 
 // endregion

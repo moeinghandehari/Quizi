@@ -11,7 +11,7 @@ import androidx.navigation.NavController
 import de.tuhh.quizi.ui.core.navigation.spec.DestinationSpec
 import kotlin.reflect.KClass
 
-internal class ResultBackNavigatorImpl<R: Any>(
+internal class ResultBackNavigatorImpl<R : Any>(
     private val navController: NavController,
     private val navBackStackEntry: NavBackStackEntry,
     resultOriginType: KClass<out DestinationSpec<*>>,
@@ -51,6 +51,7 @@ internal class ResultBackNavigatorImpl<R: Any>(
         navController.navigateUp()
     }
 
+    @Suppress("ComposableNaming")
     @Composable
     fun handleCanceled() {
         val currentNavBackStackEntry = remember { navController.currentBackStackEntry } ?: return

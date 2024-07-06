@@ -118,5 +118,5 @@ private fun Project.configureCommonKotlin() {
             )
         }
     }
-    // configureJacocoKotlin()
+    configureJacocoKotlin()
 }

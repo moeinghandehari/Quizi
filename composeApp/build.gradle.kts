@@ -40,6 +40,8 @@ kotlin {
             implementation(projects.ui.addContent)
             implementation(projects.ui.home)
             implementation(projects.ui.quiz)
+
+            implementation(projects.shared.functionality.addContent.data)
             implementation(projects.shared.functionality.projectDefaults)
         }
     }

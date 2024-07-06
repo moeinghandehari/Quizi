@@ -1,7 +1,10 @@
 package de.tuhh.quizi.ui.core.navigation.animations.defaults
 
-import androidx.compose.animation.*
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 
 interface NavGraphDefaultAnimationParams {
     val enterTransition: DestinationEnterTransition?
@@ -19,11 +22,15 @@ interface NavGraphDefaultAnimationParams {
  * @see [AnimatedNavHost] for a parameters explanation
  */
 class RootNavGraphDefaultAnimations(
-    override val enterTransition: DestinationEnterTransition = DestinationEnterTransition { EnterTransition.None },
-    override val exitTransition: DestinationExitTransition = DestinationExitTransition { ExitTransition.None },
+    override val enterTransition: DestinationEnterTransition = DestinationEnterTransition {
+        EnterTransition.None
+    },
+    override val exitTransition: DestinationExitTransition = DestinationExitTransition {
+        ExitTransition.None
+    },
     override val popEnterTransition: DestinationEnterTransition = enterTransition,
     override val popExitTransition: DestinationExitTransition = exitTransition,
-): NavGraphDefaultAnimationParams {
+) : NavGraphDefaultAnimationParams {
     companion object {
         val ACCOMPANIST_FADING by lazy {
             RootNavGraphDefaultAnimations(

@@ -1,3 +1,5 @@
+@file:Suppress("MagicNumber")
+
 package de.tuhh.quizi.ui.core.navigation.navargs.utils
 
 private const val BASE64_CHARS =
@@ -12,8 +14,8 @@ fun String.decode(): ByteArray {
         if (c == '=') return output.toByteArray()
 
         val index = BASE64_CHARS.indexOf(c)
-        if (index == -1) {
-            throw IllegalArgumentException("Invalid Base64 character: $c")
+        require(index != -1) {
+            println("Invalid Base64 character: $c")
         }
 
         bitBuffer = (bitBuffer shl 6) or index
@@ -40,6 +42,7 @@ fun String.decode(): ByteArray {
     return output.toByteArray()
 }
 
+@Suppress("LoopWithTooManyJumpStatements")
 fun ByteArray.encode(): String {
     val sb = StringBuilder()
     var i = 0

@@ -6,14 +6,15 @@ androidx-constraintlayout = "2.1.4"
 androidx-core-ktx = "1.13.1"
 androidx-espresso-core = "3.5.1"
 androidx-lifecycle = "2.8.0"
-androidx-navigation = "2.8.0-alpha02"
+androidx-navigation = "2.8.0-alpha08"
 androidx-test-junit = "1.1.5"
 coverageAggregation = "2.2.0"
 kotlinx-serialization = "1.7.0"
 kotlin = "2.0.0"
 kotlinCoroutines = "1.9.0-RC"
 compose = "2024.06.00"
-compose-plugin = "1.6.20-dev1667"
+compose-plugin = "1.7.0-alpha01"
+compottie = "2.0.0-beta01"
 detekt = "1.23.6"
 detektComposeRules = "0.3.13"
 exposed = "0.50.0"
@@ -31,7 +32,6 @@ turbine = "1.1.0"
 voyager = "1.0.0"
 google-services = "4.4.1"
 material = "1.12.0"
-navigationCommonKtx = "2.7.7"
 
 [libraries]
 android-gradle = { module = "com.android.tools.build:gradle", version.ref = "agp" }
@@ -44,6 +44,7 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-viewmodel-savedstate = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-savedstate", version.ref = "androidx-lifecycle" }
 androidx-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
 
 coverageAggregation-gradle = { module = "io.github.gmazzo.test.aggregation:plugin", version.ref = "coverageAggregation" }
@@ -70,9 +71,9 @@ compose-ui = { module = "androidx.compose.ui:ui" }
 compose-uiUtil = { module = "androidx.compose.ui:ui-util" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
-jetbrains-compose-ui-tooling-preview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "compose-plugin" }
 androidx-ui-tooling-preview-android = { module = "androidx.compose.ui:ui-tooling-preview-android" }
 androidx-ui-tooling-preview-desktop = { module = "androidx.compose.ui:ui-tooling-preview-desktop" }
+jetbrains-compose-ui-tooling-preview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "compose-plugin" }
 
 # Detekt
 detekt-gradle = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
@@ -115,10 +116,17 @@ koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin" }
 koin-core = { module = "io.insert-koin:koin-core" }
 koin-android = { module = "io.insert-koin:koin-android" }
 koin-compose-multiplatform = { module = "io.insert-koin:koin-compose" }
+koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel" }
 koin-android-compose = { module = "io.insert-koin:koin-androidx-compose" }
 koin-annotation = { module = "io.insert-koin:koin-annotations" }
 koin-ktor = { module = "io.insert-koin:koin-ktor" }
 koin-logger = { module = "io.insert-koin:koin-logger-slf4j" }
+
+# Compottie
+compottie = { module = "io.github.alexzhirkevich:compottie", version.ref = "compottie" }
+compottie-dot = { module = "io.github.alexzhirkevich:compottie-dot", version.ref = "compottie" }
+compottie-network = { module = "io.github.alexzhirkevich:compottie-network", version.ref = "compottie" }
+compottie-resources = { module = "io.github.alexzhirkevich:compottie-resources", version.ref = "compottie" }
 
 koin-ksp = { module = "io.insert-koin:koin-ksp-compiler", version.ref = "koin-ksp" }
 
@@ -136,7 +144,6 @@ firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 firebase-crashlytics-gradle = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "firebaseCrashlyticsPlugin" }
 firebase-perf = { module = "com.google.firebase:firebase-perf", version.ref = "firebasePerfPlugin" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
-androidx-navigation-common-ktx = { group = "androidx.navigation", name = "navigation-common-ktx", version.ref = "navigationCommonKtx" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

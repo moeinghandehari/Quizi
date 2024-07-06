@@ -15,17 +15,17 @@ import de.tuhh.quizi.di.appModule
 import de.tuhh.quizi.navigation.NavEventProvider
 import de.tuhh.quizi.navigation.extensions.execute
 import de.tuhh.quizi.ui.AppBottomNavigation
-import de.tuhh.quizi.ui.addcontent.AddContentNavGraph
+import de.tuhh.quizi.ui.addcontent.shared.AddContentNavGraph
 import de.tuhh.quizi.ui.animation.SlideInOutDefault
 import de.tuhh.quizi.ui.core.navigation.DestinationsNavHost
+import de.tuhh.quizi.ui.core.navigation.navigation.navigate
+import de.tuhh.quizi.ui.core.navigation.navigation.popUpTo
 import de.tuhh.quizi.ui.core.navigation.rememberNavHostEngine
 import de.tuhh.quizi.ui.core.navigation.spec.DestinationSpec
 import de.tuhh.quizi.ui.core.navigation.spec.DestinationStyle
 import de.tuhh.quizi.ui.core.navigation.spec.NavGraphSpec
-import de.tuhh.quizi.ui.core.navigation.utils.startDestination
 import de.tuhh.quizi.ui.core.navigation.utils.destination
-import de.tuhh.quizi.ui.core.navigation.navigation.navigate
-import de.tuhh.quizi.ui.core.navigation.navigation.popUpTo
+import de.tuhh.quizi.ui.core.navigation.utils.startDestination
 import de.tuhh.quizi.ui.core.theme.AppTheme
 import de.tuhh.quizi.ui.home.HomeNavGraph
 import de.tuhh.quizi.ui.navgraph.AppNavGraph
@@ -58,7 +58,8 @@ internal fun AppContent() {
                 bottomBar = {
                     val destination by navController.currentNonDialogDestinationFlow
                         .collectAsStateWithLifecycle(initialValue = null)
-                    val isRootDestination = navItems.any { it.navGraph.startDestination == destination }
+                    val isRootDestination =
+                        navItems.any { it.navGraph.startDestination == destination }
 
                     if (isRootDestination) {
                         AppBottomNavigation(
@@ -89,9 +90,7 @@ internal fun AppContent() {
                     modifier = Modifier
                         .padding(contentPadding)
                         .consumeWindowInsets(contentPadding),
-                    dependenciesContainerBuilder = {
-
-                    },
+                    dependenciesContainerBuilder = {},
                     manualComposableCallsBuilder = {
                         // Do not scope shared ViewModels to some backstack entry manually. Use the
                         //  existing dependenciesContainerBuilder and scope shared ViewModels to a NavGraph.
