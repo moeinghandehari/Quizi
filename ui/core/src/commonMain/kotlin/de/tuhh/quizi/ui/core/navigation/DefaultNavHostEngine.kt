@@ -91,27 +91,27 @@ internal class DefaultNavHostEngine(
         )
     }
 
-    @Composable
-    override fun NavHost(
-        modifier: Modifier,
-        route: KClass<*>?,
-        startRoute: KClass<*>,
-        navController: NavHostController,
-        builder: NavGraphBuilder.() -> Unit,
-    ) = with(defaultAnimationParams) {
-        androidx.navigation.compose.NavHost(
-            navController = navController,
-            startDestination = startRoute,
-            modifier = modifier,
-            route = route,
-            contentAlignment = navHostContentAlignment,
-            enterTransition = enterTransition.toAccompanist(),
-            exitTransition = exitTransition.toAccompanist(),
-            popEnterTransition = popEnterTransition.toAccompanist(),
-            popExitTransition = popExitTransition.toAccompanist(),
-            builder = builder
-        )
-    }
+//    @Composable
+//    override fun NavHost(
+//        modifier: Modifier,
+//        route: KClass<*>?,
+//        startRoute: KClass<*>,
+//        navController: NavHostController,
+//        builder: NavGraphBuilder.() -> Unit,
+//    ) = with(defaultAnimationParams) {
+//        androidx.navigation.compose.NavHost(
+//            navController = navController,
+//            startDestination = startRoute,
+//            modifier = modifier,
+//            route = route,
+//            contentAlignment = navHostContentAlignment,
+//            enterTransition = enterTransition.toAccompanist(),
+//            exitTransition = exitTransition.toAccompanist(),
+//            popEnterTransition = popEnterTransition.toAccompanist(),
+//            popExitTransition = popExitTransition.toAccompanist(),
+//            builder = builder
+//        )
+//    }
 
     override fun NavGraphBuilder.navigation(
         navGraph: NavGraphSpec,
