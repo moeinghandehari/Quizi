@@ -10,7 +10,7 @@ group = "de.tuhh.quizi.server"
 version = "1.0.0"
 
 application {
-    mainClass.set("de.tuhh.ApplicationKt")
+    mainClass.set("de.tuhh.quizi.server.ApplicationKt")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=${extra["io.ktor.development"] ?: "false"}")
 }
 
@@ -23,7 +23,7 @@ dependencies {
     implementation(libs.ktor.server.content.negotiation)
     implementation(libs.ktor.server.host.common)
     implementation(libs.ktor.server.call.logging)
-    implementation(libs.ktor.serialization)
+    implementation(libs.ktor.serialization.json)
 
     // Koin
     implementation(project.dependencies.platform(libs.koin.bom))

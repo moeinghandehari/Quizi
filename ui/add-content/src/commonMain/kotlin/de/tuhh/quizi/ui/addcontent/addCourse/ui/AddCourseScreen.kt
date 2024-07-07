@@ -27,7 +27,6 @@ import quizi.ui.add_content.generated.resources.title_add_course
 
 @Composable
 internal fun AddCourseScreen(
-    modifier: Modifier = Modifier,
     viewModel: AddContentSharedViewModel = koinInject(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
