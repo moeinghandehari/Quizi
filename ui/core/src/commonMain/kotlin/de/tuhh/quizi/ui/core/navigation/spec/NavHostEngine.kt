@@ -62,17 +62,17 @@ interface NavHostEngine {
         builder: NavGraphBuilder.() -> Unit
     )
 
-    /**
-     * "NavHost-like" Composable for this engine.
-     */
-    @Composable
-    fun NavHost(
-        modifier: Modifier,
-        route: KClass<*>?,
-        startRoute: KClass<*>,
-        navController: NavHostController,
-        builder: NavGraphBuilder.() -> Unit
-    )
+//    /**
+//     * "NavHost-like" Composable for this engine.
+//     */
+//    @Composable
+//    fun NavHost(
+//        modifier: Modifier,
+//        route: KClass<*>?,
+//        startRoute: KClass<*>,
+//        navController: NavHostController,
+//        builder: NavGraphBuilder.() -> Unit
+//    )
 
     /**
      * Creates a new navigation graph nested in the [NavGraphBuilder] graph.

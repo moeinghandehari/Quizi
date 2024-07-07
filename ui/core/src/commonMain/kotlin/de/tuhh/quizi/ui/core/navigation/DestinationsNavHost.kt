@@ -67,7 +67,7 @@ import de.tuhh.quizi.ui.core.navigation.utils.NavGraphRegistry
 fun DestinationsNavHost(
     navGraph: NavGraphSpec,
     modifier: Modifier = Modifier,
-    startRoute: Route = navGraph,
+    startRoute: Route = navGraph.startRoute,
     engine: NavHostEngine = rememberNavHostEngine(),
     navController: NavHostController = engine.rememberNavController(),
     dependenciesContainerBuilder: @Composable DependenciesContainerBuilder<*>.() -> Unit = {},
@@ -77,7 +77,7 @@ fun DestinationsNavHost(
 
     engine.NavHost(
         modifier = modifier,
-        route = navGraph,
+        route = navGraph.route,
         startRoute = startRoute,
         navController = navController,
     ) {

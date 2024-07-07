@@ -21,7 +21,7 @@ val appModule = module {
 
     factory<QuiziApiConfig> {
         QuiziApiConfig(
-            baseUrl = BuildConfig.QUIZI_API_BASE_URL,
+            baseUrl = "localhost",
         )
     }
 
