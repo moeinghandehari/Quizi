@@ -1,7 +1,7 @@
 package de.tuhh.quizi.ui.addcontent.addCourse.model
 
 import de.tuhh.quizi.core.utils.validation.Validator
-import de.tuhh.quizi.functionality.add.content.entities.Course
+import de.tuhh.quizi.functionality.add.content.entities.NewCourse
 import de.tuhh.quizi.ui.addcontent.shared.model.AddContentForm
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.serialization.Serializable
@@ -17,6 +17,6 @@ internal data class AddCourseForm(
     }
 }
 
-internal fun AddCourseForm.toCourse() = Course(courseName)
+internal fun AddCourseForm.toCourse() = NewCourse(this.courseName)
 
 internal fun MutableStateFlow<AddCourseForm>.reset() = tryEmit(AddCourseForm.EMPTY)

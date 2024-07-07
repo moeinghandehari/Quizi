@@ -1,5 +1,6 @@
 package de.tuhh.quizi
 
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -17,9 +18,8 @@ import de.tuhh.quizi.navigation.extensions.execute
 import de.tuhh.quizi.ui.AppBottomNavigation
 import de.tuhh.quizi.ui.addcontent.shared.AddContentNavGraph
 import de.tuhh.quizi.ui.animation.SlideInOutDefault
+import de.tuhh.quizi.ui.core.extensions.None
 import de.tuhh.quizi.ui.core.navigation.DestinationsNavHost
-import de.tuhh.quizi.ui.core.navigation.navigation.navigate
-import de.tuhh.quizi.ui.core.navigation.navigation.popUpTo
 import de.tuhh.quizi.ui.core.navigation.rememberNavHostEngine
 import de.tuhh.quizi.ui.core.navigation.spec.DestinationSpec
 import de.tuhh.quizi.ui.core.navigation.spec.DestinationStyle
@@ -80,7 +80,7 @@ internal fun AppContent() {
                         )
                     }
                 },
-//                contentWindowInsets = WindowInsets.None,
+                contentWindowInsets = WindowInsets.None,
                 containerColor = AppTheme.colors.template.background,
             ) { contentPadding ->
                 DestinationsNavHost(

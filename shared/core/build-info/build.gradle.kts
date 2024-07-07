@@ -3,5 +3,5 @@ plugins {
 }
 
 android {
-    namespace = "de.tuhh.quizi.core.buildinfo"
+    namespace = "de.tuhh.quizi.core.build.info"
 }

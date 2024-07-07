@@ -12,7 +12,6 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.shared.core.utilsLoading)
             implementation(project.dependencies.platform(libs.compose.bom))
-            implementation(project.dependencies.platform(libs.koin.bom))
             api(compose.foundation)
             api(compose.material)
             api(compose.material3)

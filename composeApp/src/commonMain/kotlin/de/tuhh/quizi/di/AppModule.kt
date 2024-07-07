@@ -1,6 +1,7 @@
 package de.tuhh.quizi.di
 
-import de.tuhh.quizi.functionality.add.content.data.di.AddContentModule
+import de.tuhh.quizi.core.quizi.api.model.QuiziApiConfig
+import de.tuhh.quizi.functionality.add.content.data.implementations.di.AddContentDataModule
 import de.tuhh.quizi.navigation.AppNavigatorImpl
 import de.tuhh.quizi.navigation.NavEventProvider
 import de.tuhh.quizi.ui.addcontent.shared.di.AddContentUiModule
@@ -18,9 +19,15 @@ val appModule = module {
         NavEventProvider::class,
     )
 
+    factory<QuiziApiConfig> {
+        QuiziApiConfig(
+            baseUrl = BuildConfig.QUIZI_API_BASE_URL,
+        )
+    }
+
     // Data layer provision
     includes(
-        AddContentModule
+        AddContentDataModule
     )
 
     // UI feature provision

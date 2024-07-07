@@ -32,24 +32,21 @@ import quizi.ui.add_content.generated.resources.title_select_content
 
 @Composable
 internal fun ChooseContentScreen(
-    modifier: Modifier = Modifier,
     viewModel: AddContentSharedViewModel = koinInject(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     ChooseContentScreen(
-        modifier = modifier,
         viewModel::onEvent,
     )
 }
 
 @Composable
 private fun ChooseContentScreen(
-    modifier: Modifier,
     onEvent: (AddContentSharedEvent) -> Unit,
 ) {
     Column(
         verticalArrangement = Arrangement.SpaceBetween,
-        modifier = modifier
+        modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
             .padding(16.dp),

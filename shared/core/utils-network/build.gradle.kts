@@ -1,16 +1,16 @@
 plugins {
     id("app.library.kotlin.multiplatform")
+    id("app.koin.compose.multiplatform")
+    alias(libs.plugins.kotlinxSerialization)
 }
 
 kotlin {
     sourceSets {
         commonMain.dependencies {
             // put your Multiplatform dependencies here
-            implementation(libs.kotlinx.serialization.json)
-            implementation(project.dependencies.platform(libs.koin.bom))
-            api(libs.koin.core)
-            implementation(project.dependencies.platform(libs.ktor.bom))
-            // implementation(libs.ktor.core)
+            api(project.dependencies.platform(libs.ktor.bom))
+            api(libs.bundles.ktor.multiplatform)
+            api(projects.shared.core.utilsLoading)
         }
 
         androidMain.dependencies {
@@ -25,7 +25,7 @@ kotlin {
             implementation(libs.ktor.client.java)
         }
 
-        jsMain.dependencies {
+        wasmJsMain.dependencies {
             implementation(libs.ktor.client.js)
         }
     }
