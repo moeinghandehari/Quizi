@@ -7,10 +7,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import de.tuhh.quizi.ui.core.Screen
 import de.tuhh.quizi.ui.core.components.card.BigTextCard
 import de.tuhh.quizi.ui.core.components.list.OptionsList
 import de.tuhh.quizi.ui.core.state.ButtonOption
@@ -25,20 +28,20 @@ import quizi.ui.home.generated.resources.title_home_function_choice
 @Composable
 internal fun HomeScreen(
     viewModel: HomeViewModel = koinInject()
-) {
+) = Screen { windowInsets ->
     Column(
-        verticalArrangement = Arrangement.SpaceBetween,
+        verticalArrangement = Arrangement.SpaceAround,
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
+            .windowInsetsPadding(windowInsets)
             .padding(16.dp),
     ) {
         BigTextCard(
             text = Res.string.title_home_function_choice,
             modifier = Modifier
-                .weight(1f),
+                .height(200.dp),
         )
-        Spacer(Modifier.weight(1f))
         OptionsList(
             options = listOf(
                 ButtonOption(

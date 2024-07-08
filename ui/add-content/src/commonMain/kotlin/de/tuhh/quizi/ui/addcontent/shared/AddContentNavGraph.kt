@@ -1,7 +1,7 @@
 package de.tuhh.quizi.ui.addcontent.shared
 
 import de.tuhh.quizi.ui.addcontent.addCourse.destination.AddCourseScreenDestination
-import de.tuhh.quizi.ui.addcontent.selectContent.destination.ChooseContentScreenDestination
+import de.tuhh.quizi.ui.addcontent.courses.destination.CoursesScreenDestination
 import de.tuhh.quizi.ui.core.navigation.spec.DestinationSpec
 import de.tuhh.quizi.ui.core.navigation.spec.NavGraphSpec
 import de.tuhh.quizi.ui.core.navigation.spec.Route
@@ -12,10 +12,10 @@ public object AddContentNavGraph : NavGraphSpec {
 
     override val route: String = "AddContent"
 
-    override val startRoute: Route = ChooseContentScreenDestination
+    override val startRoute: Route = CoursesScreenDestination
 
     override val destinationsByRoute: Map<String, DestinationSpec<*>> = listOf(
-        ChooseContentScreenDestination,
+        CoursesScreenDestination,
         AddCourseScreenDestination,
     ).associateBy { it.route }
 }
