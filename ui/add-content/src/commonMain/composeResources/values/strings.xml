@@ -2,6 +2,7 @@
 <resources>
     <string name="appbar_title">Add Content</string>
 
+    <string name="title_courses">Courses</string>
     <string name="title_select_content">Which type of content are you adding?</string>
     <string name="button_add_course">Course</string>
     <string name="button_add_topic">Topic to existing Course</string>

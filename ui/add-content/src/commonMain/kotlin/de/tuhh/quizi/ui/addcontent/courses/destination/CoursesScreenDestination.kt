@@ -3,7 +3,7 @@ package de.tuhh.quizi.ui.addcontent.courses.destination
 import androidx.annotation.RestrictTo
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavBackStackEntry
-import de.tuhh.quizi.ui.addcontent.courses.ui.CoursesScreen
+import de.tuhh.quizi.ui.addcontent.courses.CoursesScreen
 import de.tuhh.quizi.ui.core.navigation.scope.DestinationScope
 import de.tuhh.quizi.ui.core.navigation.spec.Direction
 import de.tuhh.quizi.ui.core.navigation.spec.DirectionDestinationSpec

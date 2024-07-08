@@ -97,12 +97,16 @@ class CourseDaoImpl : CourseDao {
         }
     }
 
-    override suspend fun getAllCourses(): List<String> = dbQuery {
+    override suspend fun getAllCourses(): List<Course> = dbQuery {
         Courses
-            .select(Courses.name)
+            .selectAll()
             .distinct()
             .map { row ->
-                row[Courses.name]
+                Course(
+                    id = row[Courses.id].value,
+                    name = row[Courses.name],
+                    topics = emptyList()
+                )
             }
     }
 

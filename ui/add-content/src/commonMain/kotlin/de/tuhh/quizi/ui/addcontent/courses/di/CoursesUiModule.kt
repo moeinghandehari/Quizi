@@ -6,7 +6,7 @@ import org.koin.dsl.module
 
 val CoursesUiModule = module {
     single<CoursesViewModel> {
-        CoursesViewModel(get(), get())
+        CoursesViewModel(get(), get(), get())
     }
 
     includes(AddContentFunctionalityModule)
