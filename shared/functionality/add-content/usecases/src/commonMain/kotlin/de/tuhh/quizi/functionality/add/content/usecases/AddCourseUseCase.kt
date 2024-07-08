@@ -1,10 +1,10 @@
 package de.tuhh.quizi.functionality.add.content.usecases
 
 import de.tuhh.quizi.functionality.add.content.abstractions.AddContentRepository
-import de.tuhh.quizi.functionality.add.content.entities.NewCourse
+import de.tuhh.quizi.functionality.add.content.entities.Course
 
 class AddCourseUseCase(
     private val addCourseRepository: AddContentRepository
 ) {
-    operator fun invoke(newCourse: NewCourse) = addCourseRepository.addCourse(newCourse)
+    operator fun invoke(course: Course) = addCourseRepository.addCourse(course)
 }
