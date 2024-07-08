@@ -20,7 +20,7 @@ class QuizRepositoryImpl(
     override suspend fun getCourseById(courseId: Int): Course? =
         courseDao.getCourseById(courseId)
 
-    override suspend fun getAllCourses(): List<String> = courseDao.getAllCourses()
+    override suspend fun getAllCourses(): List<Course> = courseDao.getAllCourses()
 
     override suspend fun updateCourse(course: Course): Course {
         TODO("Not yet implemented")

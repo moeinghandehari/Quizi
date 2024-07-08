@@ -17,7 +17,7 @@ class QuizControllerImpl(private val quizRepository: QuizRepository) : QuizContr
     override suspend fun getCourseById(courseId: Int): Course? =
         quizRepository.getCourseById(courseId)
 
-    override suspend fun getAllCourses(): List<String> =
+    override suspend fun getAllCourses(): List<Course> =
         quizRepository.getAllCourses()
 
     //    suspend fun updateCourse(course: Course): Course {

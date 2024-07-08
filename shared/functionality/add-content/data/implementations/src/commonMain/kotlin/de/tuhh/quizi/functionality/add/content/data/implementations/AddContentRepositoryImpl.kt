@@ -10,6 +10,9 @@ internal class AddContentRepositoryImpl(
     private val addContentRemoteDataSource: AddContentRemoteDataSource,
 ) : AddContentRepository {
 
+    override fun getCourses(): Flow<LoadingEvent<List<Course>>> =
+        addContentRemoteDataSource.getCourses()
+
     override fun addCourse(course: Course): Flow<LoadingEvent<Course>> =
         addContentRemoteDataSource.addCourse(course)
 }

@@ -2,25 +2,24 @@ package de.tuhh.quizi.ui.addcontent.courses.state
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import de.tuhh.quizi.functionality.add.content.entities.Course
+import de.tuhh.quizi.core.utils.loading.LoadingEvent
 import de.tuhh.quizi.functionality.add.content.usecases.AddCourseUseCase
+import de.tuhh.quizi.functionality.add.content.usecases.GetCoursesUseCase
 import de.tuhh.quizi.ui.addcontent.addCourse.model.AddCourseForm
 import de.tuhh.quizi.ui.addcontent.addCourse.model.toCourse
-import de.tuhh.quizi.ui.core.loading.submit.SubmitLoadingState
 import de.tuhh.quizi.ui.core.loading.submit.submittable
 import de.tuhh.quizi.ui.core.navigation.AppNavigator
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.update
 
 @Suppress("UnusedPrivateProperty")
 class CoursesViewModel(
     // private val savedStateHandle: SavedStateHandle,
     private val navigator: AppNavigator,
+    private val getCoursesUseCase: GetCoursesUseCase,
     private val addCourseUseCase: AddCourseUseCase,
 ) : ViewModel() {
 
@@ -30,34 +29,33 @@ class CoursesViewModel(
         addCourseUseCase.invoke(it.toCourse())
     }
 
-    internal val screenState: StateFlow<AddContentScreenState> = combine(
+    internal val screenState: StateFlow<CoursesScreenState> = combine(
         newCourseSubmit.flow,
-        flowOf(1),
-    ) { newCourse, _ ->
-        when (newCourse) {
-            is SubmitLoadingState.Error -> AddContentScreenState.Initial.Error(newCourse.reason)
-            is SubmitLoadingState.Success -> AddContentScreenState.Data(
+        getCoursesUseCase(),
+    ) { _, getCoursesState ->
+        when (getCoursesState) {
+            is LoadingEvent.Loading -> CoursesScreenState.Initial.Loading
+            is LoadingEvent.Error -> CoursesScreenState.Initial.Error(getCoursesState.reason)
+            is LoadingEvent.Success -> CoursesScreenState.Data(
                 error = null,
-                content = Course("")
+                courses = getCoursesState.data
             )
-            else -> AddContentScreenState.Initial.Loading
         }
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.Lazily,
-        initialValue = AddContentScreenState.Initial.Loading,
+        initialValue = CoursesScreenState.Initial.Loading,
     )
 
     internal fun onEvent(event: CoursesEvent) {
         when (event) {
-//            CoursesEvent.BackClicked -> navigator.navigateUp()
-            CoursesEvent.BackClicked -> {
-                addCourseForm.update {
-                    it.copy(courseName = "test")
-                }
-                newCourseSubmit.submit()
-            }
-
+            CoursesEvent.BackClicked -> navigator.navigateUp()
+//            CoursesEvent.BackClicked -> {
+//                addCourseForm.update {
+//                    it.copy(courseName = "test")
+//                }
+//                newCourseSubmit.submit()
+//            }
         }
     }
 

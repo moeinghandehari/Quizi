@@ -17,6 +17,6 @@ internal data class AddCourseForm(
     }
 }
 
-internal fun AddCourseForm.toCourse() = Course(this.courseName)
+internal fun AddCourseForm.toCourse() = Course(-1,this.courseName)
 
 internal fun MutableStateFlow<AddCourseForm>.reset() = tryEmit(AddCourseForm.EMPTY)

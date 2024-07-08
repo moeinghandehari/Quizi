@@ -1,11 +1,11 @@
 package de.tuhh.quizi.ui.addcontent.courses.state
 
 import de.tuhh.quizi.core.utils.loading.ErrorReason
-import de.tuhh.quizi.functionality.add.content.entities.NewContent
+import de.tuhh.quizi.functionality.add.content.entities.Course
 
-internal sealed interface AddContentScreenState {
+internal sealed interface CoursesScreenState {
 
-    sealed interface Initial : AddContentScreenState {
+    sealed interface Initial : CoursesScreenState {
         data object Loading : Initial
 
         data class Error(
@@ -15,13 +15,13 @@ internal sealed interface AddContentScreenState {
 
     data class Data(
         val error: ErrorReason?,
-        val content: NewContent,
-    ) : AddContentScreenState
+        val courses: List<Course>,
+    ) : CoursesScreenState
 }
 
-internal val AddContentScreenState.errorOrNull
+internal val CoursesScreenState.errorOrNull
     get() = when (this) {
-        is AddContentScreenState.Data -> error
-        is AddContentScreenState.Initial.Error -> reason
-        is AddContentScreenState.Initial.Loading -> null
+        is CoursesScreenState.Data -> error
+        is CoursesScreenState.Initial.Error -> reason
+        is CoursesScreenState.Initial.Loading -> null
     }
