@@ -19,9 +19,9 @@ import de.tuhh.quizi.ui.AppBottomNavigation
 import de.tuhh.quizi.ui.addcontent.shared.AddContentNavGraph
 import de.tuhh.quizi.ui.animation.SlideInOutDefault
 import de.tuhh.quizi.ui.core.extensions.None
+import de.tuhh.quizi.ui.core.navigation.DestinationsNavHost
 import de.tuhh.quizi.ui.core.navigation.navigation.navigate
 import de.tuhh.quizi.ui.core.navigation.navigation.popUpTo
-import de.tuhh.quizi.ui.core.navigation.DestinationsNavHost
 import de.tuhh.quizi.ui.core.navigation.rememberNavHostEngine
 import de.tuhh.quizi.ui.core.navigation.spec.DestinationSpec
 import de.tuhh.quizi.ui.core.navigation.spec.DestinationStyle

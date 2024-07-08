@@ -1,3 +1,5 @@
+@file:Suppress("UNCHECKED_CAST")
+
 package de.tuhh.quizi.core.utils.loading
 
 import kotlinx.coroutines.flow.Flow

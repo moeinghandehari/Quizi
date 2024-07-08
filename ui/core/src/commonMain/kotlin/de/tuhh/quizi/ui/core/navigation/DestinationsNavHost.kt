@@ -5,7 +5,6 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
 import de.tuhh.quizi.ui.core.navigation.manualcomposablecalls.ManualComposableCalls
 import de.tuhh.quizi.ui.core.navigation.manualcomposablecalls.ManualComposableCallsBuilder
 import de.tuhh.quizi.ui.core.navigation.navigation.DependenciesContainerBuilder

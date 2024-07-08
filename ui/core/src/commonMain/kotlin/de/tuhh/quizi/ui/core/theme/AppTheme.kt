@@ -184,6 +184,13 @@ private fun debugMaterialColorScheme(
     outline = debugColor,
     outlineVariant = debugColor,
     scrim = debugColor,
+    surfaceBright = debugColor,
+    surfaceDim = debugColor,
+    surfaceContainer = debugColor,
+    surfaceContainerHigh = debugColor,
+    surfaceContainerHighest = debugColor,
+    surfaceContainerLow = debugColor,
+    surfaceContainerLowest = debugColor,
 )
 
 /**

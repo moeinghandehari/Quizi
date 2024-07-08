@@ -3,7 +3,6 @@ package plugins.config
 import AppBuildConfig
 import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.aggregateTestCoverage
 
 internal fun Project.configureFlavors(
     commonExtension: CommonExtension<*, *, *, *, *, *>,
@@ -14,7 +13,7 @@ internal fun Project.configureFlavors(
             productFlavors {
                 dimension.productFlavors.forEach { flavor ->
                     create(flavor.name) {
-                        aggregateTestCoverage.set(flavor.aggregateTestCoverage)
+                        // aggregateTestCoverage.set(flavor.aggregateTestCoverage)
                     }
                 }
             }

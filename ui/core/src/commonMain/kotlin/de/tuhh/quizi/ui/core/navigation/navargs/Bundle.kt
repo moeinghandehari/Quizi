@@ -121,7 +121,7 @@ class Bundle {
         setObject(key, value)
     }
 
-    private inline fun setObject(key: String?, value: Any?) {
+    private fun setObject(key: String?, value: Any?) {
         mMap[key] = value
     }
 
