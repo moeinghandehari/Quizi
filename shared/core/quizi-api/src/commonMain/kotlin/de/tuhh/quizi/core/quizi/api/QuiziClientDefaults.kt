@@ -10,7 +10,7 @@ internal fun DefaultRequest.DefaultRequestBuilder.addDefaults(
     buildInfo: BuildInfo,
 ) {
     contentType(ContentType.Application.Json)
-    url(baseUrl)
+    url(scheme = "http", host = baseUrl, port = 8080)
     addHeaders(
         buildInfo.appVersionName,
         buildInfo.appVersionCode,
