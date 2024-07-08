@@ -21,6 +21,7 @@ internal fun Project.configureKotlinMultiplatform() {
 
         @OptIn(ExperimentalWasmDsl::class)
         wasmJs {
+            moduleName = project.name
             browser {
                 commonWebpackConfig {
                     outputFileName = "composeApp.js"
@@ -52,6 +53,7 @@ internal fun Project.configureKotlinMultiplatform() {
         ).forEach { iosTarget ->
             iosTarget.binaries.framework {
                 baseName = "ComposeApp"
+                binaryOption("bundleId", project.name)
                 isStatic = true
             }
         }

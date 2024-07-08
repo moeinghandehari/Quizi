@@ -2,7 +2,6 @@ package de.tuhh.quizi.ui.addcontent.shared.state
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import de.tuhh.quizi.functionality.add.content.usecases.AddCourseUseCase
 import de.tuhh.quizi.ui.addcontent.shared.state.AddContentSharedEvent.ChooseContentEvent
 import de.tuhh.quizi.ui.addcontent.shared.state.AddContentSharedEvent.ChooseContentEvent.ToAddCourseClicked
 import de.tuhh.quizi.ui.core.navigation.AppNavigator
@@ -15,7 +14,7 @@ import kotlinx.coroutines.flow.stateIn
 class AddContentSharedViewModel(
     // private val savedStateHandle: SavedStateHandle,
     private val navigator: AppNavigator,
-    private val addCourseUseCase: AddCourseUseCase,
+    // private val addCourseUseCase: AddCourseUseCase,
 ) : ViewModel() {
     val state = flowOf { }.stateIn(
         scope = viewModelScope,

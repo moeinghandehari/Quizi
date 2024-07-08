@@ -24,7 +24,6 @@ import de.tuhh.quizi.ui.core.navigation.spec.NavGraphSpec
 import de.tuhh.quizi.ui.core.navigation.spec.NavHostEngine
 import de.tuhh.quizi.ui.core.navigation.spec.Route
 import de.tuhh.quizi.ui.core.navigation.spec.addActivityDestination
-import kotlin.reflect.KClass
 
 /**
  * Returns the default [NavHostEngine] to be used with [DestinationsNavHost]

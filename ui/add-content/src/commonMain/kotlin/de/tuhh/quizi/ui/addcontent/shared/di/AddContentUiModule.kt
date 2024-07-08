@@ -10,7 +10,7 @@ val AddContentUiModule = module {
     }*/
 
     single<AddContentSharedViewModel> {
-        AddContentSharedViewModel(get(), get())
+        AddContentSharedViewModel(get())
     }
 
     includes(AddContentFunctionalityModule)

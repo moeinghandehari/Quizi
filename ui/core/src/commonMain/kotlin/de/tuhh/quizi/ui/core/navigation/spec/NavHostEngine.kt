@@ -9,7 +9,6 @@ import androidx.navigation.Navigator
 import de.tuhh.quizi.ui.core.navigation.DestinationsNavHost
 import de.tuhh.quizi.ui.core.navigation.manualcomposablecalls.ManualComposableCalls
 import de.tuhh.quizi.ui.core.navigation.navigation.DependenciesContainerBuilder
-import kotlin.reflect.KClass
 
 /**
  * Abstraction over all needed functionality to call a "NavHost-like" composable

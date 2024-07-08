@@ -12,6 +12,12 @@ kotlin {
             implementation(projects.shared.core.utilsDeviceInfo)
             api(projects.shared.core.utilsNetwork)
         }
+
+        // Workaround for https://youtrack.jetbrains.com/issue/KT-66159/
+        // Also copy the generated skiko.mjs to the packages which cause error
+        wasmJsMain.dependencies {
+            implementation(npm("aaa-kilua-assets", "0.0.7"))
+        }
     }
 }
 

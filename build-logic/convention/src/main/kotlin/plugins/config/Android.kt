@@ -1,7 +1,6 @@
 package plugins.config
 
 import AppBuildConfig
-import Identifiers
 import com.android.build.api.dsl.ApplicationBaseFlavor
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.CommonExtension
@@ -9,7 +8,6 @@ import com.android.build.api.variant.AndroidComponentsExtension
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import com.android.build.api.variant.LibraryAndroidComponentsExtension
 import com.android.build.gradle.LibraryExtension
-import extensions.param
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.get
@@ -60,54 +58,6 @@ internal fun Project.configureAndroidApplication() {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
             )
-        }
-
-        signingConfigs {
-            getByName(Identifiers.SigningConfigs.DEBUG) {
-                storeFile = rootProject.file("config/signing/debug.keystore")
-            }
-            create(Identifiers.SigningConfigs.RELEASE) {
-                storeFile =
-                    file(
-                        param(Identifiers.Params.SIGNING_KEYSTORE_PATH)?.takeUnless { it.isEmpty() }
-                            ?: "notSet"
-                    )
-                storePassword =
-                    param(Identifiers.Params.SIGNING_KEYSTORE_PASSWORD)?.takeUnless { it.isEmpty() }
-                        ?: "notSet"
-                keyAlias = param(Identifiers.Params.SIGNING_KEY_ALIAS)?.takeUnless { it.isEmpty() }
-                    ?: "notSet"
-                keyPassword =
-                    param(Identifiers.Params.SIGNING_KEY_PASSWORD)?.takeUnless { it.isEmpty() }
-                        ?: "notSet"
-            }
-        }
-
-        buildTypes {
-            getByName(Identifiers.BuildTypes.DEBUG) {
-                signingConfig = signingConfigs.getByName(Identifiers.SigningConfigs.DEBUG)
-                applicationIdSuffix = ".debug"
-                // For debuggable builds, minification is limited by AGP and will not obfuscate names
-                isMinifyEnabled = param(Identifiers.Params.IS_MINIFY_ENABLED)?.toBoolean() ?: false
-                isDebuggable = true
-
-                buildConfigField(
-                    "String",
-                    "QUIZI_API_BASE_URL",
-                    "\"${AppBuildConfig.quiziApiBuildConfig.baseUrlDev}\"",
-                )
-            }
-            getByName(Identifiers.BuildTypes.RELEASE) {
-                signingConfig = signingConfigs.getByName(Identifiers.SigningConfigs.RELEASE)
-                isMinifyEnabled = param(Identifiers.Params.IS_MINIFY_ENABLED)?.toBoolean() ?: true
-                isDebuggable = false
-
-                buildConfigField(
-                    "String",
-                    "QUIZI_API_BASE_URL",
-                    "\"${AppBuildConfig.quiziApiBuildConfig.baseUrlDev}\"",
-                )
-            }
         }
 
         val androidComponentsExtension =
