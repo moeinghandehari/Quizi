@@ -2,7 +2,7 @@ package de.tuhh.quizi.ui.addcontent.courses.state
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import de.tuhh.quizi.functionality.add.content.entities.NewCourse
+import de.tuhh.quizi.functionality.add.content.entities.Course
 import de.tuhh.quizi.functionality.add.content.usecases.AddCourseUseCase
 import de.tuhh.quizi.ui.addcontent.addCourse.model.AddCourseForm
 import de.tuhh.quizi.ui.addcontent.addCourse.model.toCourse
@@ -38,7 +38,7 @@ class CoursesViewModel(
             is SubmitLoadingState.Error -> AddContentScreenState.Initial.Error(newCourse.reason)
             is SubmitLoadingState.Success -> AddContentScreenState.Data(
                 error = null,
-                content = NewCourse("")
+                content = Course("")
             )
             else -> AddContentScreenState.Initial.Loading
         }
