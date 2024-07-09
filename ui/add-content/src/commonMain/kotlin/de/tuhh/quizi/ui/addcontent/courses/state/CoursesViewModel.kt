@@ -5,8 +5,9 @@ import androidx.lifecycle.viewModelScope
 import de.tuhh.quizi.core.utils.loading.LoadingEvent
 import de.tuhh.quizi.functionality.add.content.usecases.AddCourseUseCase
 import de.tuhh.quizi.functionality.add.content.usecases.GetCoursesUseCase
-import de.tuhh.quizi.ui.addcontent.addCourse.model.AddCourseForm
-import de.tuhh.quizi.ui.addcontent.addCourse.model.toNewCourse
+import de.tuhh.quizi.ui.addcontent.courses.model.AddCourseForm
+import de.tuhh.quizi.ui.addcontent.courses.model.toNewCourse
+import de.tuhh.quizi.ui.addcontent.topics.destination.TopicsScreenDestination
 import de.tuhh.quizi.ui.core.loading.submit.submittable
 import de.tuhh.quizi.ui.core.navigation.AppNavigator
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,9 +17,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 
-@Suppress("UnusedPrivateProperty")
 class CoursesViewModel(
-    // private val savedStateHandle: SavedStateHandle,
     private val navigator: AppNavigator,
     private val getCoursesUseCase: GetCoursesUseCase,
     private val addCourseUseCase: AddCourseUseCase,
@@ -60,10 +59,15 @@ class CoursesViewModel(
                 }
                 newCourseSubmit.submit()
             }
+
+            is CoursesEvent.OnCourseClicked ->
+                navigator.navigateTo(TopicsScreenDestination.route)
+ /*               navigator.navigateTo(
+                    NavTarget.AddContentTarget.AddTopic(
+                        courseId = event.course.id,
+                        courseName = event.course.courseName,
+                    )
+                )*/
         }
     }
-
-//    companion object {
-//        private const val KEY_NEW_COURSE = "newCourse"
-//    }
 }

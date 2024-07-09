@@ -1,6 +1,6 @@
 @file:Suppress("MagicNumber")
 
-package de.tuhh.quizi.ui.addcontent.courses.ui.component
+package de.tuhh.quizi.ui.addcontent.topics.ui.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -19,11 +19,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import de.tuhh.quizi.functionality.add.content.entities.Course
+import de.tuhh.quizi.functionality.add.content.entities.Topic
 import de.tuhh.quizi.ui.core.theme.AppTheme
 
 @Composable
-fun CourseCard(
+fun TopicCard(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -66,12 +66,12 @@ fun CourseCard(
     )
 }
 
-internal fun LazyListScope.courseItem(
-    course: Course,
+internal fun LazyListScope.topicItem(
+    topic: Topic,
     onItemClick: () -> Unit
 ) = item {
-    CourseCard(
-        text = course.courseName,
+    TopicCard(
+        text = topic.name,
         onClick = onItemClick,
     )
 }

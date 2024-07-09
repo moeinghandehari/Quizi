@@ -1,5 +1,3 @@
-@file:Suppress("MagicNumber")
-
 package de.tuhh.quizi.ui.home
 
 import androidx.compose.foundation.layout.Arrangement
@@ -16,6 +14,7 @@ import de.tuhh.quizi.ui.core.Screen
 import de.tuhh.quizi.ui.core.components.card.BigTextCard
 import de.tuhh.quizi.ui.core.components.list.OptionsList
 import de.tuhh.quizi.ui.core.state.ButtonOption
+import de.tuhh.quizi.ui.core.theme.AppTheme
 import de.tuhh.quizi.ui.home.state.HomeScreenEvent
 import de.tuhh.quizi.ui.home.state.HomeViewModel
 import org.koin.compose.koinInject
@@ -29,7 +28,7 @@ internal fun HomeScreen(
     viewModel: HomeViewModel = koinInject()
 ) = Screen { windowInsets ->
     Column(
-        verticalArrangement = Arrangement.SpaceAround,
+        verticalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
@@ -39,7 +38,8 @@ internal fun HomeScreen(
         BigTextCard(
             text = Res.string.title_home_function_choice,
             modifier = Modifier
-                .height(200.dp),
+                .height(200.dp)
+                .padding(top = AppTheme.dimensions.padding.xl),
         )
         OptionsList(
             options = listOf(
@@ -54,7 +54,7 @@ internal fun HomeScreen(
             ),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 32.dp),
+                .padding(bottom = AppTheme.dimensions.padding.threeXxl),
         )
     }
 }

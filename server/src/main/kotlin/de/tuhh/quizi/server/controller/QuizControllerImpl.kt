@@ -1,5 +1,6 @@
 package de.tuhh.quizi.server.controller
 
+import de.tuhh.quizi.server.data.model.AbstractTopic
 import de.tuhh.quizi.server.data.model.Course
 import de.tuhh.quizi.server.data.model.Question
 import de.tuhh.quizi.server.data.model.QuestionType
@@ -34,12 +35,12 @@ class QuizControllerImpl(private val quizRepository: QuizRepository) : QuizContr
     override suspend fun getTopicById(topicId: Int): Topic? =
         quizRepository.getTopicById(topicId)
 
-    //
-//    suspend fun getAllTopicsByCourseId(courseId: Int): List<Topic> {
-//        return quizRepository.getAllTopicsByCourseId(courseId)
-//    }
-//
-//    suspend fun updateTopic(topicId: Int, topic: Topic): Topic {
+
+    override suspend fun getAllTopicsByCourseId(courseId: Int): List<AbstractTopic> {
+        return quizRepository.getAllTopicsByCourseId(courseId)
+    }
+
+    //    suspend fun updateTopic(topicId: Int, topic: Topic): Topic {
 //        return quizRepository.updateTopic(topicId, topic)
 //    }
 //

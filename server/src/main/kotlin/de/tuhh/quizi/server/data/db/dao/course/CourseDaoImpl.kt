@@ -2,6 +2,7 @@ package de.tuhh.quizi.server.data.db.dao.course
 
 import de.tuhh.quizi.server.data.db.DatabaseSingleton.dbQuery
 import de.tuhh.quizi.server.data.db.dao.question.Questions
+import de.tuhh.quizi.server.data.model.AbstractTopic
 import de.tuhh.quizi.server.data.model.Course
 import de.tuhh.quizi.server.data.model.MultipleChoiceQuestion
 import de.tuhh.quizi.server.data.model.Question
@@ -127,6 +128,13 @@ class CourseDaoImpl : CourseDao {
         )
     }
 
+    private fun resultRowToAbstractTopic(row: ResultRow): AbstractTopic {
+        return AbstractTopic(
+            id = row[Topics.id].value,
+            name = row[Topics.name],
+        )
+    }
+
     override suspend fun addTopic(courseId: Int, topicName: String): Topic = dbQuery {
         val insertStatement = Topics.insert {
             it[this.courseId] = courseId
@@ -147,9 +155,9 @@ class CourseDaoImpl : CourseDao {
             .firstOrNull()
     }
 
-    override suspend fun getTopicsByCourseId(courseId: Int): List<Topic> = dbQuery {
+    override suspend fun getTopicsByCourseId(courseId: Int): List<AbstractTopic> = dbQuery {
         Topics
             .selectAll().where { Topics.courseId eq courseId }
-            .map(::resultRowToTopic)
+            .map(::resultRowToAbstractTopic)
     }
 }
