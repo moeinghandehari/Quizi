@@ -5,9 +5,7 @@ import de.tuhh.quizi.ui.addcontent.courses.state.CoursesViewModel
 import org.koin.dsl.module
 
 val CoursesUiModule = module {
-    factory<CoursesViewModel> {
-        CoursesViewModel(get(), get(), get())
-    }
+    factory<CoursesViewModel> { CoursesViewModel(get(), get(), get()) }
 
     includes(AddContentFunctionalityModule)
 }

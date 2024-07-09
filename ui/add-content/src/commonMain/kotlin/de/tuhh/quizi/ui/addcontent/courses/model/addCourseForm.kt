@@ -1,4 +1,4 @@
-package de.tuhh.quizi.ui.addcontent.addCourse.model
+package de.tuhh.quizi.ui.addcontent.courses.model
 
 import de.tuhh.quizi.core.utils.validation.Validator
 import de.tuhh.quizi.functionality.add.content.entities.NewCourse

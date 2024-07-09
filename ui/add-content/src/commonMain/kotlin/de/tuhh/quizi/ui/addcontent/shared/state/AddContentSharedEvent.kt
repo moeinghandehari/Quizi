@@ -8,12 +8,6 @@ internal sealed interface AddContentSharedEvent {
         data object CloseClicked : AddCourseEvent
     }
 
-    sealed interface ChooseContentEvent : AddContentSharedEvent {
-        data object ToAddCourseClicked : ChooseContentEvent
-        data object ToAddTopicClicked : ChooseContentEvent
-        data object ToAddQuestionClicked : ChooseContentEvent
-    }
-
     sealed interface OnValueChange : AddContentSharedEvent {
         data class ContentType(val input: String) : OnValueChange
     }

@@ -4,6 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Topic(
+    val topicId: Int,
     val name: String,
-    val courseId: Int,
-) : NewContent
+)

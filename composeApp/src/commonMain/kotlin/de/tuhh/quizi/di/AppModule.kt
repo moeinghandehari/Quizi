@@ -7,6 +7,7 @@ import de.tuhh.quizi.navigation.AppNavigatorImpl
 import de.tuhh.quizi.navigation.NavEventProvider
 import de.tuhh.quizi.ui.addcontent.courses.di.CoursesUiModule
 import de.tuhh.quizi.ui.addcontent.shared.di.AddContentUiModule
+import de.tuhh.quizi.ui.addcontent.topics.di.TopicsUiModule
 import de.tuhh.quizi.ui.core.navigation.AppNavigator
 import de.tuhh.quizi.ui.home.di.HomeUiModule
 import de.tuhh.quizi.ui.quiz.di.QuizUiModule
@@ -44,6 +45,7 @@ val appModule = module {
     includes(
         AddContentUiModule,
         CoursesUiModule,
+        TopicsUiModule,
         HomeUiModule,
         QuizUiModule,
     )

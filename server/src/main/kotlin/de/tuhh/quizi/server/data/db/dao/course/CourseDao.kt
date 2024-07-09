@@ -1,5 +1,6 @@
 package de.tuhh.quizi.server.data.db.dao.course
 
+import de.tuhh.quizi.server.data.model.AbstractTopic
 import de.tuhh.quizi.server.data.model.Course
 import de.tuhh.quizi.server.data.model.Topic
 
@@ -12,5 +13,5 @@ interface CourseDao {
 
     suspend fun addTopic(courseId: Int, topicName: String): Topic
     suspend fun getTopicById(topicId: Int): Topic?
-    suspend fun getTopicsByCourseId(courseId: Int): List<Topic>
+    suspend fun getTopicsByCourseId(courseId: Int): List<AbstractTopic>
 }

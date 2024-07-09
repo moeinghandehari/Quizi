@@ -1,4 +1,4 @@
-package de.tuhh.quizi.ui.addcontent.courses
+package de.tuhh.quizi.ui.addcontent.topics.ui
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -30,13 +30,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import de.tuhh.quizi.functionality.add.content.entities.NewCourse
-import de.tuhh.quizi.ui.addcontent.courses.state.CoursesEvent
-import de.tuhh.quizi.ui.addcontent.courses.state.CoursesScreenState
-import de.tuhh.quizi.ui.addcontent.courses.state.CoursesViewModel
-import de.tuhh.quizi.ui.addcontent.courses.state.errorOrNull
-import de.tuhh.quizi.ui.addcontent.courses.ui.component.AddCourseCodeBottomSheet
-import de.tuhh.quizi.ui.addcontent.courses.ui.component.courseItem
+import de.tuhh.quizi.functionality.add.content.entities.Course
+import de.tuhh.quizi.functionality.add.content.entities.NewTopic
+import de.tuhh.quizi.ui.addcontent.topics.state.TopicsEvent
+import de.tuhh.quizi.ui.addcontent.topics.state.TopicsScreenState
+import de.tuhh.quizi.ui.addcontent.topics.state.TopicsViewModel
+import de.tuhh.quizi.ui.addcontent.topics.state.errorOrNull
+import de.tuhh.quizi.ui.addcontent.topics.ui.component.AddTopicBottomSheet
+import de.tuhh.quizi.ui.addcontent.topics.ui.component.topicItem
 import de.tuhh.quizi.ui.core.Screen
 import de.tuhh.quizi.ui.core.components.AppTopAppBar
 import de.tuhh.quizi.ui.core.components.AppTopAppBarDefaults
@@ -44,17 +45,17 @@ import de.tuhh.quizi.ui.core.components.button.CircularIconButton
 import de.tuhh.quizi.ui.core.extensions.plus
 import de.tuhh.quizi.ui.core.rememberErrorState
 import de.tuhh.quizi.ui.core.theme.AppTheme
-import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
-import quizi.ui.add_content.generated.resources.Res
-import quizi.ui.add_content.generated.resources.title_courses
+import org.koin.core.parameter.parametersOf
 
 @Composable
-internal fun CoursesScreen(
-    viewModel: CoursesViewModel = koinInject(),
+internal fun TopicsScreen(
+    course: Course,
+    viewModel: TopicsViewModel = koinInject(parameters = { parametersOf(course) }),
 ) {
     val state by viewModel.screenState.collectAsStateWithLifecycle()
-    CoursesScreen(
+    TopicsScreen(
+        course = course,
         state = state,
         onEvent = viewModel::onEvent,
     )
@@ -62,16 +63,19 @@ internal fun CoursesScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun CoursesScreen(
-    state: CoursesScreenState,
-    onEvent: (CoursesEvent) -> Unit,
+private fun TopicsScreen(
+    course: Course,
+    state: TopicsScreenState,
+    onEvent: (TopicsEvent) -> Unit,
 ) = Screen(
     consumableErrorState = rememberErrorState(error = state.errorOrNull),
     topBar = {
         AppTopAppBar(
-            title = stringResource(Res.string.title_courses),
+            title = "Topics of ${course.courseName}",
             navigationIcon = {
-                AppTopAppBarDefaults.UpIconButton(onClick = { onEvent.invoke(CoursesEvent.BackClicked) })
+                AppTopAppBarDefaults.UpIconButton(
+                    onClick = { onEvent.invoke(TopicsEvent.BackClicked) }
+                )
             },
         )
     },
@@ -84,18 +88,18 @@ private fun CoursesScreen(
             .padding(AppTheme.dimensions.padding.l),
     ) {
         when (state) {
-            is CoursesScreenState.Initial.Loading -> {
+            is TopicsScreenState.Initial.Loading -> {
                 CircularProgressIndicator(
                     modifier = Modifier
                         .align(alignment = Alignment.Center)
                 )
             }
 
-            is CoursesScreenState.Initial.Error -> {}
+            is TopicsScreenState.Initial.Error -> {}
 
-            is CoursesScreenState.Data -> {
+            is TopicsScreenState.Data -> {
                 val keyboardController = LocalSoftwareKeyboardController.current
-                var isAddCourseBottomSheetVisible by rememberSaveable {
+                var isAddTopicBottomSheetVisible by rememberSaveable {
                     mutableStateOf(false)
                 }
 
@@ -115,8 +119,11 @@ private fun CoursesScreen(
                             .plus(PaddingValues(bottom = AppTheme.dimensions.padding.m))
                             .plus(windowInsets.asPaddingValues()),
                     ) {
-                        state.courses.forEach {
-                            courseItem(it)
+                        state.topics.forEach {
+                            topicItem(
+                                it,
+                                onItemClick = { onEvent.invoke(TopicsEvent.OnTopicClicked(it.topicId)) },
+                            )
                             item {
                                 Spacer(modifier = Modifier.height(AppTheme.dimensions.space.s))
                             }
@@ -126,14 +133,14 @@ private fun CoursesScreen(
                         modifier = Modifier
                             .padding(AppTheme.dimensions.padding.deviceContent)
                             .align(Alignment.BottomEnd),
-                        onClick = { isAddCourseBottomSheetVisible = true },
+                        onClick = { isAddTopicBottomSheetVisible = true },
                         isEnabled = true,
                         icon = Icons.Filled.Add
                     )
 
-                    if (isAddCourseBottomSheetVisible) {
+                    if (isAddTopicBottomSheetVisible) {
                         val density = LocalDensity.current
-                        AddCourseCodeBottomSheet(
+                        AddTopicBottomSheet(
                             sheetState = remember {
                                 SheetState(
                                     skipPartiallyExpanded = true,
@@ -141,10 +148,14 @@ private fun CoursesScreen(
                                     initialValue = SheetValue.Expanded,
                                 )
                             },
-                            onDismissRequest = { isAddCourseBottomSheetVisible = false },
-                            onSaveRequest = { courseName ->
-                                isAddCourseBottomSheetVisible = false
-                                onEvent.invoke(CoursesEvent.AddNewCourse(NewCourse(courseName)))
+                            onDismissRequest = { isAddTopicBottomSheetVisible = false },
+                            onSaveRequest = { topicName ->
+                                isAddTopicBottomSheetVisible = false
+                                onEvent.invoke(
+                                    TopicsEvent.AddNewTopic(
+                                        NewTopic(courseId = course.id, name = topicName)
+                                    )
+                                )
                             },
                         )
                     }
