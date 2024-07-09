@@ -21,8 +21,8 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun CircularIconButton(
     onClick: () -> Unit,
     isEnabled: Boolean,
-    icon: ImageVector? = null,
     modifier: Modifier = Modifier,
+    icon: ImageVector? = null,
 ) {
     IconButton(
         onClick = onClick,
