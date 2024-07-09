@@ -78,7 +78,7 @@ fun Route.course() {
 
     get(path = "/topic/{courseId}") {
         val topicId = call.parameters["courseId"]
-        exposedLogger.info("Topic id: $courseId")
+        exposedLogger.info("Course id: $courseId")
         topicId.let { id ->
             if (id.isNullOrBlank()) {
                 call.respond(HttpStatusCode.BadRequest, "Topic id cannot be empty")
