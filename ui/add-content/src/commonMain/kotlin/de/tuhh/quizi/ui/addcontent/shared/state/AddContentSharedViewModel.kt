@@ -1,3 +1,5 @@
+@file:Suppress("UnusedPrivateProperty")
+
 package de.tuhh.quizi.ui.addcontent.shared.state
 
 import androidx.lifecycle.ViewModel

@@ -29,7 +29,7 @@ import quizi.ui.add_content.generated.resources.title_add_course
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddCourseCodeBottomSheet(
+fun AddCourseBottomSheet(
     onSaveRequest: (String) -> Unit,
     onDismissRequest: () -> Unit,
     modifier: Modifier = Modifier,
