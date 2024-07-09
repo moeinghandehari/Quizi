@@ -135,7 +135,7 @@ private fun CoursesScreen(
                         AddCourseCodeBottomSheet(
                             sheetState = remember {
                                 SheetState(
-                                    skipPartiallyExpanded = false,
+                                    skipPartiallyExpanded = true,
                                     density = density,
                                     initialValue = SheetValue.Expanded,
                                 )

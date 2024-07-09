@@ -25,6 +25,7 @@ fun AppBaseBottomSheet(
     modifier: Modifier = Modifier,
     sheetState: SheetState = rememberModalBottomSheetState(),
     containerColor: Color = AppTheme.colors.elevation.two,
+    windowInsets: WindowInsets = WindowInsets.None,
     content: @Composable @UiComposable ColumnScope.() -> Unit,
 ) {
     ModalBottomSheet(
@@ -35,7 +36,7 @@ fun AppBaseBottomSheet(
         containerColor = containerColor,
         scrimColor = AppTheme.colors.permanent.black.low,
         dragHandle = header,
-//        contentWindowInsets = { WindowInsets.None },
+        windowInsets = windowInsets,
         content = {
             Column(
                 modifier = Modifier

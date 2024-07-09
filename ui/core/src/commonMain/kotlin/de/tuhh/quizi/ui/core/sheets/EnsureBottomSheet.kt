@@ -3,6 +3,7 @@ package de.tuhh.quizi.ui.core.sheets
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -17,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.UiComposable
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import de.tuhh.quizi.ui.core.extensions.None
 import de.tuhh.quizi.ui.core.theme.AppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -26,6 +28,7 @@ fun EnsureBottomSheet(
     onDismissRequest: () -> Unit,
     modifier: Modifier = Modifier,
     sheetState: SheetState = rememberModalBottomSheetState(),
+    windowInsets: WindowInsets = WindowInsets.None,
     content: @Composable @UiComposable ColumnScope.() -> Unit,
 ) {
     AppBaseBottomSheet(
@@ -34,6 +37,7 @@ fun EnsureBottomSheet(
         onDismissRequest = onDismissRequest,
         containerColor = AppTheme.colors.elevation.two,
         header = { AppBottomSheetDefaults.Header.DragHandle() },
+        windowInsets = windowInsets,
         content = {
             Column(
                 modifier = Modifier
