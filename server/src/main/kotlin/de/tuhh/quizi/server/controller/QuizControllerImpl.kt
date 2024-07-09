@@ -35,7 +35,6 @@ class QuizControllerImpl(private val quizRepository: QuizRepository) : QuizContr
     override suspend fun getTopicById(topicId: Int): Topic? =
         quizRepository.getTopicById(topicId)
 
-
     override suspend fun getAllTopicsByCourseId(courseId: Int): List<AbstractTopic> {
         return quizRepository.getAllTopicsByCourseId(courseId)
     }

@@ -1,3 +1,5 @@
+@file:Suppress("MagicNumber")
+
 package de.tuhh.quizi.ui.addcontent.topics.destination
 
 import androidx.annotation.RestrictTo

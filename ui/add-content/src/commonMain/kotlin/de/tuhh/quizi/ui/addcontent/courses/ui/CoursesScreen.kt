@@ -35,7 +35,7 @@ import de.tuhh.quizi.ui.addcontent.courses.state.CoursesEvent
 import de.tuhh.quizi.ui.addcontent.courses.state.CoursesScreenState
 import de.tuhh.quizi.ui.addcontent.courses.state.CoursesViewModel
 import de.tuhh.quizi.ui.addcontent.courses.state.errorOrNull
-import de.tuhh.quizi.ui.addcontent.courses.ui.component.AddCourseCodeBottomSheet
+import de.tuhh.quizi.ui.addcontent.courses.ui.component.AddCourseBottomSheet
 import de.tuhh.quizi.ui.addcontent.courses.ui.component.courseItem
 import de.tuhh.quizi.ui.core.Screen
 import de.tuhh.quizi.ui.core.components.AppTopAppBar
@@ -138,7 +138,7 @@ private fun CoursesScreen(
 
                     if (isAddCourseBottomSheetVisible) {
                         val density = LocalDensity.current
-                        AddCourseCodeBottomSheet(
+                        AddCourseBottomSheet(
                             sheetState = remember {
                                 SheetState(
                                     skipPartiallyExpanded = true,
