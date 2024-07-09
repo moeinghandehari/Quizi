@@ -11,6 +11,7 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.unit.dp
 import de.tuhh.quizi.ui.core.theme.AppTheme
@@ -20,6 +21,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun CircularIconButton(
     onClick: () -> Unit,
     isEnabled: Boolean,
+    icon: ImageVector? = null,
     modifier: Modifier = Modifier,
 ) {
     IconButton(
@@ -42,7 +44,7 @@ fun CircularIconButton(
         ),
     ) {
         Icon(
-            painter = rememberVectorPainter(Icons.AutoMirrored.Filled.ArrowForward),
+            painter = rememberVectorPainter(icon ?: Icons.AutoMirrored.Filled.ArrowForward),
             contentDescription = null,
             tint = LocalContentColor.current,
             modifier = Modifier

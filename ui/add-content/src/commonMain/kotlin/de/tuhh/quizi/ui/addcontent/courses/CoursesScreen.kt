@@ -1,5 +1,3 @@
-@file:Suppress("MagicNumber")
-
 package de.tuhh.quizi.ui.addcontent.courses
 
 import androidx.compose.foundation.clickable
@@ -15,6 +13,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SheetState
@@ -29,7 +29,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import de.tuhh.quizi.ui.addcontent.courses.state.CoursesEvent
 import de.tuhh.quizi.ui.addcontent.courses.state.CoursesScreenState
@@ -81,7 +80,7 @@ private fun CoursesScreen(
             .fillMaxWidth()
             .fillMaxHeight()
             .windowInsetsPadding(windowInsets)
-            .padding(16.dp),
+            .padding(AppTheme.dimensions.padding.l),
     ) {
         when (state) {
             is CoursesScreenState.Initial.Loading -> {
@@ -112,13 +111,13 @@ private fun CoursesScreen(
                         modifier = Modifier
                             .fillMaxSize(),
                         contentPadding = PaddingValues(horizontal = AppTheme.dimensions.padding.deviceContent)
-                            .plus(PaddingValues(bottom = 10.dp))
+                            .plus(PaddingValues(bottom = AppTheme.dimensions.padding.m))
                             .plus(windowInsets.asPaddingValues()),
                     ) {
                         state.courses.forEach {
                             courseItem(it)
                             item {
-                                Spacer(modifier = Modifier.height(10.dp))
+                                Spacer(modifier = Modifier.height(AppTheme.dimensions.space.s))
                             }
                         }
                     }
@@ -128,6 +127,7 @@ private fun CoursesScreen(
                             .align(Alignment.BottomEnd),
                         onClick = { isAddCourseBottomSheetVisible = true },
                         isEnabled = true,
+                        icon = Icons.Filled.Add
                     )
 
                     if (isAddCourseBottomSheetVisible) {
