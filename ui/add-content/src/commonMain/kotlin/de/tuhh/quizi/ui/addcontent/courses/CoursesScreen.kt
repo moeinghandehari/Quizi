@@ -2,8 +2,9 @@
 
 package de.tuhh.quizi.ui.addcontent.courses
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.asPaddingValues
@@ -14,32 +15,38 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.SheetState
+import androidx.compose.material3.SheetValue
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import de.tuhh.quizi.ui.addcontent.courses.state.CoursesEvent
 import de.tuhh.quizi.ui.addcontent.courses.state.CoursesScreenState
 import de.tuhh.quizi.ui.addcontent.courses.state.CoursesViewModel
 import de.tuhh.quizi.ui.addcontent.courses.state.errorOrNull
+import de.tuhh.quizi.ui.addcontent.courses.ui.component.AddCourseCodeBottomSheet
 import de.tuhh.quizi.ui.addcontent.courses.ui.component.courseItem
 import de.tuhh.quizi.ui.core.Screen
 import de.tuhh.quizi.ui.core.components.AppTopAppBar
 import de.tuhh.quizi.ui.core.components.AppTopAppBarDefaults
+import de.tuhh.quizi.ui.core.components.button.CircularIconButton
 import de.tuhh.quizi.ui.core.extensions.plus
 import de.tuhh.quizi.ui.core.rememberErrorState
 import de.tuhh.quizi.ui.core.theme.AppTheme
-import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.koinInject
 import quizi.ui.add_content.generated.resources.Res
-import quizi.ui.add_content.generated.resources.title_add_course
 import quizi.ui.add_content.generated.resources.title_courses
 
 @Composable
@@ -87,19 +94,62 @@ private fun CoursesScreen(
 
             }
             is CoursesScreenState.Data -> {
-                LazyColumn(
+                val keyboardController = LocalSoftwareKeyboardController.current
+                var isAddCourseBottomSheetVisible by rememberSaveable {
+                    mutableStateOf(false)
+                }
+
+                Box(
                     modifier = Modifier
-                        .fillMaxSize(),
-                    contentPadding = PaddingValues(horizontal = AppTheme.dimensions.padding.deviceContent)
-                        .plus(PaddingValues(bottom = 10.dp))
-                        .plus(windowInsets.asPaddingValues()),
+                        .fillMaxSize()
+                        .clickable(
+                            onClick = { keyboardController?.hide() },
+                            indication = null, // This disables the click animation
+                            interactionSource = remember { MutableInteractionSource() },
+                        ),
                 ) {
-                    state.courses.forEach {
-                        courseItem(it)
-                        item {
-                           Spacer(modifier = Modifier.height(10.dp))
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxSize(),
+                        contentPadding = PaddingValues(horizontal = AppTheme.dimensions.padding.deviceContent)
+                            .plus(PaddingValues(bottom = 10.dp))
+                            .plus(windowInsets.asPaddingValues()),
+                    ) {
+                        state.courses.forEach {
+                            courseItem(it)
+                            item {
+                                Spacer(modifier = Modifier.height(10.dp))
+                            }
                         }
                     }
+                    CircularIconButton(
+                        modifier = Modifier
+                            .padding(AppTheme.dimensions.padding.deviceContent)
+                            .align(Alignment.BottomEnd),
+                        onClick = { isAddCourseBottomSheetVisible = true },
+                        isEnabled = true,
+                    )
+
+                    if (isAddCourseBottomSheetVisible) {
+                        val density = LocalDensity.current
+                        AddCourseCodeBottomSheet(
+                            sheetState = remember {
+                                SheetState(
+                                    skipPartiallyExpanded = false,
+                                    density = density,
+                                    initialValue = SheetValue.Expanded,
+                                )
+                            },
+                            onDismissRequest = { isAddCourseBottomSheetVisible = false },
+                            onSaveRequest = {
+                                isAddCourseBottomSheetVisible = false
+//                                onEvent(
+//                                    VerificationCodeEvent.ResendAuthCodeClicked,
+//                                )
+                            },
+                        )
+                    }
+
                 }
             }
         }
