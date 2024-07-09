@@ -30,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import de.tuhh.quizi.functionality.add.content.entities.NewCourse
 import de.tuhh.quizi.ui.addcontent.courses.state.CoursesEvent
 import de.tuhh.quizi.ui.addcontent.courses.state.CoursesScreenState
 import de.tuhh.quizi.ui.addcontent.courses.state.CoursesViewModel
@@ -89,9 +90,9 @@ private fun CoursesScreen(
                         .align(alignment = Alignment.Center)
                 )
             }
-            is CoursesScreenState.Initial.Error -> {
 
-            }
+            is CoursesScreenState.Initial.Error -> {}
+
             is CoursesScreenState.Data -> {
                 val keyboardController = LocalSoftwareKeyboardController.current
                 var isAddCourseBottomSheetVisible by rememberSaveable {
@@ -141,15 +142,12 @@ private fun CoursesScreen(
                                 )
                             },
                             onDismissRequest = { isAddCourseBottomSheetVisible = false },
-                            onSaveRequest = {
+                            onSaveRequest = { courseName ->
                                 isAddCourseBottomSheetVisible = false
-//                                onEvent(
-//                                    VerificationCodeEvent.ResendAuthCodeClicked,
-//                                )
+                                onEvent.invoke(CoursesEvent.AddNewCourse(NewCourse(courseName)))
                             },
                         )
                     }
-
                 }
             }
         }

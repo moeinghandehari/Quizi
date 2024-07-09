@@ -7,7 +7,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -18,11 +17,9 @@ import de.tuhh.quizi.navigation.NavEventProvider
 import de.tuhh.quizi.navigation.extensions.execute
 import de.tuhh.quizi.ui.AppBottomNavigation
 import de.tuhh.quizi.ui.addcontent.shared.AddContentNavGraph
-import de.tuhh.quizi.ui.addcontent.shared.state.AddContentSharedViewModel
 import de.tuhh.quizi.ui.animation.SlideInOutDefault
 import de.tuhh.quizi.ui.core.extensions.None
 import de.tuhh.quizi.ui.core.navigation.DestinationsNavHost
-import de.tuhh.quizi.ui.core.navigation.navigation.dependency
 import de.tuhh.quizi.ui.core.navigation.navigation.navigate
 import de.tuhh.quizi.ui.core.navigation.navigation.popUpTo
 import de.tuhh.quizi.ui.core.navigation.rememberNavHostEngine

@@ -1,3 +1,5 @@
+@file:Suppress("MagicNumber")
+
 package de.tuhh.quizi.ui.addcontent.courses.ui.component
 
 import androidx.compose.foundation.background
@@ -18,7 +20,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import de.tuhh.quizi.functionality.add.content.entities.Course
 import de.tuhh.quizi.ui.core.theme.AppTheme
-import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun CourseCard(
