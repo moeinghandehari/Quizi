@@ -57,7 +57,10 @@ class TopicsViewModel(
 
             is TopicsEvent.AddNewTopic -> {
                 addTopicForm.update {
-                    it.copy(topicName = event.newTopic.name)
+                    it.copy(
+                        courseId = event.newTopic.courseId,
+                        topicName = event.newTopic.name,
+                    )
                 }
                 newTopicSubmit.submit()
             }
