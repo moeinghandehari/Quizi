@@ -21,7 +21,7 @@ internal fun Project.configureKotlinMultiplatform() {
 
         @OptIn(ExperimentalWasmDsl::class)
         wasmJs {
-            moduleName = project.name
+            // moduleName = project.name
             browser {
                 commonWebpackConfig {
                     outputFileName = "composeApp.js"
