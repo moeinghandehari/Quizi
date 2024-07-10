@@ -7,6 +7,6 @@
         </trust-anchors>
     </debug-overrides>
     <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="true">quizi.net</domain>
+        <domain includeSubdomains="true">quizi.net</domain> // Set your local ip as host
     </domain-config>
 </network-security-config>
