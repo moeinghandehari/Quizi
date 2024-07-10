@@ -33,6 +33,7 @@ val appModule = module {
     factory<QuiziApiConfig> {
         QuiziApiConfig(
             baseUrl = "quizi.net",
+            // Set your local ip as host
         )
     }
 
