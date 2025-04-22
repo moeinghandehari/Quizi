@@ -2,7 +2,7 @@ import models.FlavorDimension
 
 object AppBuildConfig {
     const val versionName = "1"
-    const val targetAndCompileSdk = 34
+    const val targetAndCompileSdk = 35
     const val minSdk = 24
     const val jvmToolchain = 17
 

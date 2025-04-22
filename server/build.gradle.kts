@@ -39,6 +39,6 @@ dependencies {
     implementation(libs.exposed.jdbc)
 
     // Testing
-    testImplementation(libs.ktor.server.tests)
+    // testImplementation(libs.ktor.server.tests)
     testImplementation(libs.kotlin.test.junit)
 }

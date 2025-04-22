@@ -6,20 +6,20 @@ import org.gradle.api.tasks.testing.Test
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.withType
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
-import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompileCommon
 import plugins.extensions.catalog
 import plugins.extensions.sourceSets
 
+@OptIn(ExperimentalWasmDsl::class)
 internal fun Project.configureKotlinMultiplatform() {
     configure<KotlinMultiplatformExtension> {
         applyDefaultHierarchyTemplate()
 
-        @OptIn(ExperimentalWasmDsl::class)
         wasmJs {
             // moduleName = project.name
             browser {
@@ -47,7 +47,7 @@ internal fun Project.configureKotlinMultiplatform() {
         jvm("desktop")
 
         listOf(
-            iosX64(),
+            // iosX64(),
             iosArm64(),
             iosSimulatorArm64(),
         ).forEach { iosTarget ->

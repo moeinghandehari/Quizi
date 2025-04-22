@@ -25,18 +25,20 @@ fun AppBaseBottomSheet(
     modifier: Modifier = Modifier,
     sheetState: SheetState = rememberModalBottomSheetState(),
     containerColor: Color = AppTheme.colors.elevation.two,
-    windowInsets: WindowInsets = WindowInsets.None,
     content: @Composable @UiComposable ColumnScope.() -> Unit,
 ) {
     ModalBottomSheet(
         onDismissRequest = onDismissRequest,
         modifier = modifier,
         sheetState = sheetState,
-        shape = AppTheme.shapes.m.copy(bottomStart = CornerSize(0.0.dp), bottomEnd = CornerSize(0.0.dp)),
+        shape = AppTheme.shapes.m.copy(
+            bottomStart = CornerSize(0.0.dp),
+            bottomEnd = CornerSize(0.0.dp)
+        ),
         containerColor = containerColor,
         scrimColor = AppTheme.colors.permanent.black.low,
         dragHandle = header,
-        windowInsets = windowInsets,
+        contentWindowInsets = { WindowInsets.None },
         content = {
             Column(
                 modifier = Modifier
