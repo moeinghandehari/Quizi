@@ -1,7 +1,6 @@
 package de.tuhh.quizi.ui.addcontent.shared.state
 
 import de.tuhh.quizi.core.utils.loading.ErrorReason
-import de.tuhh.quizi.functionality.add.content.entities.NewContent
 
 internal sealed interface AddContentScreenState {
 
@@ -15,7 +14,6 @@ internal sealed interface AddContentScreenState {
 
     data class Data(
         val error: ErrorReason?,
-        val content: NewContent,
     ) : AddContentScreenState
 }
 

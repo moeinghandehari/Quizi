@@ -3,14 +3,12 @@ package de.tuhh.quizi.ui.addcontent.topics.state
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import de.tuhh.quizi.core.utils.loading.LoadingEvent
-import de.tuhh.quizi.functionality.add.content.entities.Course
+import de.tuhh.quizi.functionality.add.content.entities.CourseId
 import de.tuhh.quizi.functionality.add.content.usecases.AddTopicUseCase
 import de.tuhh.quizi.functionality.add.content.usecases.GetTopicsUseCase
 import de.tuhh.quizi.ui.addcontent.topics.model.AddTopicForm
 import de.tuhh.quizi.ui.addcontent.topics.model.toNewTopic
 import de.tuhh.quizi.ui.core.loading.submit.submittable
-import de.tuhh.quizi.ui.core.navigation.AppNavigator
-import de.tuhh.quizi.ui.core.navigation.NavTarget
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -19,8 +17,8 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 
 class TopicsViewModel(
-    private val course: Course,
-    private val navigator: AppNavigator,
+    private val courseId: Int,
+    private val courseTitle: String,
     private val getTopicsUseCase: GetTopicsUseCase,
     private val addTopicUseCase: AddTopicUseCase,
 ) : ViewModel() {
@@ -35,7 +33,7 @@ class TopicsViewModel(
     internal val screenState: StateFlow<TopicsScreenState> = combine(
         addTopicForm,
         newTopicSubmit.flow,
-        getTopicsUseCase(course.id),
+        getTopicsUseCase(courseId),
     ) { addTopicForm, formSubmit, topics ->
         when (topics) {
             is LoadingEvent.Loading -> TopicsScreenState.Initial.Loading
@@ -51,9 +49,20 @@ class TopicsViewModel(
         initialValue = TopicsScreenState.Initial.Loading,
     )
 
+    internal fun courseName(): String = courseTitle
+
+    internal fun addNewTopic(newTopicName: String) {
+        addTopicForm.update {
+            it.copy(
+                courseId = CourseId(courseId),
+                topicName = newTopicName,
+            )
+        }
+        newTopicSubmit.submit()
+    }
     internal fun onEvent(event: TopicsEvent) {
         when (event) {
-            TopicsEvent.BackClicked -> navigator.navigateUp()
+            TopicsEvent.BackClicked -> {} //navigator.navigateUp()
 
             is TopicsEvent.AddNewTopic -> {
                 addTopicForm.update {
@@ -65,9 +74,7 @@ class TopicsViewModel(
                 newTopicSubmit.submit()
             }
 
-            is TopicsEvent.OnTopicClicked -> {
-                navigator.navigateTo(NavTarget.AddContentTarget.AddQuestion(topicId = event.topicId))
-            }
+            is TopicsEvent.OnTopicClicked -> {}
         }
     }
 }

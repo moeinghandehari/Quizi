@@ -7,9 +7,7 @@ import de.tuhh.quizi.functionality.add.content.usecases.AddCourseUseCase
 import de.tuhh.quizi.functionality.add.content.usecases.GetCoursesUseCase
 import de.tuhh.quizi.ui.addcontent.courses.model.AddCourseForm
 import de.tuhh.quizi.ui.addcontent.courses.model.toNewCourse
-import de.tuhh.quizi.ui.addcontent.topics.destination.TopicsScreenDestination
 import de.tuhh.quizi.ui.core.loading.submit.submittable
-import de.tuhh.quizi.ui.core.navigation.AppNavigator
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -18,7 +16,6 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 
 class CoursesViewModel(
-    private val navigator: AppNavigator,
     private val getCoursesUseCase: GetCoursesUseCase,
     private val addCourseUseCase: AddCourseUseCase,
 ) : ViewModel() {
@@ -51,7 +48,7 @@ class CoursesViewModel(
 
     internal fun onEvent(event: CoursesEvent) {
         when (event) {
-            CoursesEvent.BackClicked -> navigator.navigateUp()
+            CoursesEvent.BackClicked -> Unit //navigator.navigateUp()
 
             is CoursesEvent.AddNewCourse -> {
                 addCourseForm.update {
@@ -60,8 +57,8 @@ class CoursesViewModel(
                 newCourseSubmit.submit()
             }
 
-            is CoursesEvent.OnCourseClicked ->
-                navigator.navigateTo(TopicsScreenDestination.route)
+            is CoursesEvent.OnCourseClicked -> TODO ()
+                // navigator.navigateTo(TopicsScreenDestination.route)
  /*               navigator.navigateTo(
                     NavTarget.AddContentTarget.AddTopic(
                         courseId = event.course.id,

@@ -18,6 +18,6 @@ data class SingleChoiceQuestion(
 ) : Identifiable, Question {
     init {
         require(options.size == OPTIONS_COUNT) { "There must be exactly 4 options" }
-        require(options.count { it.value.second } == OPTIONS_CORRECT) { "Exactly one option must be correct" }
+        require(options.count { it.isCorrect } == OPTIONS_CORRECT) { "Exactly one option must be correct" }
     }
 }

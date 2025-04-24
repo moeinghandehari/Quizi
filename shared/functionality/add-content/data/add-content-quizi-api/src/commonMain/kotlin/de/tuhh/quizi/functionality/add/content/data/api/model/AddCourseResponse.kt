@@ -1,6 +1,7 @@
 package de.tuhh.quizi.functionality.add.content.data.api.model
 
 import de.tuhh.quizi.functionality.add.content.entities.Course
+import de.tuhh.quizi.functionality.add.content.entities.CourseTitle
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -11,5 +12,5 @@ internal data class AddCourseResponse(
 )
 
 internal fun AddCourseResponse.toModel() = Course(
-    courseName = courseName,
+    courseTitle = CourseTitle(courseName),
 )

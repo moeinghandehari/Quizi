@@ -19,8 +19,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEach
-import de.tuhh.quizi.ui.core.navigation.spec.DestinationSpec
-import de.tuhh.quizi.ui.core.navigation.spec.NavGraphSpec
+import androidx.navigation.NavGraph
+import androidx.navigation.compose.ComposeNavigator.Destination
 import de.tuhh.quizi.ui.core.theme.AppTheme
 import de.tuhh.quizi.ui.state.NavItem
 import org.jetbrains.compose.resources.painterResource
@@ -29,8 +29,8 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun AppBottomNavigation(
     items: List<NavItem>,
-    currentDestination: DestinationSpec<*>?,
-    onItemClick: (navGraph: NavGraphSpec) -> Unit,
+    currentDestination: Destination?,
+    onItemClick: (navGraph: NavGraph) -> Unit,
     modifier: Modifier = Modifier,
     windowInsets: WindowInsets = AppBottomNavigationDefaults.windowInsets,
 ) {
@@ -45,15 +45,14 @@ fun AppBottomNavigation(
             windowInsets = windowInsets,
         ) {
             items.fastForEach { item ->
-                val isSelected = item.navGraph.destinationsByRoute.containsValue(
-                    currentDestination,
-                )
+                val isSelected =
+                    item.navGraph.startDestinationRoute?.contains(currentDestination?.navigatorName.toString()) // TODO
                 NavigationBarItem(
-                    selected = isSelected,
+                    selected = isSelected == true,
                     onClick = { onItemClick(item.navGraph) },
                     icon = {
                         Icon(
-                            painter = painterResource(if (isSelected) item.selectedIcon else item.icon),
+                            painter = painterResource(if (isSelected == true) item.selectedIcon else item.icon),
                             contentDescription = null,
                             modifier = Modifier
                                 .size(24.dp),

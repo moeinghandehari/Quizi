@@ -13,7 +13,6 @@ import io.ktor.http.HttpStatusCode.Companion.NotFound
 import io.ktor.http.isSuccess
 import io.ktor.util.reflect.TypeInfo
 import io.ktor.util.reflect.typeInfo
-import io.ktor.utils.io.errors.IOException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flow
@@ -52,7 +51,7 @@ fun <T, R> statefulApiCall(
     } catch (e: Exception) {
         e.printStackTrace()
         val errorReason = when (e) {
-            is IOException -> ErrorReason.NetworkConnection
+            is kotlinx.io.IOException -> ErrorReason.NetworkConnection
             else -> ErrorReason.Unspecified(e.message)
         }
         LoadingEvent.Error(errorReason)

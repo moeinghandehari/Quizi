@@ -15,9 +15,8 @@ import de.tuhh.quizi.ui.core.components.card.BigTextCard
 import de.tuhh.quizi.ui.core.components.list.OptionsList
 import de.tuhh.quizi.ui.core.state.ButtonOption
 import de.tuhh.quizi.ui.core.theme.AppTheme
-import de.tuhh.quizi.ui.home.state.HomeScreenEvent
 import de.tuhh.quizi.ui.home.state.HomeViewModel
-import org.koin.compose.koinInject
+import org.jetbrains.compose.ui.tooling.preview.Preview
 import quizi.ui.home.generated.resources.Res
 import quizi.ui.home.generated.resources.button_add_content
 import quizi.ui.home.generated.resources.button_quiz
@@ -25,7 +24,23 @@ import quizi.ui.home.generated.resources.title_home_function_choice
 
 @Composable
 internal fun HomeScreen(
-    viewModel: HomeViewModel = koinInject()
+    onAddContentClicked: () -> Unit,
+    onQuizClick: () -> Unit,
+    viewModel: HomeViewModel
+) = Screen { windowInsets ->
+
+    // val state by viewModel.screenState.collectAsStateWithLifecycle()
+
+    HomeScreen(
+        onAddContentClicked,
+        onQuizClick,
+    )
+}
+
+@Composable
+private fun HomeScreen(
+    onAddContentClicked: () -> Unit,
+    onQuizClick: () -> Unit,
 ) = Screen { windowInsets ->
     Column(
         verticalArrangement = Arrangement.SpaceBetween,
@@ -45,16 +60,24 @@ internal fun HomeScreen(
             options = listOf(
                 ButtonOption(
                     text = Res.string.button_add_content,
-                    action = { viewModel.onEvent(HomeScreenEvent.ToAddContentClicked) }
+                    action = { onAddContentClicked() }
                 ),
                 ButtonOption(
                     text = Res.string.button_quiz,
-                    action = { viewModel.onEvent(HomeScreenEvent.ToQuizClicked) }
+                    action = { onQuizClick() }
                 ),
             ),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = AppTheme.dimensions.padding.threeXxl),
         )
+    }
+}
+
+@Preview
+@Composable
+private fun HomeScreenPreview() {
+    AppTheme {
+        HomeScreen({}, {})
     }
 }

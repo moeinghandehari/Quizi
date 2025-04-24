@@ -30,10 +30,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import de.tuhh.quizi.functionality.add.content.entities.Course
-import de.tuhh.quizi.functionality.add.content.entities.NewTopic
 import de.tuhh.quizi.ui.addcontent.topics.state.TopicsEvent
 import de.tuhh.quizi.ui.addcontent.topics.state.TopicsScreenState
+import de.tuhh.quizi.ui.addcontent.topics.state.TopicsScreenState.Data
+import de.tuhh.quizi.ui.addcontent.topics.state.TopicsScreenState.Initial
 import de.tuhh.quizi.ui.addcontent.topics.state.TopicsViewModel
 import de.tuhh.quizi.ui.addcontent.topics.state.errorOrNull
 import de.tuhh.quizi.ui.addcontent.topics.ui.component.AddTopicBottomSheet
@@ -45,18 +45,19 @@ import de.tuhh.quizi.ui.core.components.button.CircularIconButton
 import de.tuhh.quizi.ui.core.extensions.plus
 import de.tuhh.quizi.ui.core.rememberErrorState
 import de.tuhh.quizi.ui.core.theme.AppTheme
-import org.koin.compose.koinInject
-import org.koin.core.parameter.parametersOf
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 internal fun TopicsScreen(
-    course: Course,
-    viewModel: TopicsViewModel = koinInject(parameters = { parametersOf(course) }),
+    onBackClick: () -> Unit,
+    viewModel: TopicsViewModel,
 ) {
     val state by viewModel.screenState.collectAsStateWithLifecycle()
     TopicsScreen(
-        course = course,
+        courseName = viewModel.courseName(),
         state = state,
+        onBackClick = onBackClick,
+        onSubmitNewTopic = viewModel::addNewTopic,
         onEvent = viewModel::onEvent,
     )
 }
@@ -64,17 +65,19 @@ internal fun TopicsScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun TopicsScreen(
-    course: Course,
+    courseName: String,
     state: TopicsScreenState,
+    onBackClick: () -> Unit,
+    onSubmitNewTopic: (String) -> Unit,
     onEvent: (TopicsEvent) -> Unit,
 ) = Screen(
     consumableErrorState = rememberErrorState(error = state.errorOrNull),
     topBar = {
         AppTopAppBar(
-            title = "Topics of ${course.courseName}",
+            title = "Topics of $courseName",
             navigationIcon = {
                 AppTopAppBarDefaults.UpIconButton(
-                    onClick = { onEvent.invoke(TopicsEvent.BackClicked) }
+                    onClick = onBackClick
                 )
             },
         )
@@ -88,16 +91,16 @@ private fun TopicsScreen(
             .padding(AppTheme.dimensions.padding.l),
     ) {
         when (state) {
-            is TopicsScreenState.Initial.Loading -> {
+            is Initial.Loading -> {
                 CircularProgressIndicator(
                     modifier = Modifier
                         .align(alignment = Alignment.Center)
                 )
             }
 
-            is TopicsScreenState.Initial.Error -> {}
+            is Initial.Error -> {}
 
-            is TopicsScreenState.Data -> {
+            is Data -> {
                 val keyboardController = LocalSoftwareKeyboardController.current
                 var isAddTopicBottomSheetVisible by rememberSaveable {
                     mutableStateOf(false)
@@ -151,16 +154,26 @@ private fun TopicsScreen(
                             onDismissRequest = { isAddTopicBottomSheetVisible = false },
                             onSaveRequest = { topicName ->
                                 isAddTopicBottomSheetVisible = false
-                                onEvent.invoke(
-                                    TopicsEvent.AddNewTopic(
-                                        NewTopic(courseId = course.id, name = topicName)
-                                    )
-                                )
+                                onSubmitNewTopic.invoke(topicName)
                             },
                         )
                     }
                 }
             }
         }
+    }
+}
+
+@Preview
+@Composable
+private fun TopicScreenPreview() {
+    AppTheme {
+        TopicsScreen(
+            courseName = "Course Name",
+            state = Data(error = null, topics = listOf()),
+            onBackClick = { false },
+            onSubmitNewTopic = {},
+            onEvent = {},
+        )
     }
 }

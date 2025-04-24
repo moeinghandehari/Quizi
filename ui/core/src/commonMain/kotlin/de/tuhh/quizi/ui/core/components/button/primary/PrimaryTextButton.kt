@@ -1,6 +1,4 @@
-@file:Suppress("MagicNumber") // TODO
-
-package de.tuhh.quizi.ui.core.components.button
+package de.tuhh.quizi.ui.core.components.button.primary
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -12,47 +10,48 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.unit.dp
+import de.tuhh.quizi.ui.core.components.button.DefaultTextButton
 import de.tuhh.quizi.ui.core.theme.AppTheme
-import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import quizi.ui.core.generated.resources.Res
-import quizi.ui.core.generated.resources.general_error_unknown
 
 @Composable
-fun OptionButton(
+fun PrimaryTextButton(
     label: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     isEnabled: Boolean = true,
     shape: Shape = AppTheme.shapes.s,
-    containerColor: Color = Color(0xFF6750A4),
-    contentColor: Color = Color.White,
+    containerColor: Color = Color.Transparent,
+    contentColor: Color = AppTheme.colors.element.grey.high,
     elevation: ButtonElevation? = ButtonDefaults.buttonElevation(),
     border: BorderStroke? = null,
-    contentPadding: PaddingValues = PaddingValues(vertical = 16.dp, horizontal = 32.dp),
+    contentPadding: PaddingValues = PaddingValues(AppTheme.dimensions.padding.l),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-    DefaultButton(
+    DefaultTextButton(
         label = label,
         onClick = onClick,
+        modifier = modifier,
         isEnabled = isEnabled,
         shape = shape,
-        containerColor = containerColor,
-        contentColor = contentColor,
+        colors = ButtonDefaults.textButtonColors().copy(
+            containerColor = containerColor,
+            contentColor = contentColor,
+        ),
         elevation = elevation,
         border = border,
         contentPadding = contentPadding,
         interactionSource = interactionSource,
-        modifier = modifier,
     )
 }
 
 @Preview
 @Composable
-private fun OptionButtonPreview() {
-    OptionButton(
-        label = stringResource(Res.string.general_error_unknown),
-        onClick = {},
-    )
+private fun PrimaryTextButtonPreview() {
+    AppTheme {
+        PrimaryTextButton(
+            label = "PrimaryTextButton",
+            onClick = {},
+        )
+    }
 }

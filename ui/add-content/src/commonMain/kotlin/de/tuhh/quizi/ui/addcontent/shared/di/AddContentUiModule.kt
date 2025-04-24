@@ -6,7 +6,7 @@ import org.koin.dsl.module
 
 val AddContentUiModule = module {
     single<AddContentSharedViewModel> {
-        AddContentSharedViewModel(get())
+        AddContentSharedViewModel()
     }
 
     includes(AddContentFunctionalityModule)

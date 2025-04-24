@@ -7,6 +7,7 @@ androidx-core-ktx = "1.16.0"
 androidx-espresso-core = "3.6.1"
 androidx-lifecycle = "2.8.4"
 androidx-navigation = "2.8.0-alpha13"
+androidx-performance-annotation = "1.0.0-alpha04"
 androidx-test-junit = "1.2.1"
 coverageAggregation = "2.4.4"
 kotlinx-serialization = "1.8.1"
@@ -47,6 +48,7 @@ androidx-lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycl
 androidx-lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-viewmodel-savedstate = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-savedstate", version.ref = "androidx-lifecycle" }
 androidx-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
+androidx-performance-annotation = { module = "org.jetbrains.androidx.performance:performance-annotation", version.ref = "androidx-performance-annotation" }
 
 coverageAggregation-gradle = { module = "io.github.gmazzo.test.aggregation:plugin", version.ref = "coverageAggregation" }
 
@@ -102,6 +104,7 @@ ktor-server-tests = { module = "io.ktor:ktor-server-tests-jvm", version.ref = "k
 ktor-server-host-common = { module = "io.ktor:ktor-server-host-common-jvm", version.ref = "ktor-server" }
 ktor-server-content-negotiation = { module = "io.ktor:ktor-server-content-negotiation-jvm", version.ref = "ktor-server" }
 ktor-server-call-logging = { module = "io.ktor:ktor-server-call-logging-jvm", version.ref = "ktor-server" }
+ktor-server-network-tls-certificates = { module = "io.ktor:ktor-network-tls-certificates", version.ref = "ktor-server" }
 
 # Logback
 logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }

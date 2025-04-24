@@ -45,25 +45,31 @@ import de.tuhh.quizi.ui.core.extensions.plus
 import de.tuhh.quizi.ui.core.rememberErrorState
 import de.tuhh.quizi.ui.core.theme.AppTheme
 import org.jetbrains.compose.resources.stringResource
-import org.koin.compose.koinInject
+import org.jetbrains.compose.ui.tooling.preview.Preview
 import quizi.ui.add_content.generated.resources.Res
 import quizi.ui.add_content.generated.resources.title_courses
 
 @Composable
-internal fun CoursesScreen(
-    viewModel: CoursesViewModel = koinInject(),
+internal fun AddCourseScreen(
+    onBackClick: () -> Unit,
+    onCourseClick: (Int, String) -> Unit,
+    viewModel: CoursesViewModel,
 ) {
     val state by viewModel.screenState.collectAsStateWithLifecycle()
-    CoursesScreen(
+    AddCourseScreen(
         state = state,
+        onBackClick = onBackClick,
+        onCourseClick = onCourseClick,
         onEvent = viewModel::onEvent,
     )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun CoursesScreen(
+private fun AddCourseScreen(
     state: CoursesScreenState,
+    onBackClick: () -> Unit,
+    onCourseClick: (Int, String) -> Unit,
     onEvent: (CoursesEvent) -> Unit,
 ) = Screen(
     consumableErrorState = rememberErrorState(error = state.errorOrNull),
@@ -72,7 +78,7 @@ private fun CoursesScreen(
             title = stringResource(Res.string.title_courses),
             navigationIcon = {
                 AppTopAppBarDefaults.UpIconButton(
-                    onClick = { onEvent.invoke(CoursesEvent.BackClicked) }
+                    onClick = { onBackClick() }
                 )
             },
         )
@@ -120,7 +126,7 @@ private fun CoursesScreen(
                         state.courses.forEach {
                             courseItem(
                                 it,
-                                onItemClick = { onEvent.invoke(CoursesEvent.OnCourseClicked(it)) },
+                                onItemClick = { onCourseClick(it.id.value, it.courseTitle.value) },
                             )
                             item {
                                 Spacer(modifier = Modifier.height(AppTheme.dimensions.space.s))
@@ -156,5 +162,18 @@ private fun CoursesScreen(
                 }
             }
         }
+    }
+}
+
+@Preview
+@Composable
+private fun CoursesScreenPreview() {
+    AppTheme {
+        AddCourseScreen(
+            state = CoursesScreenState.Data(error = null, courses = listOf()),
+            onBackClick = { false },
+            onCourseClick = {_, _ -> },
+            onEvent = {},
+        )
     }
 }

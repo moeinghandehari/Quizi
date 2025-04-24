@@ -20,6 +20,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import de.tuhh.quizi.functionality.add.content.entities.Topic
+import de.tuhh.quizi.ui.core.components.button.OptionButton
 import de.tuhh.quizi.ui.core.theme.AppTheme
 
 @Composable
@@ -70,8 +71,9 @@ internal fun LazyListScope.topicItem(
     topic: Topic,
     onItemClick: () -> Unit
 ) = item {
-    TopicCard(
-        text = topic.name,
+    OptionButton(
+        label = topic.name,
         onClick = onItemClick,
+        modifier = Modifier.fillMaxWidth()
     )
 }

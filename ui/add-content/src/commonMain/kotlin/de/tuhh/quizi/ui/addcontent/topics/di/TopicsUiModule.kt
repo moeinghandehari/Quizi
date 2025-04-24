@@ -5,7 +5,14 @@ import de.tuhh.quizi.ui.addcontent.topics.state.TopicsViewModel
 import org.koin.dsl.module
 
 val TopicsUiModule = module {
-    factory<TopicsViewModel> { params -> TopicsViewModel(params.get(), get(), get(), get()) }
+    factory<TopicsViewModel> { params ->
+        TopicsViewModel(
+            courseId = params.get(),
+            courseTitle = params.get(),
+            getTopicsUseCase = get(),
+            addTopicUseCase = get(),
+        )
+    }
 
     includes(AddContentFunctionalityModule)
 }

@@ -5,6 +5,6 @@ import org.koin.dsl.module
 
 val QuizUiModule = module {
     factory<QuizViewModel> {
-        QuizViewModel(get())
+        QuizViewModel()
     }
 }
