@@ -31,7 +31,6 @@ ktor-client = "3.1.2"
 ktor-server = "3.1.2"
 logback = "1.5.18"
 turbine = "1.2.0"
-voyager = "1.0.1"
 google-services = "4.4.2"
 material = "1.12.0"
 
@@ -138,10 +137,6 @@ koin-ksp = { module = "io.insert-koin:koin-ksp-compiler", version.ref = "koin-ks
 
 # Turbine Testing
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
-
-# Voyager
-voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
-voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyager" }
 
 # Firebase
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase" }

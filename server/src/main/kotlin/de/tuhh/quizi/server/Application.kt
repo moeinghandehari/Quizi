@@ -14,7 +14,7 @@ import org.koin.ktor.plugin.Koin
 import org.koin.logger.slf4jLogger
 
 fun main(args: Array<String>) {
-    embeddedServer(Netty, port = 8080, host = "quizi.net") {
+    embeddedServer(Netty, port = 8080, host = "0.0.0.0") {
     // Set your local ip as host
         main()
         module()

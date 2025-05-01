@@ -1,7 +1,7 @@
 import models.FlavorDimension
 
 object AppBuildConfig {
-    const val versionName = "1"
+    const val versionName = "1.0.0"
     const val targetAndCompileSdk = 35
     const val minSdk = 24
     const val jvmToolchain = 17
@@ -15,7 +15,7 @@ object AppBuildConfig {
 
     val quiziApiBuildConfig = QuiziApiBuildConfig(
         baseUrlProd = "",
-        baseUrlDev = "",
+        baseUrlDev = "131.189.200.54",
     )
 
     /**

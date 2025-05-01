@@ -61,7 +61,7 @@ compose.desktop {
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "de.tuhh.quizi"
-            packageVersion = "1.0.0"
+            packageVersion = AppBuildConfig.versionName
         }
     }
 }

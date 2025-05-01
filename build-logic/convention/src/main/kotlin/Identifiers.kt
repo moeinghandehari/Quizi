@@ -10,7 +10,6 @@ object Identifiers {
     }
 
     object Params {
-        const val APP_CENTER_APP_SECRET = "appCenterAppSecret"
         const val VERSION_CODE = "versionCode"
         const val SIGNING_KEY_ALIAS = "signingKeyAlias"
         const val SIGNING_KEY_PASSWORD = "signingKeyPassword"

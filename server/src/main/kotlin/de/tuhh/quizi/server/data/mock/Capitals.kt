@@ -248,7 +248,7 @@ val capitalQuestions = listOf<Question>(
         id = 30,
         question = Description("True or False?"),
         options = listOf(
-            Option("The capital of the United States is New York City.",false),
+            Option("The capital of the United States is New York City.", false),
         ),
         hint = null,
         topicId = 1,
