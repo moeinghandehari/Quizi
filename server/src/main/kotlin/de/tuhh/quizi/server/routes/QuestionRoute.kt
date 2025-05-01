@@ -50,7 +50,7 @@ fun Route.randomQuestions() {
             else -> null
         }
         val description = Description(question.description)
-        val option = Option(question.option to question.answer)
+        val option = Option(question.option, question.answer)
         val hint = Hint(question.hint)
         if (questionType == null) {
             call.respond(HttpStatusCode.BadRequest, "Non of parameters can be empty")

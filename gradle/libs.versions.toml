@@ -1,37 +1,39 @@
 [versions]
-agp = "8.4.2"
-androidx-activityCompose = "1.9.0"
+agp = "8.9.2"
+androidx-activityCompose = "1.10.1"
 androidx-appcompat = "1.7.0"
-androidx-constraintlayout = "2.1.4"
-androidx-core-ktx = "1.13.1"
-androidx-espresso-core = "3.5.1"
-androidx-lifecycle = "2.8.0"
-androidx-navigation = "2.8.0-alpha02"
-androidx-test-junit = "1.1.5"
-coverageAggregation = "2.2.0"
-kotlinx-serialization = "1.7.0"
-kotlin = "2.0.0"
-kotlinCoroutines = "1.9.0-RC"
-compose = "2024.06.00"
-compose-plugin = "1.6.20-dev1667"
-detekt = "1.23.6"
-detektComposeRules = "0.3.13"
-exposed = "0.50.0"
-firebase = "33.0.0"
-firebaseCrashlyticsPlugin = "3.0.1"
+androidx-constraintlayout = "2.2.1"
+androidx-core-ktx = "1.16.0"
+androidx-espresso-core = "3.6.1"
+androidx-lifecycle = "2.8.4"
+androidx-navigation = "2.8.0-alpha13"
+androidx-performance-annotation = "1.0.0-alpha04"
+androidx-test-junit = "1.2.1"
+coverageAggregation = "2.4.4"
+kotlinx-serialization = "1.8.1"
+kotlin = "2.1.20"
+kotlinCoroutines = "1.10.2"
+compose = "2025.04.00"
+compose-plugin = "1.8.0-beta02"
+compottie = "2.0.0-rc04"
+detekt = "1.23.8"
+detektComposeRules = "0.4.22"
+exposed = "0.61.0"
+firebase = "33.12.0"
+firebaseCrashlyticsPlugin = "3.0.3"
 firebasePerfPlugin = "1.4.2"
 jacoco = "0.8.7"
 junit = "4.13.2"
-ksp = "2.0.0-1.0.21" # Depends on kotlin version
-koin = "3.6.0-Beta4"
-koin-ksp = "1.3.1"
-ktor = "2.3.11"
-logback = "1.5.6"
-turbine = "1.1.0"
-voyager = "1.0.0"
-google-services = "4.4.1"
+ksp = "2.1.20-1.0.32" # Depends on kotlin version
+koin = "4.0.4"
+koin-ksp = "2.0.0"
+ktor-client = "3.1.2"
+ktor-server = "3.1.2"
+logback = "1.5.18"
+turbine = "1.2.0"
+voyager = "1.0.1"
+google-services = "4.4.2"
 material = "1.12.0"
-navigationCommonKtx = "2.7.7"
 
 [libraries]
 android-gradle = { module = "com.android.tools.build:gradle", version.ref = "agp" }
@@ -44,7 +46,9 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-viewmodel-savedstate = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-savedstate", version.ref = "androidx-lifecycle" }
 androidx-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
+androidx-performance-annotation = { module = "org.jetbrains.androidx.performance:performance-annotation", version.ref = "androidx-performance-annotation" }
 
 coverageAggregation-gradle = { module = "io.github.gmazzo.test.aggregation:plugin", version.ref = "coverageAggregation" }
 
@@ -70,9 +74,10 @@ compose-ui = { module = "androidx.compose.ui:ui" }
 compose-uiUtil = { module = "androidx.compose.ui:ui-util" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
-jetbrains-compose-ui-tooling-preview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "compose-plugin" }
 androidx-ui-tooling-preview-android = { module = "androidx.compose.ui:ui-tooling-preview-android" }
 androidx-ui-tooling-preview-desktop = { module = "androidx.compose.ui:ui-tooling-preview-desktop" }
+jetbrains-compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "compose-plugin" }
+jetbrains-compose-ui-tooling-preview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "compose-plugin" }
 
 # Detekt
 detekt-gradle = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
@@ -83,21 +88,23 @@ detekt-composeRules = { module = "io.nlopez.compose.rules:detekt", version.ref =
 ksp-gradle = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin", version.ref = "ksp" }
 
 # Ktor
-ktor-bom = { module = "io.ktor:ktor-bom", version.ref = "ktor" }
+ktor-bom = { module = "io.ktor:ktor-bom", version.ref = "ktor-client" }
 ktor-core = { module = "io.ktor:ktor-client-core" }
 ktor-logging = { module = "io.ktor:ktor-client-logging" }
-ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json" }
-ktor-client-android = { module = "io.ktor:ktor-client-android" }
+ktor-client-android = { module = "io.ktor:ktor-client-okhttp" }
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin" }
 ktor-client-java = { module = "io.ktor:ktor-client-java" }
-ktor-client-js = { module = "io.ktor:ktor-client-js" }
+ktor-client-js = { module = "io.ktor:ktor-client-js"}
 ktor-contentNegotiation = { module = "io.ktor:ktor-client-content-negotiation" }
-ktor-server-core = { module = "io.ktor:ktor-server-core-jvm" }
-ktor-server-netty = { module = "io.ktor:ktor-server-netty-jvm" }
-ktor-server-tests = { module = "io.ktor:ktor-server-tests-jvm" }
-ktor-server-host-common = { module = "io.ktor:ktor-server-host-common-jvm" }
-ktor-server-content-negotiation = { module = "io.ktor:ktor-server-content-negotiation-jvm" }
-ktor-server-call-logging = { module = "io.ktor:ktor-server-call-logging-jvm" }
+ktor-serialization-json = { module = "io.ktor:ktor-serialization-kotlinx-json"}
+
+ktor-server-core = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktor-server"}
+ktor-server-netty = { module = "io.ktor:ktor-server-netty-jvm", version.ref = "ktor-server" }
+ktor-server-tests = { module = "io.ktor:ktor-server-tests-jvm", version.ref = "ktor-server" }
+ktor-server-host-common = { module = "io.ktor:ktor-server-host-common-jvm", version.ref = "ktor-server" }
+ktor-server-content-negotiation = { module = "io.ktor:ktor-server-content-negotiation-jvm", version.ref = "ktor-server" }
+ktor-server-call-logging = { module = "io.ktor:ktor-server-call-logging-jvm", version.ref = "ktor-server" }
+ktor-server-network-tls-certificates = { module = "io.ktor:ktor-network-tls-certificates", version.ref = "ktor-server" }
 
 # Logback
 logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
@@ -115,10 +122,17 @@ koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin" }
 koin-core = { module = "io.insert-koin:koin-core" }
 koin-android = { module = "io.insert-koin:koin-android" }
 koin-compose-multiplatform = { module = "io.insert-koin:koin-compose" }
+koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel" }
 koin-android-compose = { module = "io.insert-koin:koin-androidx-compose" }
 koin-annotation = { module = "io.insert-koin:koin-annotations" }
 koin-ktor = { module = "io.insert-koin:koin-ktor" }
 koin-logger = { module = "io.insert-koin:koin-logger-slf4j" }
+
+# Compottie
+compottie = { module = "io.github.alexzhirkevich:compottie", version.ref = "compottie" }
+compottie-dot = { module = "io.github.alexzhirkevich:compottie-dot", version.ref = "compottie" }
+compottie-network = { module = "io.github.alexzhirkevich:compottie-network", version.ref = "compottie" }
+compottie-resources = { module = "io.github.alexzhirkevich:compottie-resources", version.ref = "compottie" }
 
 koin-ksp = { module = "io.insert-koin:koin-ksp-compiler", version.ref = "koin-ksp" }
 
@@ -136,7 +150,6 @@ firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 firebase-crashlytics-gradle = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "firebaseCrashlyticsPlugin" }
 firebase-perf = { module = "com.google.firebase:firebase-perf", version.ref = "firebasePerfPlugin" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
-androidx-navigation-common-ktx = { group = "androidx.navigation", name = "navigation-common-ktx", version.ref = "navigationCommonKtx" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -149,11 +162,11 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-ktor = { id = "io.ktor.plugin", version.ref = "ktor" }
+ktor = { id = "io.ktor.plugin", version.ref = "ktor-server" }
 googleServices = { id = "com.google.gms.google-services", version.ref = "google-services" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlyticsPlugin" }
 firebase-performance = { id = "com.google.firebase.firebase-perf", version.ref = "firebasePerfPlugin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 
 [bundles]
-ktor-multiplatform = ["ktor-core", "ktor-logging", "ktor-contentNegotiation"]
+ktor-multiplatform = ["ktor-core", "ktor-logging", "ktor-contentNegotiation", "ktor-serialization-json"]

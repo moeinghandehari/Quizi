@@ -41,14 +41,16 @@ internal fun Project.configureAndroidLibrary() {
 
         val androidComponentsExtension = extensions.getByType<LibraryAndroidComponentsExtension>()
         androidComponentsExtension.configureCommonAndroid(commonExtension = this)
-
-        // configureJacocoAndroid(this)
     }
 }
 
 internal fun Project.configureAndroidApplication() {
     extensions.configure<ApplicationExtension> {
-        configureFlavors(this)
+        // configureFlavors(this)
+
+        buildFeatures {
+            buildConfig = true
+        }
 
         defaultConfig {
             targetSdk = AppBuildConfig.targetAndCompileSdk
@@ -58,11 +60,15 @@ internal fun Project.configureAndroidApplication() {
             )
         }
 
-        val androidComponentsExtension = extensions.getByType<ApplicationAndroidComponentsExtension>()
+        val androidComponentsExtension =
+            extensions.getByType<ApplicationAndroidComponentsExtension>()
         androidComponentsExtension.configureCommonAndroid(commonExtension = this)
 
         // Define name for app builds
-        androidComponentsExtension.updateBuildFileNames(this@configureAndroidApplication, defaultConfig)
+        androidComponentsExtension.updateBuildFileNames(
+            this@configureAndroidApplication,
+            defaultConfig
+        )
     }
 }
 

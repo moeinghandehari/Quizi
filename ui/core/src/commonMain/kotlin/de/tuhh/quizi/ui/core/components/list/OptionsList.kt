@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import de.tuhh.quizi.ui.core.components.button.OptionButton
 import de.tuhh.quizi.ui.core.state.ButtonOption
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun OptionsList(
@@ -23,8 +24,8 @@ fun OptionsList(
     ) {
         options.forEach { item ->
             OptionButton(
-                label = item.option.first,
-                onClick = item.option.second,
+                label = stringResource(item.text),
+                onClick = item.action,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 32.dp, vertical = 8.dp),

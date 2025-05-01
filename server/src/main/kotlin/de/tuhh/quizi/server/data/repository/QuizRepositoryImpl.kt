@@ -2,6 +2,7 @@ package de.tuhh.quizi.server.data.repository
 
 import de.tuhh.quizi.server.data.db.dao.course.CourseDao
 import de.tuhh.quizi.server.data.db.dao.question.QuestionDao
+import de.tuhh.quizi.server.data.model.AbstractTopic
 import de.tuhh.quizi.server.data.model.Course
 import de.tuhh.quizi.server.data.model.Question
 import de.tuhh.quizi.server.data.model.QuestionType
@@ -20,7 +21,7 @@ class QuizRepositoryImpl(
     override suspend fun getCourseById(courseId: Int): Course? =
         courseDao.getCourseById(courseId)
 
-    override suspend fun getAllCourses(): List<String> = courseDao.getAllCourses()
+    override suspend fun getAllCourses(): List<Course> = courseDao.getAllCourses()
 
     override suspend fun updateCourse(course: Course): Course {
         TODO("Not yet implemented")
@@ -36,9 +37,8 @@ class QuizRepositoryImpl(
     override suspend fun getTopicById(topicId: Int): Topic? =
         courseDao.getTopicById(topicId)
 
-    override suspend fun getAllTopicsByCourseId(courseId: Int): List<Topic> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getAllTopicsByCourseId(courseId: Int): List<AbstractTopic> =
+        courseDao.getTopicsByCourseId(courseId)
 
     override suspend fun updateTopic(topicId: Int, topic: Topic): Topic {
         TODO("Not yet implemented")

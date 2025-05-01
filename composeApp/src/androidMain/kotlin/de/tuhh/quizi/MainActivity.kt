@@ -17,7 +17,7 @@ class MainActivity : FragmentActivity() {
 
         Firebase.initialize(this)
         Firebase.analytics.setAnalyticsCollectionEnabled(true)
-        Firebase.crashlytics.setCrashlyticsCollectionEnabled(true)
+        Firebase.crashlytics.isCrashlyticsCollectionEnabled = true
         firebaseAnalytics = Firebase.analytics
 
         setContent {

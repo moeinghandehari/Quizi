@@ -36,11 +36,16 @@ kotlin {
 
             implementation(compose.components.resources)
 
+            implementation(projects.shared.core.quiziApi)
+
+            implementation(projects.shared.functionality.addContent.data.implementations)
+            implementation(projects.shared.functionality.addContent.entities)
+            implementation(projects.shared.functionality.projectDefaults)
+
             implementation(projects.ui.core)
             implementation(projects.ui.addContent)
             implementation(projects.ui.home)
             implementation(projects.ui.quiz)
-            implementation(projects.shared.functionality.projectDefaults)
         }
     }
 }

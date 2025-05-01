@@ -2,6 +2,7 @@ package de.tuhh.quizi.server.data.db.dao.course
 
 import de.tuhh.quizi.server.data.db.DatabaseSingleton.dbQuery
 import de.tuhh.quizi.server.data.db.dao.question.Questions
+import de.tuhh.quizi.server.data.model.AbstractTopic
 import de.tuhh.quizi.server.data.model.Course
 import de.tuhh.quizi.server.data.model.MultipleChoiceQuestion
 import de.tuhh.quizi.server.data.model.Question
@@ -97,12 +98,16 @@ class CourseDaoImpl : CourseDao {
         }
     }
 
-    override suspend fun getAllCourses(): List<String> = dbQuery {
+    override suspend fun getAllCourses(): List<Course> = dbQuery {
         Courses
-            .select(Courses.name)
+            .selectAll()
             .distinct()
             .map { row ->
-                row[Courses.name]
+                Course(
+                    id = row[Courses.id].value,
+                    name = row[Courses.name],
+                    topics = emptyList()
+                )
             }
     }
 
@@ -120,6 +125,13 @@ class CourseDaoImpl : CourseDao {
             name = row[Topics.name],
             courseId = row[Topics.courseId].value,
             questions = listOf(),
+        )
+    }
+
+    private fun resultRowToAbstractTopic(row: ResultRow): AbstractTopic {
+        return AbstractTopic(
+            id = row[Topics.id].value,
+            name = row[Topics.name],
         )
     }
 
@@ -143,9 +155,9 @@ class CourseDaoImpl : CourseDao {
             .firstOrNull()
     }
 
-    override suspend fun getTopicsByCourseId(courseId: Int): List<Topic> = dbQuery {
+    override suspend fun getTopicsByCourseId(courseId: Int): List<AbstractTopic> = dbQuery {
         Topics
             .selectAll().where { Topics.courseId eq courseId }
-            .map(::resultRowToTopic)
+            .map(::resultRowToAbstractTopic)
     }
 }
