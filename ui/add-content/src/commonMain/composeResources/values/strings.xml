@@ -3,10 +3,10 @@
     <string name="appbar_title">Add Content</string>
 
     <string name="title_courses">Courses</string>
-    <string name="title_select_content">Which type of content are you adding?</string>
-    <string name="title_add_course">Add New Course</string>
-    <string name="title_add_topic">Add New Topic</string>
-    <string name="title_add_question">Add New Question</string>
+    <string name="title_select_content">Content Types</string>
+    <string name="title_add_course">Courses</string>
+    <string name="title_add_topic">Topics</string>
+    <string name="title_add_question">Questions</string>
 
     <string name="placeholder_course_name">Course name</string>
 
