@@ -2,6 +2,8 @@
 package de.tuhh.quizi.ui.core.components.button
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.MarqueeAnimationMode
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -26,6 +28,7 @@ internal fun DefaultButton(
     shape: Shape,
     containerColor: Color,
     contentColor: Color,
+    maxLines: Int?,
     elevation: ButtonElevation?,
     border: BorderStroke?,
     contentPadding: PaddingValues,
@@ -55,8 +58,12 @@ internal fun DefaultButton(
         interactionSource = interactionSource,
     ) {
         Text(
-            modifier = Modifier.wrapContentHeight(),
+            modifier = Modifier.wrapContentHeight().basicMarquee(
+                animationMode = MarqueeAnimationMode.Immediately,
+                repeatDelayMillis = 500
+            ),
             text = label,
+            maxLines = maxLines ?: Int.MAX_VALUE,
             style = TextStyle(
                 fontSize = 15.sp,
                 fontWeight = FontWeight.W600,

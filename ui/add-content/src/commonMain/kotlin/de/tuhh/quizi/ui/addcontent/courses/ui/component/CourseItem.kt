@@ -74,6 +74,7 @@ internal fun LazyListScope.courseItem(
     OptionButton(
         label = course.courseTitle.value,
         onClick = onItemClick,
+        maxLines = 1,
         modifier = Modifier.fillMaxWidth()
     )
 }
