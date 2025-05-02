@@ -9,10 +9,13 @@ import de.tuhh.quizi.server.plugins.configureSerialization
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
 import io.ktor.server.application.Application
+import io.ktor.server.application.ApplicationCallPipeline
+import io.ktor.server.application.call
 import io.ktor.server.application.install
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import io.ktor.server.plugins.cors.routing.CORS
+import io.ktor.server.request.header
 import org.koin.ktor.plugin.Koin
 import org.koin.logger.slf4jLogger
 
@@ -40,7 +43,8 @@ fun Application.main() {
 
 fun Application.configureCors() {
     install(CORS) {
-        allowHost("localhost:8080", schemes = listOf("http"))
+        allowHost("www.quizi.org", schemes = listOf("http"))
+//        allowHost("localhost:8080", schemes = listOf("http")) // for local testing
 
         allowMethod(HttpMethod.Get)
         allowMethod(HttpMethod.Post)
@@ -56,5 +60,9 @@ fun Application.configureCors() {
         allowCredentials = true
 
         allowHeaders { true }
+    }
+
+    intercept(ApplicationCallPipeline.Setup) {
+        println("Incoming origin: ${call.request.header(HttpHeaders.Origin)}")
     }
 }

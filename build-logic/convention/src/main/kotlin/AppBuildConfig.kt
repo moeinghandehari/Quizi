@@ -15,7 +15,7 @@ object AppBuildConfig {
 
     val quiziApiBuildConfig = QuiziApiBuildConfig(
         baseUrlProd = "",
-        baseUrlDev = "131.189.200.54",
+        baseUrlDev = "quizi.org",
     )
 
     /**

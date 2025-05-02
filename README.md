@@ -25,4 +25,4 @@ Server:
     Stop server (Find PID using previous command)
                     `kill <PID>`
 
-Server is currently running on an Azure VM :)
+Server is currently running on an Azure VM, accessible via www.quizi.org
