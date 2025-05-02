@@ -6,18 +6,21 @@ import de.tuhh.quizi.server.di.appModule
 import de.tuhh.quizi.server.plugins.configureMonitoring
 import de.tuhh.quizi.server.plugins.configureRouting
 import de.tuhh.quizi.server.plugins.configureSerialization
+import io.ktor.http.HttpHeaders
+import io.ktor.http.HttpMethod
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
+import io.ktor.server.plugins.cors.routing.CORS
 import org.koin.ktor.plugin.Koin
 import org.koin.logger.slf4jLogger
 
 fun main(args: Array<String>) {
-    embeddedServer(Netty, port = 8080, host = "0.0.0.0") {
-    // Set your local ip as host
+    embeddedServer(Netty, port = 8080, host = "0.0.0.0") { // host = "localhost" for local testing
         main()
         module()
+        configureCors()
     }.start(wait = true)
 }
 
@@ -32,5 +35,26 @@ fun Application.main() {
     install(Koin) {
         slf4jLogger()
         modules(appModule, dataModule)
+    }
+}
+
+fun Application.configureCors() {
+    install(CORS) {
+        allowHost("localhost:8080", schemes = listOf("http"))
+
+        allowMethod(HttpMethod.Get)
+        allowMethod(HttpMethod.Post)
+        allowMethod(HttpMethod.Options)
+        allowMethod(HttpMethod.Put)
+        allowMethod(HttpMethod.Delete)
+
+        allowHeader(HttpHeaders.ContentType)
+        allowHeader(HttpHeaders.Authorization)
+        allowHeader(HttpHeaders.AccessControlRequestHeaders)
+        allowHeader(HttpHeaders.AccessControlRequestMethod)
+
+        allowCredentials = true
+
+        allowHeaders { true }
     }
 }

@@ -25,6 +25,7 @@ dependencies {
     implementation(libs.ktor.server.call.logging)
     implementation(libs.ktor.serialization.json)
     implementation(libs.ktor.server.network.tls.certificates)
+    implementation(libs.ktor.server.cors)
 
     // Koin
     implementation(project.dependencies.platform(libs.koin.bom))

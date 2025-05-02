@@ -3,7 +3,6 @@ package de.tuhh.quizi.server.routes
 import de.tuhh.quizi.server.controller.QuizController
 import de.tuhh.quizi.server.data.db.dao.course.Topics.courseId
 import io.ktor.http.HttpStatusCode
-import io.ktor.server.application.call
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
 import io.ktor.server.routing.get
