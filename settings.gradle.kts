@@ -34,7 +34,7 @@ include(":server")
 
 include(":composeApp")
 
-include(":ui:add-content")
+include(":ui:explore-content")
 include(":ui:core")
 include(":ui:home")
 include(":ui:quiz")
@@ -50,8 +50,8 @@ include(":shared:core:utils-validation")
 
 include(":shared:functionality:project-defaults")
 
-include(":shared:functionality:add-content:abstractions")
-include(":shared:functionality:add-content:data:add-content-quizi-api")
-include(":shared:functionality:add-content:data:implementations")
-include(":shared:functionality:add-content:entities")
-include(":shared:functionality:add-content:usecases")
+include(":shared:functionality:explore-content:abstractions")
+include(":shared:functionality:explore-content:data:explore-content-quizi-api")
+include(":shared:functionality:explore-content:data:implementations")
+include(":shared:functionality:explore-content:entities")
+include(":shared:functionality:explore-content:usecases")

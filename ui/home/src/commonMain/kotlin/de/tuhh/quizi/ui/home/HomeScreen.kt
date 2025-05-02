@@ -24,7 +24,7 @@ import quizi.ui.home.generated.resources.title_home_function_choice
 
 @Composable
 internal fun HomeScreen(
-    onAddContentClicked: () -> Unit,
+    onExploreContentClick: () -> Unit,
     onQuizClick: () -> Unit,
     viewModel: HomeViewModel
 ) = Screen { windowInsets ->
@@ -32,14 +32,14 @@ internal fun HomeScreen(
     // val state by viewModel.screenState.collectAsStateWithLifecycle()
 
     HomeScreen(
-        onAddContentClicked,
+        onExploreContentClick,
         onQuizClick,
     )
 }
 
 @Composable
 private fun HomeScreen(
-    onAddContentClicked: () -> Unit,
+    onExploreContentClick: () -> Unit,
     onQuizClick: () -> Unit,
 ) = Screen { windowInsets ->
     Column(
@@ -60,7 +60,7 @@ private fun HomeScreen(
             options = listOf(
                 ButtonOption(
                     text = Res.string.button_add_content,
-                    action = { onAddContentClicked() }
+                    action = { onExploreContentClick() }
                 ),
                 ButtonOption(
                     text = Res.string.button_quiz,

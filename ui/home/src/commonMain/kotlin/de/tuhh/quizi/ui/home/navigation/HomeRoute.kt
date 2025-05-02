@@ -18,13 +18,13 @@ data object HomeBaseRoute
 fun NavController.navigateToHome(navOptions: NavOptions) = navigate(route = HomeRoute, navOptions)
 
 fun NavGraphBuilder.home(
-    onAddContentClick: () -> Unit,
+    onExploreContentClick: () -> Unit,
     onQuizClick: () -> Unit,
 ) {
     navigation<HomeBaseRoute>(startDestination = HomeRoute){
         composable<HomeRoute> {
             HomeScreen(
-                onAddContentClicked = onAddContentClick,
+                onExploreContentClick = onExploreContentClick,
                 onQuizClick = onQuizClick,
                 viewModel = koinInject()
             )

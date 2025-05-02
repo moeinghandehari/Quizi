@@ -38,12 +38,12 @@ kotlin {
 
             implementation(projects.shared.core.quiziApi)
 
-            implementation(projects.shared.functionality.addContent.data.implementations)
-            implementation(projects.shared.functionality.addContent.entities)
+            implementation(projects.shared.functionality.exploreContent.data.implementations)
+            implementation(projects.shared.functionality.exploreContent.entities)
             implementation(projects.shared.functionality.projectDefaults)
 
             implementation(projects.ui.core)
-            implementation(projects.ui.addContent)
+            implementation(projects.ui.exploreContent)
             implementation(projects.ui.home)
             implementation(projects.ui.quiz)
         }
