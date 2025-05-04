@@ -15,3 +15,7 @@ kotlin {
 android {
     namespace = "de.tuhh.quizi.functionality.explore.content.data.implementations"
 }
+
+tasks.named("wasmJsBrowserProductionWebpack").configure {
+    enabled = false
+}
