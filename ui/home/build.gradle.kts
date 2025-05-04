@@ -11,6 +11,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(projects.ui.core)
+            implementation(projects.shared.core.utilsLoading)
             implementation(compose.components.resources)
         }
     }

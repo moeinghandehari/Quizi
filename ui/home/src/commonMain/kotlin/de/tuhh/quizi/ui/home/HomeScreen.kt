@@ -8,8 +8,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import de.tuhh.quizi.ui.core.Screen
 import de.tuhh.quizi.ui.core.components.card.BigTextCard
 import de.tuhh.quizi.ui.core.components.list.OptionsList
@@ -29,7 +31,7 @@ internal fun HomeScreen(
     viewModel: HomeViewModel
 ) = Screen { windowInsets ->
 
-    // val state by viewModel.screenState.collectAsStateWithLifecycle()
+    val state by viewModel.screenState.collectAsStateWithLifecycle()
 
     HomeScreen(
         onExploreContentClick,

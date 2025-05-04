@@ -3,7 +3,7 @@ package de.tuhh.quizi.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
-import de.tuhh.quizi.ui.explorecontent.courses.navigation.navigateToAddCourse
+import de.tuhh.quizi.ui.explorecontent.courses.navigation.navigateToExploreCourse
 import de.tuhh.quizi.ui.explorecontent.shared.navigation.exploreContent
 import de.tuhh.quizi.ui.explorecontent.shared.navigation.navigateToExploreContent
 import de.tuhh.quizi.ui.explorecontent.topics.navigation.navigateToTopics
@@ -31,7 +31,7 @@ fun AppNavHost(
         )
         exploreContent(
             onBackClick = navController::navigateUp,
-            onAddCourseClick = navController::navigateToAddCourse,
+            onAddCourseClick = navController::navigateToExploreCourse,
             onCourseClick = navController::navigateToTopics
         )
 

@@ -16,7 +16,7 @@ data class AddTopicRoute(val courseId: Int, val courseTitle: String)
 fun NavController.navigateToTopics(courseId: Int, courseTitle: String, navOptions: NavOptionsBuilder.() -> Unit = {}) =
     navigate(route = AddTopicRoute(courseId, courseTitle), navOptions)
 
-fun NavGraphBuilder.addTopicScreen(
+fun NavGraphBuilder.exploreTopicScreen(
     onBackClick: () -> Unit,
 ) {
     composable<AddTopicRoute> { entry ->

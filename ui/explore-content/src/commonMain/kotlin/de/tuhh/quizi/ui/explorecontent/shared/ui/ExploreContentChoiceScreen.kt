@@ -39,13 +39,13 @@ import quizi.ui.explore_content.generated.resources.title_add_topic
 import quizi.ui.explore_content.generated.resources.title_select_content
 
 @Composable
-internal fun AddContentTypeChoiceScreen(
+internal fun ExploreContentTypeChoiceScreen(
     onBackClick: () -> Unit,
     onAddCourseClick: () -> Unit,
     viewModel: ExploreContentSharedViewModel,
 ) {
     val screenState by viewModel.screenState.collectAsStateWithLifecycle()
-    AddContentTypeChoiceScreen(
+    ExploreContentTypeChoiceScreen(
         screenState = screenState,
         onBackClick = onBackClick,
         onAddCourseClick = onAddCourseClick,
@@ -54,7 +54,7 @@ internal fun AddContentTypeChoiceScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun AddContentTypeChoiceScreen(
+private fun ExploreContentTypeChoiceScreen(
     screenState: AddContentScreenState,
     onBackClick: () -> Unit,
     onAddCourseClick: () -> Unit,
@@ -133,7 +133,7 @@ private fun AddContentTypeChoiceScreen(
 @Composable
 private fun AddContentTypeChoiceScreenPreview() {
     AppTheme {
-        AddContentTypeChoiceScreen(
+        ExploreContentTypeChoiceScreen(
             screenState = Data(error = null),
             onBackClick = {},
             onAddCourseClick = {},

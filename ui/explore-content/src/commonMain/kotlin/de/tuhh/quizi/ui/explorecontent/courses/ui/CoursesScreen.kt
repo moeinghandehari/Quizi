@@ -50,13 +50,13 @@ import quizi.ui.explore_content.generated.resources.Res
 import quizi.ui.explore_content.generated.resources.title_courses
 
 @Composable
-internal fun AddCourseScreen(
+internal fun ExploreCourseScreen(
     onBackClick: () -> Unit,
     onCourseClick: (Int, String) -> Unit,
     viewModel: CoursesViewModel,
 ) {
     val state by viewModel.screenState.collectAsStateWithLifecycle()
-    AddCourseScreen(
+    ExploreCourseScreen(
         state = state,
         onBackClick = onBackClick,
         onCourseClick = onCourseClick,
@@ -66,7 +66,7 @@ internal fun AddCourseScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun AddCourseScreen(
+private fun ExploreCourseScreen(
     state: CoursesScreenState,
     onBackClick: () -> Unit,
     onCourseClick: (Int, String) -> Unit,
@@ -169,7 +169,7 @@ private fun AddCourseScreen(
 @Composable
 private fun CoursesScreenPreview() {
     AppTheme {
-        AddCourseScreen(
+        ExploreCourseScreen(
             state = CoursesScreenState.Data(error = null, courses = listOf()),
             onBackClick = { false },
             onCourseClick = {_, _ -> },
