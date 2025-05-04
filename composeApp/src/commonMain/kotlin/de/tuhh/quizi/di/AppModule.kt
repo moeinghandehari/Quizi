@@ -1,7 +1,8 @@
 package de.tuhh.quizi.di
 
+import de.tuhh.quizi.core.api.getBaseUrl
+import de.tuhh.quizi.core.api.model.QuiziApiConfig
 import de.tuhh.quizi.core.buildinfo.BuildInfo
-import de.tuhh.quizi.core.quizi.api.model.QuiziApiConfig
 import de.tuhh.quizi.functionality.explore.content.data.implementations.di.QuizDataModule
 import de.tuhh.quizi.ui.explorecontent.courses.di.CoursesUiModule
 import de.tuhh.quizi.ui.explorecontent.shared.di.AddContentUiModule
@@ -22,8 +23,7 @@ val appModule = module {
 
     factory<QuiziApiConfig> {
         QuiziApiConfig(
-            baseUrl = "quizi.org",
-            // Set your local ip as host
+            baseUrl = getBaseUrl(),
         )
     }
 

@@ -1,4 +1,4 @@
-package de.tuhh.quizi.core.quizi.api
+package de.tuhh.quizi.core.api
 
 import de.tuhh.quizi.core.buildinfo.BuildInfo
 import io.ktor.client.plugins.DefaultRequest
@@ -10,7 +10,7 @@ internal fun DefaultRequest.DefaultRequestBuilder.addDefaults(
     buildInfo: BuildInfo,
 ) {
     contentType(ContentType.Application.Json)
-    url(scheme = "http", host = baseUrl, port = 8080)
+    url(scheme = "https", host = baseUrl, path = "api")
     addHeaders(
         buildInfo.appVersionName,
         buildInfo.appVersionCode,

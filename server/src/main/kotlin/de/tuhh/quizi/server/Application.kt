@@ -43,7 +43,8 @@ fun Application.main() {
 
 fun Application.configureCors() {
     install(CORS) {
-        allowHost("www.quizi.org", schemes = listOf("http"))
+        allowHost("www.quizi.org", schemes = listOf("https"))
+        allowHost("quizi.org", schemes = listOf("https"))
 //        allowHost("localhost:8080", schemes = listOf("http")) // for local testing
 
         allowMethod(HttpMethod.Get)

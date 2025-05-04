@@ -1,4 +1,4 @@
-package de.tuhh.quizi.core.quizi.api
+package de.tuhh.quizi.core.api
 
 import de.tuhh.quizi.core.utils.deviceinfo.getPlatformName
 import de.tuhh.quizi.core.utils.deviceinfo.getPreferredLanguageCode

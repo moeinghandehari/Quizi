@@ -6,7 +6,4 @@
             <certificates src="user" />
         </trust-anchors>
     </debug-overrides>
-    <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="true">quizi.org</domain> // Set your local ip as host
-    </domain-config>
 </network-security-config>
