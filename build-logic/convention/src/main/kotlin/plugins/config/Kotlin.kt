@@ -68,11 +68,6 @@ internal fun Project.configureKotlinMultiplatform() {
                 implementation(catalog.findLibrary("kotlin.coroutines.test").get())
                 implementation(catalog.findLibrary("turbine").get())
             }
-
-            // Opt-in for native coroutines
-            all {
-                languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
-            }
         }
 
         // Kotlin by default uses a (not so unique) `unique_name` in the pattern `<moduleName>_commonMain` in the
