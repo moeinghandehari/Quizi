@@ -18,12 +18,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import de.tuhh.quizi.ui.core.theme.AppTheme
-import org.jetbrains.compose.resources.StringResource
-import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun BigTextCard(
-    text: StringResource,
+    text: String,
     modifier: Modifier = Modifier,
     textColor: Color = Color.Black,
 ) = Box(
@@ -44,7 +42,7 @@ fun BigTextCard(
         .padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 16.dp),
 ) {
     Text(
-        text = stringResource(text),
+        text = text,
         style = AppTheme.typography.title1.regular,
         textAlign = TextAlign.Center,
         color = textColor,

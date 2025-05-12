@@ -16,51 +16,110 @@ import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.insert
 
 class QuestionDaoImpl : QuestionDao {
-
-    override suspend fun addQuestion(
+    override suspend fun addSingleChoiceQuestion(
         topicId: Int,
-        questionType: QuestionType,
         description: Description,
         options: List<Option>,
-        hint: Hint?,
-    ): Question = dbQuery {
+        answer: Int,
+        hint: Hint?
+    ): SingleChoiceQuestion = dbQuery {
         val insertStatement = Questions.insert {
-            it[this.type] = questionType.ordinal
+            it[this.type] = QuestionType.SingleChoice.ordinal
             it[this.question] = description.value
             it[this.options] = serializeOptions(options)
+            it[this.answer] = answer
             it[this.topicId] = topicId
             it[this.hint] = hint?.value
         }
-        insertStatement.resultedValues?.singleOrNull<ResultRow>()
-            ?.let<ResultRow, Question>(::resultRowToQuestion)
-            ?: throw DbExceptionHandler.InsertionException("Could not add question")
+
+        insertStatement.resultedValues?.singleOrNull()
+            ?.let(::resultRowToQuestion) as? SingleChoiceQuestion
+            ?: throw DbExceptionHandler.InsertionException("Could not add single choice question")
+    }
+
+    override suspend fun addMultipleChoiceQuestion(
+        topicId: Int,
+        description: Description,
+        options: List<Option>,
+        answer: Int,
+        hint: Hint?
+    ): MultipleChoiceQuestion = dbQuery {
+        val insertStatement = Questions.insert {
+            it[this.type] = QuestionType.MultipleChoice.ordinal
+            it[this.question] = description.value
+            it[this.options] = serializeOptions(options)
+            it[this.answer] = answer
+            it[this.topicId] = topicId
+            it[this.hint] = hint?.value
+        }
+
+        insertStatement.resultedValues?.singleOrNull()
+            ?.let(::resultRowToQuestion) as? MultipleChoiceQuestion
+            ?: throw DbExceptionHandler.InsertionException("Could not add multiple choice question")
+    }
+
+    override suspend fun addTrueFalseQuestion(
+        topicId: Int,
+        description: Description,
+        answer: Int,
+        hint: Hint?
+    ): TrueFalseQuestion = dbQuery {
+        val insertStatement = Questions.insert {
+            it[this.type] = QuestionType.TrueFalse.ordinal
+            it[this.question] = description.value
+            it[this.answer] = answer
+            it[this.topicId] = topicId
+            it[this.hint] = hint?.value
+        }
+
+        insertStatement.resultedValues?.singleOrNull()
+            ?.let(::resultRowToQuestion) as? TrueFalseQuestion
+            ?: throw DbExceptionHandler.InsertionException("Could not add true/false question")
     }
 
     override fun resultRowToQuestion(row: ResultRow): Question = when (row[Questions.type]) {
-        0 -> MultipleChoiceQuestion(
-            id = row[Questions.id].value,
-            question = Description(row[Questions.question]),
-            options = deserializeOptions(row[Questions.options]),
-            hint = row[Questions.hint]?.let { Hint(it) },
-            topicId = row[Questions.topicId].value,
-        )
+        QuestionType.SingleChoice.ordinal -> {
+            val options =
+                deserializeOptionsOrFail(row[Questions.options], QuestionType.SingleChoice)
 
-        1 -> SingleChoiceQuestion(
-            id = row[Questions.id].value,
-            question = Description(row[Questions.question]),
-            options = deserializeOptions(row[Questions.options]),
-            hint = row[Questions.hint]?.let { Hint(it) },
-            topicId = row[Questions.topicId].value,
-        )
+            SingleChoiceQuestion(
+                id = row[Questions.id].value,
+                question = Description(row[Questions.question]),
+                options = options,
+                answer = row[Questions.answer],
+                topicId = row[Questions.topicId].value,
+                hint = row[Questions.hint]?.let(::Hint)
+            )
+        }
 
-        2 -> TrueFalseQuestion(
-            id = row[Questions.id].value,
-            question = Description(row[Questions.question]),
-            options = deserializeOptions(row[Questions.options]),
-            hint = row[Questions.hint]?.let { Hint(it) },
-            topicId = row[Questions.topicId].value,
-        )
+        QuestionType.MultipleChoice.ordinal -> {
+            val options =
+                deserializeOptionsOrFail(row[Questions.options], QuestionType.MultipleChoice)
 
-        else -> throw IllegalArgumentException("Unknown question type")
+            MultipleChoiceQuestion(
+                id = row[Questions.id].value,
+                question = Description(row[Questions.question]),
+                options = options,
+                answer = row[Questions.answer],
+                topicId = row[Questions.topicId].value,
+                hint = row[Questions.hint]?.let(::Hint)
+            )
+        }
+
+        QuestionType.TrueFalse.ordinal -> {
+            TrueFalseQuestion(
+                id = row[Questions.id].value,
+                question = Description(row[Questions.question]),
+                answer = row[Questions.answer], // 0 or 1
+                topicId = row[Questions.topicId].value,
+                hint = row[Questions.hint]?.let(::Hint)
+            )
+        }
+
+        else -> throw IllegalArgumentException("Unknown question type: ${row[Questions.type]}")
     }
+
+    private fun deserializeOptionsOrFail(raw: String?, type: QuestionType): List<Option> =
+        raw?.let { deserializeOptions(it) }
+            ?: throw IllegalStateException("Options can't be null for ${type.name} question")
 }

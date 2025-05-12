@@ -35,6 +35,6 @@ fun AppNavHost(
             onCourseClick = navController::navigateToTopics
         )
 
-        quizScreen(onBackClicked = navController::navigateUp)
+        quizScreen(onBackClick = navController::navigateUp)
     }
 }

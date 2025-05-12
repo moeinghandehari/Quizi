@@ -11,7 +11,8 @@ private const val OPTIONS_COUNT = 4
 data class MultipleChoiceQuestion(
     override val id: Int,
     override val question: Description,
-    override val options: List<Option>,
+    val options: List<Option>,
+    override val answer: Int,
     override val topicId: Int,
     override val hint: Hint?,
 ) : Identifiable, Question {

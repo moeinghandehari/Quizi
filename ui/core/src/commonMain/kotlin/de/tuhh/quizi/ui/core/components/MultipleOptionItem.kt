@@ -1,6 +1,5 @@
 package de.tuhh.quizi.ui.core.components
 
-/*
 import androidx.compose.foundation.background
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
@@ -21,4 +20,3 @@ internal fun DefaultOptionItem(
         modifier.background(color = if (isSelected) Color.Gray else Color.White)
     }
 }
- */

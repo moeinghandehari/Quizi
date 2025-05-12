@@ -40,6 +40,9 @@ kotlin {
 
             implementation(projects.shared.functionality.exploreContent.data.implementations)
             implementation(projects.shared.functionality.exploreContent.entities)
+
+            implementation(projects.shared.functionality.quiz.data.implementations)
+
             implementation(projects.shared.functionality.projectDefaults)
 
             implementation(projects.ui.core)

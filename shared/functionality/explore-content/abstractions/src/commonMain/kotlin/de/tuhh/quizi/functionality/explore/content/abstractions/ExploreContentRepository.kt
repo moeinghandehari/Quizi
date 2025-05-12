@@ -7,7 +7,7 @@ import de.tuhh.quizi.functionality.explore.content.entities.NewTopic
 import de.tuhh.quizi.functionality.explore.content.entities.Topic
 import kotlinx.coroutines.flow.Flow
 
-interface QuizRepository {
+interface ExploreContentRepository {
     fun getCourses(): Flow<LoadingEvent<List<Course>>>
     fun addCourse(newCourse: NewCourse): Flow<LoadingEvent<Course>>
 

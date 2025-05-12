@@ -12,12 +12,13 @@ private const val OPTIONS_CORRECT = 1
 data class SingleChoiceQuestion(
     override val id: Int,
     override val question: Description,
-    override val options: List<Option>,
+    val options: List<Option>,
+    override val answer: Int,
     override val topicId: Int,
     override val hint: Hint?,
 ) : Identifiable, Question {
     init {
         require(options.size == OPTIONS_COUNT) { "There must be exactly 4 options" }
-        require(options.count { it.isCorrect } == OPTIONS_CORRECT) { "Exactly one option must be correct" }
+        require(answer.countOneBits() == OPTIONS_CORRECT) { "Exactly one option must be correct" }
     }
 }

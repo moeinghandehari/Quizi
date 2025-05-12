@@ -5,7 +5,6 @@ import de.tuhh.quizi.server.data.db.dao.question.QuestionDao
 import de.tuhh.quizi.server.data.model.AbstractTopic
 import de.tuhh.quizi.server.data.model.Course
 import de.tuhh.quizi.server.data.model.Question
-import de.tuhh.quizi.server.data.model.QuestionType
 import de.tuhh.quizi.server.data.model.Topic
 import de.tuhh.quizi.server.data.model.types.Description
 import de.tuhh.quizi.server.data.model.types.Hint
@@ -48,13 +47,28 @@ class QuizRepositoryImpl(
         TODO("Not yet implemented")
     }
 
-    override suspend fun addQuestion(
+    override suspend fun addTrueFalseQuestion(
         topicId: Int,
-        questionType: QuestionType,
+        description: Description,
+        answer: Int,
+        hint: Hint?,
+    ): Question = questionDao.addTrueFalseQuestion(topicId, description, answer, hint)
+
+    override suspend fun addSingleChoiceQuestion(
+        topicId: Int,
         description: Description,
         options: List<Option>,
+        answer: Int,
         hint: Hint?,
-    ): Question = questionDao.addQuestion(topicId, questionType, description, options, hint)
+    ): Question = questionDao.addSingleChoiceQuestion(topicId, description, options, answer, hint)
+
+    override suspend fun addMultipleChoiceQuestion(
+        topicId: Int,
+        description: Description,
+        options: List<Option>,
+        answer: Int,
+        hint: Hint?,
+    ): Question = questionDao.addMultipleChoiceQuestion(topicId, description, options, answer, hint)
 
     override suspend fun getQuestionById(questionId: Int): Question? {
         TODO("Not yet implemented")

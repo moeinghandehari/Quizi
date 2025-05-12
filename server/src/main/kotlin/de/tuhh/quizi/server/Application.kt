@@ -16,6 +16,7 @@ import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import io.ktor.server.plugins.cors.routing.CORS
 import io.ktor.server.request.header
+import io.ktor.server.routing.IgnoreTrailingSlash
 import org.koin.ktor.plugin.Koin
 import org.koin.logger.slf4jLogger
 
@@ -39,6 +40,7 @@ fun Application.main() {
         slf4jLogger()
         modules(appModule, dataModule)
     }
+    install(IgnoreTrailingSlash)
 }
 
 fun Application.configureCors() {

@@ -23,11 +23,26 @@ interface QuizRepository {
     suspend fun updateTopic(topicId: Int, topic: Topic): Topic
     suspend fun deleteCourseTopic(topicId: Int): Boolean
 
-    suspend fun addQuestion(
+    suspend fun addTrueFalseQuestion(
         topicId: Int,
-        questionType: QuestionType,
+        description: Description,
+        answer: Int,
+        hint: Hint?,
+    ): Question
+
+    suspend fun addSingleChoiceQuestion(
+        topicId: Int,
         description: Description,
         options: List<Option>,
+        answer: Int,
+        hint: Hint?,
+    ): Question
+
+    suspend fun addMultipleChoiceQuestion(
+        topicId: Int,
+        description: Description,
+        options: List<Option>,
+        answer: Int,
         hint: Hint?,
     ): Question
 

@@ -12,6 +12,8 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.ui.core)
             implementation(projects.shared.core.utilsLoading)
+            implementation(projects.shared.functionality.quiz.usecases)
+            implementation(compose.components.resources)
         }
     }
 }

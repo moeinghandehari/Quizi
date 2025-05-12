@@ -18,6 +18,7 @@ import de.tuhh.quizi.ui.core.components.list.OptionsList
 import de.tuhh.quizi.ui.core.state.ButtonOption
 import de.tuhh.quizi.ui.core.theme.AppTheme
 import de.tuhh.quizi.ui.home.state.HomeViewModel
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import quizi.ui.home.generated.resources.Res
 import quizi.ui.home.generated.resources.button_add_content
@@ -53,7 +54,7 @@ private fun HomeScreen(
             .padding(16.dp),
     ) {
         BigTextCard(
-            text = Res.string.title_home_function_choice,
+            text = stringResource(Res.string.title_home_function_choice),
             modifier = Modifier
                 .height(200.dp)
                 .padding(top = AppTheme.dimensions.padding.xl),

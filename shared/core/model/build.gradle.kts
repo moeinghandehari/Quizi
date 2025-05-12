@@ -1,8 +1,14 @@
 plugins {
-    id("app.android.library")
+    id("app.library.kotlin.multiplatform")
     alias(libs.plugins.kotlinxSerialization)
 }
 
-android {
-    namespace = "de.tuhh.quizi.shared.core.model"
+kotlin {
+    sourceSets {
+        commonMain.dependencies {
+            api(libs.kotlinx.serialization.json)
+        }
+    }
 }
+
+android { namespace = "de.tuhh.quizi.shared.core.model" }

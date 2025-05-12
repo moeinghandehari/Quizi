@@ -31,26 +31,28 @@ class CourseDaoImpl : CourseDao {
     private fun resultRowToQuestion(row: ResultRow): Question = when (row[Questions.type]) {
         0 -> MultipleChoiceQuestion(
             id = row[Questions.id].value,
-            question = Description(row[Questions.question]),
-            options = deserializeOptions(row[Questions.options]),
-            hint = row[Questions.hint]?.let { Hint(it) },
             topicId = row[Questions.topicId].value,
+            question = Description(row[Questions.question]),
+            options = deserializeOptions(row[Questions.options].orEmpty()),
+            answer = row[Questions.answer],
+            hint = row[Questions.hint]?.let { Hint(it) },
         )
 
         1 -> SingleChoiceQuestion(
             id = row[Questions.id].value,
-            question = Description(row[Questions.question]),
-            options = deserializeOptions(row[Questions.options]),
-            hint = row[Questions.hint]?.let { Hint(it) },
             topicId = row[Questions.topicId].value,
+            question = Description(row[Questions.question]),
+            options = deserializeOptions(row[Questions.options].orEmpty()),
+            answer = row[Questions.answer],
+            hint = row[Questions.hint]?.let { Hint(it) },
         )
 
         2 -> TrueFalseQuestion(
             id = row[Questions.id].value,
-            question = Description(row[Questions.question]),
-            options = deserializeOptions(row[Questions.options]),
-            hint = row[Questions.hint]?.let { Hint(it) },
             topicId = row[Questions.topicId].value,
+            question = Description(row[Questions.question]),
+            hint = row[Questions.hint]?.let { Hint(it) },
+            answer = row[Questions.answer],
         )
 
         else -> throw IllegalArgumentException("Unknown question type")

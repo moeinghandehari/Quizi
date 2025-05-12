@@ -44,6 +44,22 @@ fun Route.course() {
         }
     }
 
+    get(path = "course") {
+        val courseId = call.request.queryParameters["courseId"]
+        exposedLogger.info("Course id: $courseId")
+        courseId.let { id ->
+            if (id.isNullOrBlank()) {
+                call.respond(HttpStatusCode.BadRequest, "Course id cannot be empty")
+                return@get
+            } else {
+                call.respond(
+                    HttpStatusCode.OK,
+                    quizController.getCourseById(id.toInt()) ?: "Course not found",
+                )
+            }
+        }
+    }
+
     get(path = "/course/all") {
         call.respond(
             HttpStatusCode.OK,

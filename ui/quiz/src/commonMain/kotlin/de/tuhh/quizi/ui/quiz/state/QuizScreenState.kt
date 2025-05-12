@@ -1,6 +1,7 @@
 package de.tuhh.quizi.ui.quiz.state
 
 import de.tuhh.quizi.core.utils.loading.ErrorReason
+import de.tuhh.quizi.functionality.quiz.entities.Question
 
 internal sealed interface QuizScreenState {
 
@@ -14,7 +15,7 @@ internal sealed interface QuizScreenState {
 
     data class Data(
         val error: ErrorReason?,
-        val question: String
+        val question: Question
     ) : QuizScreenState
 }
 

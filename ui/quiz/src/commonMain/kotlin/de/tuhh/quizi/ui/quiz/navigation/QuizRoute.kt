@@ -15,11 +15,11 @@ fun NavController.navigateToQuiz(navOptions: NavOptionsBuilder.() -> Unit = {}) 
     navigate(route = QuizRoute, navOptions)
 
 fun NavGraphBuilder.quizScreen(
-    onBackClicked: () -> Unit,
+    onBackClick: () -> Unit,
 ) {
     composable<QuizRoute> {
         QuizScreen(
-            onBackClicked = onBackClicked,
+            onBackClick = onBackClick,
             viewModel = koinInject()
         )
     }
