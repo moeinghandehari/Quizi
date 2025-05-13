@@ -1,9 +1,7 @@
 package de.tuhh.quizi.ui.quiz
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.CircularProgressIndicator
@@ -16,6 +14,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import de.tuhh.quizi.functionality.quiz.entities.Question.MultipleChoice
 import de.tuhh.quizi.functionality.quiz.entities.Question.SingleChoice
 import de.tuhh.quizi.functionality.quiz.entities.Question.TrueFalse
+import de.tuhh.quizi.functionality.quiz.entities.types.Answer
 import de.tuhh.quizi.ui.core.Screen
 import de.tuhh.quizi.ui.core.components.AppTopAppBar
 import de.tuhh.quizi.ui.core.components.AppTopAppBarDefaults
@@ -33,10 +32,12 @@ internal fun QuizScreen(
     onBackClick: () -> Unit,
     viewModel: QuizViewModel = koinInject()
 ) {
-    val state by viewModel.screenState.collectAsStateWithLifecycle()
+    val screenState by viewModel.screenState.collectAsStateWithLifecycle()
+    val answerForm by viewModel.answerForm.collectAsStateWithLifecycle()
 
     QuizScreen(
-        screenState = state,
+        screenState = screenState,
+        answerForm = answerForm,
         onBackClick = onBackClick,
         onAnswer = viewModel::onAnswer,
     )
@@ -46,8 +47,9 @@ internal fun QuizScreen(
 @Composable
 private fun QuizScreen(
     screenState: QuizScreenState,
+    answerForm: de.tuhh.quizi.ui.quiz.model.AnswerForm,
     onBackClick: () -> Unit,
-    onAnswer: (Boolean) -> Unit,
+    onAnswer: (Answer) -> Unit,
 ) = Screen(
     consumableErrorState = rememberErrorState(error = screenState.errorOrNull),
     topBar = {
@@ -61,7 +63,7 @@ private fun QuizScreen(
     },
 ) { windowInsets ->
     Box(
-        modifier = Modifier.fillMaxWidth().fillMaxHeight().windowInsetsPadding(windowInsets)
+        modifier = Modifier.fillMaxSize().windowInsetsPadding(windowInsets)
             .padding(AppTheme.dimensions.padding.l),
     ) {
         when (screenState) {
@@ -74,19 +76,17 @@ private fun QuizScreen(
             is QuizScreenState.Initial.Error -> {}
 
             is QuizScreenState.Data -> {
-                when (screenState.question) {
-                    is SingleChoice -> Unit// TODO ------SingleChoiceQuizView
-                    is MultipleChoice -> Unit// TODO ------MultipleChoiceQuizView
+                when (val question = screenState.question) {
+                    is SingleChoice -> Unit // TODO
+                    is MultipleChoice -> Unit // TODO
                     is TrueFalse -> TrueFalseQuizView(
-                        question = screenState.question.question.value,
+                        question = question.question.value,
+                        selectedAnswer = answerForm.answer,
+                        isCorrect = answerForm.isAnsweredCorrectly,
                         modifier = Modifier.fillMaxSize(),
                         onClick = { answer ->
-                            if (answer == screenState.question.answer) {
-                                onAnswer(true)
-                                onBackClick()
-                            } else {
-                                onAnswer(false)
-                                onBackClick()
+                            if (answerForm.answer == null) {
+                                onAnswer(answer)
                             }
                         },
                     )

@@ -1,6 +1,7 @@
 @file:Suppress("MagicNumber", "UnusedParameter") // TODO
 package de.tuhh.quizi.ui.quiz.components
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,11 +21,23 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun TrueFalseQuizView(
     question: String,
+    selectedAnswer: Answer?,
+    isCorrect: Boolean,
     onClick: (Answer) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val borderModifier = when {
+        selectedAnswer == null -> Modifier
+        isCorrect -> Modifier.border(
+            AppTheme.dimensions.space.xs,
+            AppTheme.colors.element.color.positive
+        )
+
+        else -> Modifier.border(AppTheme.dimensions.space.xs, AppTheme.colors.element.color.error)
+    }
+
     Column(
-        modifier = modifier,
+        modifier = modifier.then(borderModifier),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
@@ -46,12 +59,14 @@ fun TrueFalseQuizView(
                 label = "False",
                 onClick = { onClick(Answer(0)) },
                 modifier = Modifier.weight(10f),
+                isEnabled = selectedAnswer == null
             )
             Spacer(modifier = Modifier.weight(1f))
             PositiveButton(
                 label = "True",
                 onClick = { onClick(Answer(1)) },
                 modifier = Modifier.weight(10f),
+                isEnabled = selectedAnswer == null
             )
         }
     }
@@ -62,6 +77,8 @@ fun TrueFalseQuizView(
 private fun TrueFalseQuizViewPreview() {
     TrueFalseQuizView(
         question = "Berlin is capital of Germany",
+        selectedAnswer = null,
+        isCorrect = false,
         onClick = {},
     )
 }
