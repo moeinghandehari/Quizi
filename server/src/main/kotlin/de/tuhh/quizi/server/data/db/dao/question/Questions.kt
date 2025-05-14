@@ -18,7 +18,7 @@ import org.jetbrains.exposed.dao.id.IntIdTable
 private const val HINT_LENGTH = 255
 private const val QUESTION_LENGTH = 255
 
-object Questions : IntIdTable() {
+internal object Questions : IntIdTable() {
     val type = integer("type")
     val question = varchar("question", QUESTION_LENGTH)
     val options = text("options").nullable()

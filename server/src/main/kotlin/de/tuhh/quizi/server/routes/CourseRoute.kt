@@ -1,6 +1,6 @@
 package de.tuhh.quizi.server.routes
 
-import de.tuhh.quizi.server.controller.QuizController
+import de.tuhh.quizi.server.controller.ContentController
 import de.tuhh.quizi.server.data.db.dao.course.Topics.courseId
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.response.respond
@@ -11,7 +11,7 @@ import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.sql.exposedLogger
 import org.koin.java.KoinJavaComponent.inject
 
-private val quizController by inject<QuizController>(QuizController::class.java)
+private val contentController by inject<ContentController>(ContentController::class.java)
 
 fun Route.course() {
     @Serializable
@@ -23,7 +23,7 @@ fun Route.course() {
                 call.respond(HttpStatusCode.BadRequest, "Course name cannot be empty")
                 return@post
             } else {
-                call.respond(HttpStatusCode.OK, quizController.addCourse(name))
+                call.respond(HttpStatusCode.OK, contentController.addCourse(name))
             }
         }
     }
@@ -38,7 +38,7 @@ fun Route.course() {
             } else {
                 call.respond(
                     HttpStatusCode.OK,
-                    quizController.getCourseById(id.toInt()) ?: "Course not found",
+                    contentController.getCourseById(id.toInt()) ?: "Course not found",
                 )
             }
         }
@@ -54,7 +54,7 @@ fun Route.course() {
             } else {
                 call.respond(
                     HttpStatusCode.OK,
-                    quizController.getCourseById(id.toInt()) ?: "Course not found",
+                    contentController.getCourseById(id.toInt()) ?: "Course not found",
                 )
             }
         }
@@ -63,7 +63,7 @@ fun Route.course() {
     get(path = "/course/all") {
         call.respond(
             HttpStatusCode.OK,
-            quizController.getAllCourses(),
+            contentController.getAllCourses(),
         )
     }
 
@@ -83,7 +83,7 @@ fun Route.course() {
                     } else {
                         call.respond(
                             HttpStatusCode.OK,
-                            quizController.addTopic(id, name) ?: "Topic not added",
+                            contentController.addTopic(id, name) ?: "Topic not added",
                         )
                     }
                 }
@@ -101,7 +101,7 @@ fun Route.course() {
             } else {
                 call.respond(
                     HttpStatusCode.OK,
-                    quizController.getAllTopicsByCourseId(id.toInt()),
+                    contentController.getAllTopicsByCourseId(id.toInt()),
                 )
             }
         }
@@ -117,7 +117,7 @@ fun Route.course() {
             } else {
                 call.respond(
                     HttpStatusCode.OK,
-                    quizController.getTopicById(id.toInt()) ?: "Topic not found",
+                    contentController.getTopicById(id.toInt()) ?: "Topic not found",
                 )
             }
         }

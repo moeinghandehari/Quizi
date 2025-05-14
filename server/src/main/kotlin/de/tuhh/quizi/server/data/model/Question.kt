@@ -19,6 +19,13 @@ enum class QuestionType {
     TrueFalse,
 }
 
+internal fun getQuestionTypeFromIdentifier(identifier: Int): QuestionType = when (identifier) {
+    QuestionType.SingleChoice.ordinal -> QuestionType.SingleChoice
+    QuestionType.MultipleChoice.ordinal -> QuestionType.MultipleChoice
+    QuestionType.TrueFalse.ordinal -> QuestionType.TrueFalse
+    else -> throw IllegalArgumentException("Invalid question type identifier: $identifier")
+}
+
 internal fun getQuestionTypeIdentifier(question: Question): Int = when (question) {
     is SingleChoiceQuestion -> QuestionType.SingleChoice.ordinal
     is MultipleChoiceQuestion -> QuestionType.MultipleChoice.ordinal

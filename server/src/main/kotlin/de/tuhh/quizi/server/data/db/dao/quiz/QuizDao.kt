@@ -1,8 +1,8 @@
-package de.tuhh.quizi.server.controller
+package de.tuhh.quizi.server.data.db.dao.quiz
 
 import de.tuhh.quizi.server.data.model.Question
 import de.tuhh.quizi.server.data.model.QuestionType
 
-interface QuizController {
+interface QuizDao {
     suspend fun getQuizByTopicId(topicId: Int, type: QuestionType, count: Int): List<Question>
 }

@@ -109,9 +109,9 @@ class QuestionDaoImpl : QuestionDao {
         QuestionType.TrueFalse.ordinal -> {
             TrueFalseQuestion(
                 id = row[Questions.id].value,
+                topicId = row[Questions.topicId].value,
                 question = Description(row[Questions.question]),
                 answer = row[Questions.answer], // 0 or 1
-                topicId = row[Questions.topicId].value,
                 hint = row[Questions.hint]?.let(::Hint)
             )
         }
