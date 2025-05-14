@@ -9,6 +9,7 @@ import de.tuhh.quizi.server.data.model.TrueFalseQuestion
 import de.tuhh.quizi.server.data.model.types.Description
 import de.tuhh.quizi.server.data.model.types.Hint
 import de.tuhh.quizi.server.data.model.types.deserializeOptions
+import org.jetbrains.exposed.sql.Random
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.selectAll
@@ -25,7 +26,8 @@ internal class QuizDaoImpl : QuizDao {
         Questions
             .selectAll()
             .where { Questions.topicId eq topicId and (Questions.type eq type.ordinal) }
-            .take(count)
+            .orderBy(Random())
+            .limit(count)
             .map(::resultRowToQuestion)
     }
 

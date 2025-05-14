@@ -12,5 +12,5 @@ class QuizRepositoryImpl(
         type: QuestionType,
         count: Int
     ): List<Question> =
-        quizDao.getQuizByTopicId(topicId, type, count).shuffled()
+        quizDao.getQuizByTopicId(topicId, type, count)
 }
