@@ -22,6 +22,6 @@ internal class QuizRemoteDataSourceImpl(
         statefulApiCall<List<GetQuizResponse>, List<Question>>(
             transform = { list -> list.map { it.toQuestionModel() } }
         ) {
-            httpClient.get("quiz?topicId=${topicId.value}&type=${type.ordinal + 1}&count=$count")
+            httpClient.get("quiz?topicId=${topicId.value}&type=${type.ordinal}&count=$count")
         }
 }
