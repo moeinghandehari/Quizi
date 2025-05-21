@@ -25,6 +25,7 @@ internal fun Project.configureKotlinMultiplatform() {
             browser {
                 commonWebpackConfig {
                     outputFileName = "composeApp.js"
+                    outputPath = file("$buildDir/dist/wasmJs/productionWebpack")
                     devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
                         static = (static ?: mutableListOf()).apply {
                             // Serve sources to debug inside browser
@@ -90,6 +91,18 @@ internal fun Project.configureKotlinMultiplatform() {
     // Building KMP sometimes fails with `Task 'testClasses' not found in project`
     // https://stackoverflow.com/questions/33132996/android-skip-gradle-testclasses-task-for-a-dependency-project
     tasks.maybeCreate("testClasses")
+
+    tasks.named("wasmJsBrowserProductionWebpack") {
+        doLast {
+            val outputDir = buildDir.resolve("dist/wasmJs/productionWebpack")
+            val resourcesDir = buildDir.resolve("processedResources/wasmJs/main")
+
+            copy {
+                from(resourcesDir)
+                into(outputDir)
+            }
+        }
+    }
 
     configureCommonKotlin()
 }

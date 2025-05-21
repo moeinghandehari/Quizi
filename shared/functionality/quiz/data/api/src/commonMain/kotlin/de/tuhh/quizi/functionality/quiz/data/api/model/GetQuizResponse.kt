@@ -9,7 +9,7 @@ import de.tuhh.quizi.functionality.quiz.entities.TopicId
 import de.tuhh.quizi.functionality.quiz.entities.types.Answer
 import de.tuhh.quizi.functionality.quiz.entities.types.Description
 import de.tuhh.quizi.functionality.quiz.entities.types.Hint
-import de.tuhh.quizi.functionality.quiz.entities.types.deserializeOptions
+import de.tuhh.quizi.functionality.quiz.entities.types.Option
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -21,7 +21,7 @@ internal data class GetQuizResponse(
     @SerialName("topicId") val topicId: Int,
     @SerialName("type") val type: Int,
     @SerialName("question") val question: String,
-    @SerialName("options") val options: String? = null,
+    @SerialName("options") val options: List<Option>? = null,
     @SerialName("answer") val answer: Int,
     @SerialName("hint") val hint: String?,
 )
@@ -33,7 +33,7 @@ internal fun GetQuizResponse.toQuestionModel() = when (this.type) {
         question = Description(question),
         answer = Answer(answer),
         hint = hint.let { hint -> if (hint == null) null else Hint(hint) },
-        options = deserializeOptions(options ?: "")
+        options = options ?: emptyList()
     )
 
     QuestionType.MultipleChoice.ordinal -> MultipleChoice(
@@ -42,7 +42,7 @@ internal fun GetQuizResponse.toQuestionModel() = when (this.type) {
         question = Description(question),
         answer = Answer(answer),
         hint = hint.let { hint -> if (hint == null) null else Hint(hint) },
-        options = deserializeOptions(options ?: "")
+        options = options ?: emptyList()
     )
 
     QuestionType.TrueFalse.ordinal -> TrueFalse(

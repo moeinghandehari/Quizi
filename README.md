@@ -24,6 +24,7 @@ PATH_TO_PROJECT/server/build/install/server/bin/
 &emsp;Copy files to the server (scp needed)
 ```bash
 scp -r PATH_TO_LOCAL_FOLDER USERNAME@SERVER_IP:~
+scp -r ~/StudioProjects/Quizi/server azureuser@131.189.200.54:~
 ```
 &emsp;Run             
 ```bash
@@ -53,5 +54,38 @@ ps aux | grep server
 ```bash
 kill <PID>
 ```
+&emsp;&emsp;Ktor Service Status
+```bash
+sudo systemctl status quizi-server
+```
+&emsp;&emsp;Ktor Service Configs
+```bash
+sudo nano /etc/systemd/system/quizi-server.service
+```
+&emsp;&emsp;Reload Service Configs
+```bash
+sudo systemctl daemon-reload
+```
+&emsp;&emsp;Restart Ktor Service
+```bash
+sudo systemctl restart quizi-server.service
+```
 
+Update WebApp 
+```bash
+./gradlew clean
+./gradlew wasmJsBrowserDistribution
+sudo rm -r /var/www/html/*
+scp -r ~/StudioProjects/Quizi/composeApp/build/dist/wasmJs/productionExecutable azureuser@131.189.200.54:~
+sudo mv ~/productionExecutable/* /var/www/html/
+```
+
+New web commands for WebPack
+```bash
+./gradlew clean
+./gradlew wasmJsBrowserProductionWebpack
+sudo rm -r /var/www/html/*
+scp -r ~/StudioProjects/Quizi/composeApp/build/dist/wasmJs/productionWebpack azureuser@131.189.200.54:~
+sudo mv ~/productionExecutable/* /var/www/html/
+```
 Server is currently running on an Azure ubuntu VM.
